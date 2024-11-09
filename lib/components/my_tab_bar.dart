@@ -21,17 +21,7 @@ class MyTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: TabBar(
-        tabs: const [
-          Tab(
-            child: Icon(Icons.home),
-          ),
-          Tab(
-            child: Icon(Icons.settings),
-          ),
-          Tab(
-            child: Icon(Icons.person),
-          ),
-        ],
+        tabs: _buildCategoriesTabs(),
         controller: tabsController,
       ),
     );

@@ -4,6 +4,7 @@ import 'package:food_delivery/components/my_description_box.dart';
 import 'package:food_delivery/components/my_drawer.dart';
 import 'package:food_delivery/components/my_sliver_app_bar.dart';
 import 'package:food_delivery/components/my_tab_bar.dart';
+import 'package:food_delivery/models/food.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -19,7 +20,30 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabsController = TabController(length: 3, vsync: this);
+    _tabsController =
+        TabController(length: FoodCategory.values.length, vsync: this);
+  }
+
+  List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu) {
+    return fullMenu.where((food) => food.category == category).toList();
+  }
+
+  //return list of foods in this category
+  List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
+    return FoodCategory.values.map((category) {
+      List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
+
+      return ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(
+              categoryMenu[index].name,
+            ),
+          );
+        },
+        itemCount: categoryMenu.length,
+      );
+    }).toList();
   }
 
   @override
@@ -31,13 +55,6 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text(
-      //     "Home",
-      //   ),
-      //   backgroundColor: Theme.of(context).colorScheme.surface,
-      // ),
       drawer: const MyDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -63,14 +80,7 @@ class _HomePageState extends State<HomePage>
         ],
         body: TabBarView(
           controller: _tabsController,
-          children: [
-            ListView.builder(
-              itemBuilder: (context, index) => Text("Hello"),
-              itemCount: 5,
-            ),
-            Text('HI'),
-            Text('World'),
-          ],
+          children: getFoodInThisCategory(fullMenu),
         ),
       ),
     );
