@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_current_location.dart';
+import 'package:food_delivery/components/my_description_box.dart';
 import 'package:food_delivery/components/my_drawer.dart';
 import 'package:food_delivery/components/my_sliver_app_bar.dart';
+import 'package:food_delivery/components/my_tab_bar.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabsController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabsController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabsController.dispose;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +38,11 @@ class HomePage extends StatelessWidget {
       //   ),
       //   backgroundColor: Theme.of(context).colorScheme.surface,
       // ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           MySliverAppBar(
+            title: MyTabBar(tabsController: _tabsController),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -30,16 +53,21 @@ class HomePage extends StatelessWidget {
                 ),
 
                 // my curent location
-                MyCurrentLocation(),
+                const MyCurrentLocation(),
 
                 // description box
+                MyDescriptionBox(),
               ],
             ),
-            title: Text('Title'),
           ),
         ],
-        body: Container(
-          color: Colors.blue,
+        body: TabBarView(
+          controller: _tabsController,
+          children: [
+            Text('Hello'),
+            Text('HI'),
+            Text('World'),
+          ],
         ),
       ),
     );
