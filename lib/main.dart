@@ -3,10 +3,19 @@ import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:food_delivery/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'models/restaurant.dart';
+
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Restaurant(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

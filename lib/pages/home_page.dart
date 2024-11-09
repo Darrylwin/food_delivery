@@ -5,6 +5,9 @@ import 'package:food_delivery/components/my_drawer.dart';
 import 'package:food_delivery/components/my_sliver_app_bar.dart';
 import 'package:food_delivery/components/my_tab_bar.dart';
 import 'package:food_delivery/models/food.dart';
+import 'package:provider/provider.dart';
+
+import '../models/restaurant.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -78,9 +81,11 @@ class _HomePageState extends State<HomePage>
             ),
           ),
         ],
-        body: TabBarView(
-          controller: _tabsController,
-          children: getFoodInThisCategory(fullMenu),
+        body: Consumer<Restaurant>(
+          builder: (context, restaurant, child) => TabBarView(
+            controller: _tabsController,
+            children: getFoodInThisCategory(restaurant.menu),
+          ),
         ),
       ),
     );
