@@ -64,7 +64,10 @@ class _HomePageState extends State<HomePage>
         body: TabBarView(
           controller: _tabsController,
           children: [
-            Text('Hello'),
+            ListView.builder(
+              itemBuilder: (context, index) => Text("Hello"),
+              itemCount: 5,
+            ),
             Text('HI'),
             Text('World'),
           ],

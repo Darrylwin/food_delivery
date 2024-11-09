@@ -393,4 +393,32 @@ class Restaurant {
       ],
     ),
   ];
+
+  /*
+  * GETTERS
+  */
+  List<Food> get menu =>_menu;
+
+  /*
+  * OPERATORS
+  */
+// add to cart
+
+// remove cart
+
+//get total price of cart
+
+//get total items in cart
+
+//clear cart
+
+  /*
+  HELPERS
+  */
+
+//generate a receipt
+
+//format double value into money
+
+//formt list of addons into string summary
 }
