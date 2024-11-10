@@ -6,6 +6,7 @@ import 'package:food_delivery/components/my_food_tile.dart';
 import 'package:food_delivery/components/my_sliver_app_bar.dart';
 import 'package:food_delivery/components/my_tab_bar.dart';
 import 'package:food_delivery/models/food.dart';
+import 'package:food_delivery/pages/food_page.dart';
 import 'package:provider/provider.dart';
 
 import '../models/restaurant.dart';
@@ -41,7 +42,16 @@ class _HomePageState extends State<HomePage>
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
           final food = categoryMenu[index];
-          return MyFoodTile(onTap: (){}, food: food);
+          return MyFoodTile(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FoodPage(food: food),
+                  ),
+                );
+              },
+              food: food);
         },
         itemCount: categoryMenu.length,
       );
