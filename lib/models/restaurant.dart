@@ -476,6 +476,7 @@ class Restaurant extends ChangeNotifier {
         _cart.removeAt(cartIndex);
       }
     }
+    notifyListeners();
   }
 
 //get total price of cart
@@ -505,6 +506,10 @@ class Restaurant extends ChangeNotifier {
   }
 
 //clear cart
+void clearCart(){
+    _cart.clear();
+    notifyListeners();
+}
 
 /*
   HELPERS
@@ -514,5 +519,5 @@ class Restaurant extends ChangeNotifier {
 
 //format double value into money
 
-//formt list of addons into string summary
+//format list of addons into string summary
 }
