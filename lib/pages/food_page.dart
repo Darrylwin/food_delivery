@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
-import 'package:food_delivery/main.dart';
 import 'package:food_delivery/models/food.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +24,7 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
   //method to add to card
-  void Function()? addToCart(Food food, Map<Addons, bool> selectedAddons) {
+   void addToCart(Food food, Map<Addons, bool> selectedAddons) {
     Navigator.pop(context);
 
     //format the selected addons
@@ -49,7 +48,7 @@ class _FoodPageState extends State<FoodPage> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                //food imagee
+                //food image
                 Image.network(
                   widget.food.imagePath,
                   height: 300,
@@ -158,7 +157,7 @@ class _FoodPageState extends State<FoodPage> {
         //back button
         SafeArea(
           child: Container(
-            margin: EdgeInsets.only(left: 25),
+            margin: const EdgeInsets.only(left: 25),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary.withOpacity(.5),
               // borderRadius: BorderRadius.circular(8),
