@@ -33,7 +33,7 @@ class _FoodPageState extends State<FoodPage> {
                 //food imagee
                 Image.network(
                   widget.food.imagePath,
-                  height: 275,
+                  height: 300,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
                 ),
