@@ -494,7 +494,15 @@ class Restaurant extends ChangeNotifier {
     return total;
   }
 
-//get total items in cart
+//get total number of items in cart
+  int getTotalItemsCount() {
+    int totalItemCount = 0;
+    for (CartItem cartItem in _cart) {
+      totalItemCount += cartItem.quantity;
+    }
+
+    return totalItemCount;
+  }
 
 //clear cart
 
