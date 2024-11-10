@@ -3,12 +3,18 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/models/food.dart';
 
 class FoodPage extends StatefulWidget {
-  const FoodPage({
+  FoodPage({
     super.key,
     required this.food,
-  });
+  }){
+    //initialise selected addons to be false
+    for(Addons addon in food.availableAddons){
+      selectedAddons[addon] = false;
+    }
+  }
 
   final Food food;
+  final Map<Addons, bool> selectedAddons = <Addons, bool>{};
 
   @override
   State<FoodPage> createState() => _FoodPageState();
@@ -97,8 +103,12 @@ class _FoodPageState extends State<FoodPage> {
                               color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
-                          value: false,
-                          onChanged: (value) {},
+                          value: widget.selectedAddons[addon],
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.selectedAddons[addon] = value!;
+                            });
+                          },
                         );
                       },
                       itemCount: widget.food.availableAddons.length,
@@ -113,6 +123,8 @@ class _FoodPageState extends State<FoodPage> {
               text: 'Add to cart',
               onTap: () {},
             ),
+
+            const SizedBox(height: 25),
           ],
         ),
       ),
