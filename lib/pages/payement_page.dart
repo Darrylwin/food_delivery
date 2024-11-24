@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/flutter_credit_card.dart';
 
-class PayementPage extends StatelessWidget {
-  const PayementPage({super.key});
+class PayementPage extends StatefulWidget {
+  PayementPage({
+    super.key,
+  });
+
+  @override
+  State<PayementPage> createState() => _PayementPageState();
+}
+
+class _PayementPageState extends State<PayementPage> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  String cardNumber = '';
+  String expiryDate = '';
+  String cardHolderName = '';
+  String cvvCode = '';
+  bool isCvvFocused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -9,8 +24,41 @@ class PayementPage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
+        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text(
           "Checkout",
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            //credit card
+            CreditCardWidget(
+              cardNumber: cardNumber,
+              expiryDate: expiryDate,
+              cardHolderName: cardHolderName,
+              cvvCode: cvvCode,
+              showBackView: isCvvFocused,
+              onCreditCardWidgetChange: (p0) {},
+            ),
+        
+            //credit card form
+            CreditCardForm(
+              cardNumber: cardNumber,
+              expiryDate: expiryDate,
+              cardHolderName: cardHolderName,
+              cvvCode: cvvCode,
+              onCreditCardModelChange: (CreditCardModel data) {
+                setState(() {
+                  cardNumber = data.cardNumber;
+                  expiryDate = data.expiryDate;
+                  cardHolderName = data.cardHolderName;
+                  cvvCode = data.cvvCode;
+                });
+              },
+              formKey: formKey,
+            ),
+          ],
         ),
       ),
     );
