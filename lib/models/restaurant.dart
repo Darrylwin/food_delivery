@@ -440,7 +440,7 @@ class Restaurant extends ChangeNotifier {
 // add to cart
   void addToCart(Food food, List<Addons> selectedAddons) {
     //check if food is already in cart
-    CartItem? cartItem = _cart.firstWhere(
+    CartItem? cartItem = _cart.firstWhereOrNull(
       (item) {
         bool isSameFood = item.food.name == food.name;
 
