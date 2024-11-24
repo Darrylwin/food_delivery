@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:food_delivery/components/my_button.dart';
 
 class PayementPage extends StatefulWidget {
   PayementPage({
@@ -41,7 +42,7 @@ class _PayementPageState extends State<PayementPage> {
               showBackView: isCvvFocused,
               onCreditCardWidgetChange: (p0) {},
             ),
-        
+
             //credit card form
             CreditCardForm(
               cardNumber: cardNumber,
@@ -58,6 +59,15 @@ class _PayementPageState extends State<PayementPage> {
               },
               formKey: formKey,
             ),
+
+            // const Spacer(),
+
+            MyButton(
+              text: "Pay now",
+              onTap: () {},
+            ),
+
+            // const SizedBox(height: 8),
           ],
         ),
       ),
