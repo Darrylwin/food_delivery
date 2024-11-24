@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_cart_tile.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -53,23 +54,44 @@ class CartPage extends StatelessWidget {
           ),
           body: Column(
             children: [
+              //list of cart
               Expanded(
-                child: ListView.builder(
-                    itemCount: userCart.length,
-                    itemBuilder: (context, index) {
-                      //get individual cart item
-                      final cartItem = userCart[index];
+                child: Column(
+                  children: [
+                    userCart.isEmpty
+                        ? const Expanded(
+                            child: Center(
+                              child: Text("Cart is empty"),
+                            ),
+                          )
+                        : Expanded(
+                            child: ListView.builder(
+                                itemCount: userCart.length,
+                                itemBuilder: (context, index) {
+                                  //get individual cart item
+                                  final cartItem = userCart[index];
 
-                      // return cart ui
-                      // return ListTile(
-                      //   title: Text(
-                      //     userCart[index].food.name,
-                      //   ),
-                      // );
+                                  // return cart ui
+                                  // return ListTile(
+                                  //   title: Text(
+                                  //     userCart[index].food.name,
+                                  //   ),
+                                  // );
 
-                      return MyCartTile(cartItem: cartItem);
-                    }),
+                                  return MyCartTile(cartItem: cartItem);
+                                }),
+                          ),
+                  ],
+                ),
               ),
+
+              //button to pay
+              MyButton(
+                text: 'Go to check out',
+                onTap: () {},
+              ),
+
+              const SizedBox(height: 25),
             ],
           ),
         );
