@@ -61,13 +61,12 @@ class _PayementPageState extends State<PayementPage> {
             ),
 
             // const Spacer(),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
 
             MyButton(
               text: "Pay now",
               onTap: () {},
             ),
-
-            // const SizedBox(height: 8),
           ],
         ),
       ),

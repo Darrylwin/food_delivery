@@ -16,4 +16,3 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 1.20.00
-> error: use spacer and sizedbox in the payement_page
