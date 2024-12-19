@@ -15,13 +15,13 @@ class MyCurrentLocation extends StatelessWidget {
           // cancel
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(Icons.cancel),
+            icon: const Icon(Icons.cancel),
           ),
 
           //save
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
           ),
         ],
       ),
@@ -53,7 +53,7 @@ class MyCurrentLocation extends StatelessWidget {
                 ),
 
                 // drop down menu
-                Icon(Icons.keyboard_arrow_down_rounded),
+                const Icon(Icons.keyboard_arrow_down_rounded),
               ],
             ),
           ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/food.dart';
 
 class MyFoodTile extends StatelessWidget {
-  MyFoodTile({super.key, required this.onTap, required this.food});
+  const MyFoodTile({super.key, required this.onTap, required this.food});
 
   final void Function()? onTap;
   final Food food;

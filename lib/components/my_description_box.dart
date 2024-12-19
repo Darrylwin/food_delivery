@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyDescriptionBox extends StatelessWidget {
-  MyDescriptionBox({super.key});
+  const MyDescriptionBox({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class MyDescriptionBox extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(8),
       ),
-      margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+      margin: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
       padding: const EdgeInsets.all(25.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

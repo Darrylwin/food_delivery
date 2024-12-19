@@ -5,7 +5,7 @@ import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
 
 class MyCartTile extends StatelessWidget {
-  MyCartTile({super.key, required this.cartItem});
+  const MyCartTile({super.key, required this.cartItem});
 
   final CartItem cartItem;
 

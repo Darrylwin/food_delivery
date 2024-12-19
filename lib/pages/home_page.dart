@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import '../models/restaurant.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage>
                 const MyCurrentLocation(),
 
                 // description box
-                MyDescriptionBox(),
+                const MyDescriptionBox(),
               ],
             ),
           ),

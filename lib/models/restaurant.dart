@@ -429,6 +429,7 @@ class Restaurant extends ChangeNotifier {
   * GETTERS
   */
   List<Food> get menu => _menu;
+
   List<CartItem> get cart => _cart;
 
   /*
@@ -446,7 +447,7 @@ class Restaurant extends ChangeNotifier {
         bool isSameFood = item.food.name == food.name;
 
         bool isSameAddons =
-            ListEquality().equals(item.selectedAddons, selectedAddons);
+            const ListEquality().equals(item.selectedAddons, selectedAddons);
 
         return isSameFood && isSameAddons;
       },
@@ -507,10 +508,10 @@ class Restaurant extends ChangeNotifier {
   }
 
 //clear cart
-void clearCart(){
+  void clearCart() {
     _cart.clear();
     notifyListeners();
-}
+  }
 
 /*
   HELPERS
