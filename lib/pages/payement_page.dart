@@ -67,6 +67,8 @@ class _PayementPageState extends State<PayementPage> {
               text: "Pay now",
               onTap: () {},
             ),
+
+            const SizedBox(height: 16),
           ],
         ),
       ),
