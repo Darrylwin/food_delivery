@@ -39,6 +39,9 @@ dependencies:
   collection: ^1.18.0
   flutter_credit_card: ^4.0.1
   intl: ^0.20.1
+  http: ^1.2.2
+  supabase_flutter: ^2.8.2  # Vérifiez la dernière version sur pub.dev
+ 
 
 dev_dependencies:
   flutter_test:
