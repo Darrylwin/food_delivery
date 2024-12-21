@@ -90,6 +90,8 @@ class DeliveryProgressPage extends StatelessWidget {
                 ),
               ),
 
+              const SizedBox(width: 10),
+
               //call button
               Container(
                 decoration: BoxDecoration(
