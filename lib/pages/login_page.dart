@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:food_delivery/pages/home_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -22,17 +23,44 @@ class _LoginPageState extends State<LoginPage> {
 
   // login method
 
-  void logIn() {
+  Future<void> logIn() async {
     // authentification
+    // Récupérez les valeurs des champs de texte
+    String email = emailController.text;
+    String password = passwordController.text;
+          
 
-    // navigate to home page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
+    // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
+    print('Email: $email');
+    print('Password: $password');
+
+     try {
+      final response = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (response.error == null) {
+        // Connexion réussie
+         ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Connexion reuusie')),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } else {
+        // Affichage d'une erreur si la connexion échoue
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Erreur : ${response.error!.message}'),
+        ));
+      }
+    } catch (e) {
+      print('Erreur lors de la connexion : $e');
+    }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,4 +151,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+}
+
+extension on AuthResponse {
+  get error => null;
 }
