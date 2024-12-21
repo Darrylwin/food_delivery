@@ -40,7 +40,7 @@ class _PayementPageState extends State<PayementPage> {
           actions: [
             //cancel button
             TextButton(
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.of(context).pop();
@@ -49,7 +49,7 @@ class _PayementPageState extends State<PayementPage> {
 
             //validate button
             TextButton(
-              child: Text("Validate"),
+              child: const Text("Validate"),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -63,6 +63,7 @@ class _PayementPageState extends State<PayementPage> {
         ),
       );
     }
+    return null;
   }
 
   @override
