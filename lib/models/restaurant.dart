@@ -554,7 +554,7 @@ class Restaurant extends ChangeNotifier {
 
   //format list of addons into a string summary
   String _formatAddons(List<Addons> addons) =>
-      "\$ ${addons.map((addon) => "${addon.name} (${_formatPrice(addon.price)})").join(', ')}";
+      " ${addons.map((addon) => "${addon.name} (${_formatPrice(addon.price)})").join(', ')}";
 
 //format double value into money
 
