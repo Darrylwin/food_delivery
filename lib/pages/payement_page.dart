@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:food_delivery/components/my_button.dart';
 
+import 'delivery_progress_page.dart';
+
 class PayementPage extends StatefulWidget {
   const PayementPage({
     super.key,
@@ -18,6 +20,50 @@ class _PayementPageState extends State<PayementPage> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
+
+  void Function()? userTaper() {
+    if (formKey.currentState!.validate()) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text("Configure ayement"),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('Card number: $cardNumber'),
+                Text('Expiry date: $expiryDate'),
+                Text('Card Holder name: $cardHolderName'),
+                Text('Cvv: $cvvCode'),
+              ],
+            ),
+          ),
+          actions: [
+            //cancel button
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.of(context).pop();
+              },
+            ),
+
+            //validate button
+            TextButton(
+              child: Text("Validate"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DeliveryProgressPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +87,7 @@ class _PayementPageState extends State<PayementPage> {
               cvvCode: cvvCode,
               showBackView: isCvvFocused,
               onCreditCardWidgetChange: (p0) {},
+              cardBgColor: const Color.fromARGB(255, 12, 86, 96),
             ),
 
             //credit card form
@@ -65,7 +112,7 @@ class _PayementPageState extends State<PayementPage> {
 
             MyButton(
               text: "Pay now",
-              onTap: () {},
+              onTap: userTaper,
             ),
 
             const SizedBox(height: 16),

@@ -416,7 +416,7 @@ class Restaurant extends ChangeNotifier {
       description: "The essential drink for staying hydrated",
       price: 1.99,
       imagePath:
-          'https://i.pinimg.com/736x/d0/da/94/d0da948760541a4f8498bfb8dd34df2f.jpg',
+          'https://i.pinimg.com/736x/99/7e/c4/997ec4b70d360c96697eada2299c7c8f.jpg',
       category: FoodCategory.drinks,
       availableAddons: [
         Addons(name: "Extra Meat", price: 3.00),
