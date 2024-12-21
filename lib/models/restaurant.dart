@@ -518,6 +518,12 @@ class Restaurant extends ChangeNotifier {
   */
 
 //generate a receipt
+  //format double price into money
+  String _formatPrice(double price) => "\$ ${price.toStringAsFixed(2)}";
+
+  //format list of addons into a string summary
+  String _formatAddons(List<Addons> addons) =>
+      "\$ ${addons.map((addon) => "${addon.name} (${_formatPrice(addon.price)})").join(', ')}";
 
 //format double value into money
 
