@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
@@ -21,6 +22,40 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+// Méthode pour créer un utilisateur
+  Future<void> signUp() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+    String confirmPassword = confirmPasswordController.text;
+
+    if (password == confirmPassword){
+      // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
+    print('Email: $email');
+    print('Password: $password');
+
+    try {
+      final response = await Supabase.instance.client.auth.signUp(
+        email: email,  // email de l'utilisateur
+        password: password,  // mot de passe de l'utilisateur
+      );
+
+      if (response.error == null) {
+        // Utilisateur créé avec succès, vous pouvez rediriger ou afficher un message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Utilisateur créé avec succès')),
+        );
+      } else {
+        // Afficher l'erreur si la création de l'utilisateur échoue
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erreur : ${response.error!.message}')),
+        );
+      }
+    } catch (e) {
+      print('Erreur lors de la création de l\'utilisateur : $e');
+    }
+  }
+    }
+    
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               // sign up button
               MyButton(
-                onTap: () {},
+                onTap: signUp,
                 text: "Sign up",
               ),
 
@@ -126,4 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
+}
+extension on AuthResponse {
+  get error => null;
 }

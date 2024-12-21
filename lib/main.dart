@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/backendphp/supabase_config.dart';
 import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:food_delivery/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'models/restaurant.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SupabaseConfig.initialize();
+  
   runApp(
     MultiProvider(
       providers: [
