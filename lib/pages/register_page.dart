@@ -48,25 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
           );
 
           // Connecter l'utilisateur
-          final loginResponse = await Supabase.instance.client.auth.signInWithPassword(
-            email: email,
-            password: password,
-          );
-
-          if (loginResponse.error == null) {
-            // Rediriger vers la HomePage
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ),
-            );
-          } else {
-            // Afficher l'erreur si la connexion échoue
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Erreur de connexion : ${loginResponse.error!.message}')),
-            );
-          }
+          await logUserIn(email, password);
         } else {
           // Afficher l'erreur si la création de l'utilisateur échoue
           ScaffoldMessenger.of(context).showSnackBar(
@@ -88,6 +70,33 @@ class _RegisterPageState extends State<RegisterPage> {
           content: Text('Passwords don\'t match'),
         ),
       );
+    }
+  }
+
+  // Méthode pour connecter l'utilisateur
+  Future<void> logUserIn(String email, String password) async {
+    try {
+      final loginResponse = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (loginResponse.error == null) {
+        // Rediriger vers la HomePage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } else {
+        // Afficher l'erreur si la connexion échoue
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erreur de connexion : ${loginResponse.error!.message}')),
+        );
+      }
+    } catch (e) {
+      print('Erreur lors de la connexion de l\'utilisateur : $e');
     }
   }
 
