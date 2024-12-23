@@ -11,23 +11,31 @@ class MyReceipt extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25, top: 50),
       child: Center(
         child: Column(
+          spacing: 25,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Thanks for your order 🙏"),
-            const SizedBox(height: 25),
             Container(
               padding: const EdgeInsets.all(25),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
+                borderRadius: BorderRadius.circular(10),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Theme.of(context).colorScheme.tertiary,
+                //     offset: const Offset(5, 5),
+                //     blurRadius: 15,
+                //     spreadRadius: 5,
+                //   ),
+                // ],
               ),
               child: Consumer<Restaurant>(
                 builder: (context, restaurant, child) =>
                     Text(restaurant.displayCartReceipt()),
               ),
             ),
-            const SizedBox(height: 25),
             const Text("Estimed elivery time is 5:10 PM"),
           ],
         ),
