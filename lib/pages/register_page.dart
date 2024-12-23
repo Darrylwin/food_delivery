@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (response.error == null) {
         // Utilisateur créé avec succès, vous pouvez rediriger ou afficher un message
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Utilisateur créé avec succès')),
+          const SnackBar(content: Text('Utilisateur créé avec succès')),
         );
       } else {
         // Afficher l'erreur si la création de l'utilisateur échoue
