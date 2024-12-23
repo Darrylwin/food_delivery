@@ -3,6 +3,8 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'home_page.dart';
+
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
 
@@ -28,34 +30,67 @@ class _RegisterPageState extends State<RegisterPage> {
     String password = passwordController.text;
     String confirmPassword = confirmPasswordController.text;
 
-    if (password == confirmPassword){
+    if (password == confirmPassword) {
       // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
-    print('Email: $email');
-    print('Password: $password');
+      print('Email: $email');
+      print('Password: $password');
 
-    try {
-      final response = await Supabase.instance.client.auth.signUp(
-        email: email,  // email de l'utilisateur
-        password: password,  // mot de passe de l'utilisateur
-      );
+      try {
+        final response = await Supabase.instance.client.auth.signUp(
+          email: email, // email de l'utilisateur
+          password: password, // mot de passe de l'utilisateur
+        );
 
-      if (response.error == null) {
-        // Utilisateur créé avec succès, vous pouvez rediriger ou afficher un message
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Utilisateur créé avec succès')),
-        );
-      } else {
-        // Afficher l'erreur si la création de l'utilisateur échoue
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erreur : ${response.error!.message}')),
-        );
+        if (response.error == null) {
+          // Utilisateur créé avec succès, vous pouvez rediriger ou afficher un message
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Utilisateur créé avec succès')),
+          );
+
+          // Connecter l'utilisateur
+          final loginResponse = await Supabase.instance.client.auth.signInWithPassword(
+            email: email,
+            password: password,
+          );
+
+          if (loginResponse.error == null) {
+            // Rediriger vers la HomePage
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+            );
+          } else {
+            // Afficher l'erreur si la connexion échoue
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Erreur de connexion : ${loginResponse.error!.message}')),
+            );
+          }
+        } else {
+          // Afficher l'erreur si la création de l'utilisateur échoue
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Erreur : ${response.error!.message}')),
+          );
+        }
+      } catch (e) {
+        print('Erreur lors de la création de l\'utilisateur : $e');
       }
-    } catch (e) {
-      print('Erreur lors de la création de l\'utilisateur : $e');
+    } else {
+      print('Email: $email');
+      print('Password: $password');
+      print('confirmPassword: $confirmPassword');
+      print('Passwords don\'t match');
+
+      // Afficher un message d'erreur si les mots de passe ne correspondent pas
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Passwords don\'t match'),
+        ),
+      );
     }
   }
-    }
-    
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,6 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
 extension on AuthResponse {
   get error => null;
 }
