@@ -159,7 +159,7 @@ class _FoodPageState extends State<FoodPage> {
           child: Container(
             margin: const EdgeInsets.only(left: 25),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(.5),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
               // borderRadius: BorderRadius.circular(8),
               shape: BoxShape.circle,
             ),
