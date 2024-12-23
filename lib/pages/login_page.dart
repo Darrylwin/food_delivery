@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       if (response.error == null) {
         // Connexion réussie
          ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Connexion reuusie')),
+          const SnackBar(content: Text('Connexion réussie')),
         );
         Navigator.push(
           context,
