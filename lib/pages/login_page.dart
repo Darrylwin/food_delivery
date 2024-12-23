@@ -43,11 +43,11 @@ class _LoginPageState extends State<LoginPage> {
       if (response.error == null) {
         // Connexion réussie
          ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Connexion reuusie')),
+          const SnackBar(content: Text('Connexion reuusie')),
         );
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => const HomePage()),
         );
       } else {
         // Affichage d'une erreur si la connexion échoue
