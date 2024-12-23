@@ -49,6 +49,9 @@ A Flutter project for a food delivery application.
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
+### Collaborators
+
+- [MrJojono](https://github.com/MrJojono)
 
 ## Acknowledgements
 
