@@ -8,6 +8,7 @@ A Flutter project for a food delivery application.
 - Add food items to the cart with optional add-ons
 - View cart summary and total price
 - Generate a receipt for the cart items
+- Backend powered by Supabase for real-time data synchronization and user authentication
 
 ## Getting Started
 
@@ -44,6 +45,7 @@ A Flutter project for a food delivery application.
 - `lib/models`: Contains the data models for the app (e.g., `food.dart`, `cart_item.dart`, `restaurant.dart`).
 - `lib/screens`: Contains the UI screens for the app.
 - `lib/widgets`: Contains reusable UI components.
+- `lib/services`: Contains Supabase configuration and API services.
 
 ## Contributing
 
@@ -57,3 +59,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 - [Flutter](https://flutter.dev/)
 - [Dart](https://dart.dev/)
+- [Supabase](https://supabase.com/)
