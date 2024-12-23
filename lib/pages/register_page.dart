@@ -42,13 +42,13 @@ class _RegisterPageState extends State<RegisterPage> {
         );
 
         if (response.error == null) {
-          // Utilisateur créé avec succès, vous pouvez rediriger ou afficher un message
+          // Utilisateur créé avec succès, informer l'utilisateur de vérifier son email
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Utilisateur créé avec succès')),
+            const SnackBar(content: Text('Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
           );
 
-          // Connecter l'utilisateur
-          await logUserIn(email, password);
+          // Attendre la confirmation de l'email
+          await waitForEmailConfirmation(email, password);
         } else {
           // Afficher l'erreur si la création de l'utilisateur échoue
           ScaffoldMessenger.of(context).showSnackBar(
@@ -73,15 +73,20 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  // Méthode pour connecter l'utilisateur
-  Future<void> logUserIn(String email, String password) async {
-    try {
-      final loginResponse = await Supabase.instance.client.auth.signInWithPassword(
+  // Méthode pour attendre la confirmation de l'email
+  Future<void> waitForEmailConfirmation(String email, String password) async {
+    bool isConfirmed = false;
+
+    while (!isConfirmed) {
+      await Future.delayed(const Duration(seconds: 5));
+
+      final response = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
 
-      if (loginResponse.error == null) {
+      if (response.error == null) {
+        isConfirmed = true;
         // Rediriger vers la HomePage
         Navigator.pushReplacement(
           context,
@@ -89,14 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
             builder: (context) => const HomePage(),
           ),
         );
-      } else {
-        // Afficher l'erreur si la connexion échoue
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erreur de connexion : ${loginResponse.error!.message}')),
-        );
       }
-    } catch (e) {
-      print('Erreur lors de la connexion de l\'utilisateur : $e');
     }
   }
 
