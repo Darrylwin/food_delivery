@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_drawer_tile.dart';
 import 'package:food_delivery/pages/settings_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../services/auth/login_or_register.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
+
+  Future<void> signUserOut(BuildContext context) async {
+    try {
+      await Supabase.instance.client.auth.signOut();
+
+      // Navigate to login page and clear navigation stack
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const LoginOrRegister(),
+        ),
+        (route) => false,
+      );
+    } catch (e) {
+      print('Error signing out: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error signing out'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +80,7 @@ class MyDrawer extends StatelessWidget {
           MyDrawerTile(
             text: 'L O G  O U T',
             icon: Icons.logout,
-            onTap: () => {},
+            onTap: () => signUserOut(context),
           ),
 
           const SizedBox(height: 25),
