@@ -3,6 +3,7 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../components/registration_button.dart';
 import 'home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -44,7 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
         if (response.error == null) {
           // Utilisateur créé avec succès, informer l'utilisateur de vérifier son email
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
+            const SnackBar(
+                content: Text(
+                    'Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
           );
 
           // Attendre la confirmation de l'email
@@ -102,104 +105,112 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height / 5),
-              //logo
-              Center(
-                child: Icon(
-                  Icons.lock_open_rounded,
-                  size: 100,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 30),
+            //logo
+
+            Center(
+              child: Image.asset(
+                'assets/images/nom.png',
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            // app welcome message
+            Text(
+              "Sign up your account",
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            // email textfield
+            MyTextFiled(
+              controller: emailController,
+              hintText: "Email",
+              obscureText: false,
+            ),
+
+            const SizedBox(height: 33),
+
+            //password textfield
+            MyTextFiled(
+              controller: passwordController,
+              hintText: "Password",
+              obscureText: true,
+            ),
+
+            const SizedBox(height: 33),
+
+            // confirm password textfield
+            MyTextFiled(
+              controller: confirmPasswordController,
+              hintText: "Confirm Password",
+              obscureText: true,
+            ),
+
+            const SizedBox(height: 33),
+
+            // sign up button
+            MyButton(
+              onTap: signUp,
+              text: "SIGN UP",
+            ),
+
+            const SizedBox(height: 19),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RegistrationButton(
+                  image: 'assets/icons/facebook.png',
+                  onTap: () {},
                 ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // app welcome message
-              Text(
-                "A new member ! Let's Create an account",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                RegistrationButton(
+                  image: 'assets/icons/google.png',
+                  onTap: () {},
                 ),
-              ),
+              ],
+            ),
 
-              const SizedBox(height: 25),
+                        const SizedBox(height: 10),
 
-              // email textfield
-              MyTextFiled(
-                controller: emailController,
-                hintText: "Email",
-                obscureText: false,
-              ),
-
-              const SizedBox(height: 20),
-
-              //password textfield
-              MyTextFiled(
-                controller: passwordController,
-                hintText: "Password",
-                obscureText: true,
-              ),
-
-              const SizedBox(
-                height: 20,
-              ),
-
-              // confirm password textfield
-              MyTextFiled(
-                controller: confirmPasswordController,
-                hintText: "Confirm Password",
-                obscureText: true,
-              ),
-
-              const SizedBox(
-                height: 20,
-              ),
-
-              // sign up button
-              MyButton(
-                onTap: signUp,
-                text: "Sign up",
-              ),
-
-              const SizedBox(
-                height: 25,
-              ),
-
-              // already havea an account ?
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account ?",
+            // already havea an account ?
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Already have an account ?",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                GestureDetector(
+                  onTap: widget.onTap,
+                  child: const Text(
+                    "Login now",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
+                      color: Color(0xff0d5ef9),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: Text(
-                      "Login now",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
