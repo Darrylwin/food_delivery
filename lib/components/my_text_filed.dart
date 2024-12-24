@@ -19,17 +19,19 @@ class MyTextFiled extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscureText,
-        decoration: InputDecoration(
+        decoration: InputDecoration(filled :true,fillColor: Theme.of(context).colorScheme.tertiary,
           enabledBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: Theme.of(context).colorScheme.tertiary),
+            borderRadius: BorderRadius.circular(13),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: Theme.of(context).colorScheme.primary),
           ),
           hintText: hintText,
-          hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+          hintStyle:
+              TextStyle(color: Theme.of(context).colorScheme.primary),
         ),
       ),
     );
