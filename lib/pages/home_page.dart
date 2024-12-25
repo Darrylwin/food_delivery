@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_current_location.dart';
 import 'package:food_delivery/components/my_description_box.dart';
@@ -21,6 +22,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabsController;
+  int _bottomNavBarIndex = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   void initState() {
@@ -96,6 +99,40 @@ class _HomePageState extends State<HomePage>
             children: getFoodInThisCategory(restaurant.menu),
           ),
         ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        color: Colors.transparent,
+        buttonBackgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // color: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        items: [
+          Image.asset(
+            'assets/icons/home.png',
+            color: Theme.of(context).colorScheme.primary,
+            height: 25,
+          ),
+          Image.asset(
+            'assets/icons/order.png',
+            color: Theme.of(context).colorScheme.primary,
+            height: 25,
+          ),
+          Image.asset(
+            'assets/icons/profil.png',
+            color: Theme.of(context).colorScheme.primary,
+            height: 25,
+          ),
+          Image.asset(
+            'assets/icons/message.png',
+            color: Theme.of(context).colorScheme.primary,
+            height: 25,
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _bottomNavBarIndex = index;
+          });
+        },
       ),
     );
   }

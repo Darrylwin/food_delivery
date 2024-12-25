@@ -41,8 +41,8 @@ dependencies:
   intl: ^0.20.1
   http: ^1.2.2
   supabase_flutter: ^2.8.2  # Vérifiez la dernière version sur pub.dev
-  flutter_svg: ^2.0.16
- 
+  curved_navigation_bar: ^1.0.6
+
 
 dev_dependencies:
   flutter_test:
