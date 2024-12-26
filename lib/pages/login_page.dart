@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -80,14 +80,15 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 24),
 
               // app welcome message
-              Text(
+              const Text(
                 "Sign in your account",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
@@ -137,22 +138,21 @@ class _LoginPageState extends State<LoginPage> {
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Colors.grey[400],
                   ),
                   Text(
                     'Or continue with',
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary),
+                    style: TextStyle(color: Colors.grey[700]),
                   ),
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Theme.of(context).colorScheme.secondary,
+                    color: Colors.grey[400],
                   ),
                 ],
               ),
 
-              const SizedBox(height: 15),
+              const SizedBox(height: 16),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -168,6 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
 
+              const SizedBox(height: 12),
+
               // not a member ? register now
 
               Row(
@@ -176,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "Not a member ?",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
+                      color: Colors.grey[700],
                     ),
                   ),
                   const SizedBox(
@@ -188,12 +190,14 @@ class _LoginPageState extends State<LoginPage> {
                       "Register Now",
                       style: TextStyle(
                         color: Color(0xff0d5ef9),
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
+
+              const SizedBox(height: 11),
             ],
           ),
         ),

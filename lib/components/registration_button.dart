@@ -6,8 +6,9 @@ class RegistrationButton extends StatelessWidget {
     required this.image,
     required this.onTap,
   });
-  final String image;
+
   final void Function()? onTap;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +17,10 @@ class RegistrationButton extends StatelessWidget {
       child: SizedBox(
         height: 50,
         width: 125,
-        child: InkWell(
+        child: GestureDetector(
           onTap: onTap,
           child: Image.asset(
             image,
-            fit: BoxFit.contain,
-            color: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
       ),
