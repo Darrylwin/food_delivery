@@ -7,7 +7,7 @@ import 'models/restaurant.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SupabaseConfig.initialize();
-  
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => Restaurant(),
@@ -25,8 +25,20 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+        canvasColor: const Color(0xFFF5F5F5),
+        colorScheme: ColorScheme.light(
+          surface: Colors.grey.shade300,
+          primary: Colors.grey.shade500,
+          secondary: Colors.grey.shade100,
+          tertiary: Colors.white,
+          inversePrimary: Colors.grey.shade700,
+        ),
+        // appBarTheme: const AppBarTheme(
+        //   backgroundColor: Colors.white,
+        //   foregroundColor: Color(0xFF1A1A1A),
+        //   elevation: 0,
+        // ),
       ),
       home: const LoginOrRegister(),
     );
