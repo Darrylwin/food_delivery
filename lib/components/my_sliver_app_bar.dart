@@ -14,8 +14,8 @@ class MySliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 340,
-      collapsedHeight: 120,
+      expandedHeight: 170,
+      collapsedHeight: 100,
       floating: false,
       pinned: true,
       actions: [
@@ -29,15 +29,19 @@ class MySliverAppBar extends StatelessWidget {
               ),
             );
           },
-          icon: const Icon(Icons.shopping_cart),
+          icon: const Icon(Icons.shopping_cart, color: Colors.black),
         ),
       ],
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       title: const Text(
         "Popular menu",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
       ),
-      centerTitle: true,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(bottom: 50.0),
