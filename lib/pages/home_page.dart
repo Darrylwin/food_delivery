@@ -41,22 +41,30 @@ class _HomePageState extends State<HomePage>
     return FoodCategory.values.map((category) {
       List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
 
-      return ListView.builder(
-        padding: EdgeInsets.zero,
+      return GridView.builder(
+        padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           final food = categoryMenu[index];
           return MyFoodTile(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FoodPage(food: food),
-                  ),
-                );
-              },
-              food: food);
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FoodPage(food: food),
+                ),
+              );
+            },
+            food: food,
+          );
         },
         itemCount: categoryMenu.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: -0,
+          childAspectRatio:
+              150 / 250, // This will make each child 150 wide and 250 high
+        ),
       );
     }).toList();
   }
@@ -76,7 +84,8 @@ class _HomePageState extends State<HomePage>
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           MySliverAppBar(
             title: MyTabBar(tabsController: _tabsController),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SearchTextField(
                   controller: controller,

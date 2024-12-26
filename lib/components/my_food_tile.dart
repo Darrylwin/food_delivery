@@ -1,67 +1,126 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import '../models/food.dart';
 
 class MyFoodTile extends StatelessWidget {
-  const MyFoodTile({super.key, required this.onTap, required this.food});
+  const MyFoodTile({
+    super.key,
+    required this.onTap,
+    required this.food,
+  });
 
   final void Function()? onTap;
   final Food food;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              //text food details
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        children: [
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: Column(
               children: [
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(food.name),
-                      Text(
-                        '\$${food.price.toString()}',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white,
+                          Color(0xfff9f9ff),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        food.description,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                    height: 200,
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          food.name,
+                          softWrap: true,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 5),
+                        Text(
+                          '\$ ${food.price}',
+                          style: const TextStyle(
+                            // color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                      ],
+                    ),
                   ),
-                ), //food image
-                const SizedBox(width: 15),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.5),
-                  child: Image.network(
-                    food.imagePath,
-                    height: 100,
-                    width: 120,
-                    fit: BoxFit.cover,
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xff0d5ef9),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(13),
+                      bottomRight: Radius.circular(13),
+                    ),
+                  ),
+                  height: 40,
+                  width: double.infinity,
+                  child: const Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.shopping_bag_rounded,
+                          color: Colors.white,
+                          size: 15,
+                        ),
+                        Text(
+                          'ADD TO CART',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w300,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-
-        //divide line
-        Divider(
-          color: Theme.of(context).colorScheme.tertiary,
-          endIndent: 25,
-          indent: 25,
-        ),
-      ],
+          Positioned(
+            top: 1,
+            left: 0,
+            right: 0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      food.imagePath,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
