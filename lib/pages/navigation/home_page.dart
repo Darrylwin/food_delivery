@@ -101,14 +101,16 @@ class HomeContent extends StatefulWidget {
   State<HomeContent> createState() => _HomeContentState();
 }
 
-class _HomeContentState extends State<HomeContent> with SingleTickerProviderStateMixin {
+class _HomeContentState extends State<HomeContent>
+    with SingleTickerProviderStateMixin {
   late TabController _tabsController;
   TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _tabsController = TabController(length: FoodCategory.values.length, vsync: this);
+    _tabsController =
+        TabController(length: FoodCategory.values.length, vsync: this);
   }
 
   @override
@@ -163,6 +165,7 @@ class _HomeContentState extends State<HomeContent> with SingleTickerProviderStat
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              // const SizedBox(height: 10),
               SearchTextField(
                 controller: controller,
                 sort: true,
