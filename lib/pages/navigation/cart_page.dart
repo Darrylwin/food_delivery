@@ -138,7 +138,11 @@ class CartPage extends StatelessWidget {
               ),
 
               //total price
-              const Total(),
+              Container(
+                // margin:
+                //     const EdgeInsets.symmetric(horizontal: 11.5, vertical: 10),
+                child: const Total(),
+              ),
 
               //button to pay
               MyButton(

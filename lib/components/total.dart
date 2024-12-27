@@ -9,44 +9,75 @@ class Total extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) {
-        double discount = restaurant.getTotalPrice() -
-            ((restaurant.getTotalPrice() * 3.75) / 100);
+        double discount = (restaurant.getTotalPrice() * 3.75) / 100;
         double total = restaurant.getTotalPrice() - discount;
         return Container(
-          padding: const EdgeInsets.all(8),
-          margin: const EdgeInsets.only(
-            bottom: 8,
-          ),
-          decoration: const BoxDecoration(
-            color: Color(0xfff3f4f4),
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: BoxDecoration(
+            color: const Color(0xfff3f4f4),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Basket Total'),
-                  Text('+ USD ${restaurant.getTotalPrice()}'),
+                  const Text(
+                    'Basket Total',
+                    style: TextStyle(
+                      color: Color(0xff8b8e90),
+                      fontSize: 14.5,
+                    ),
+                  ),
+                  Text(
+                    '+ USD ${restaurant.getTotalPrice().toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
               ),
-              const Divider(
-                color: Color(0xff8b8e90),
-              ),
+              Divider(color: const Color(0xff8b8e90).withOpacity(.5)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Discount'),
-                  Text('- USD ${discount.toStringAsFixed(2)}'),
+                  const Text(
+                    'Discount',
+                    style: TextStyle(
+                      color: Color(0xff8b8e90),
+                      fontSize: 14.5,
+                    ),
+                  ),
+                  Text(
+                    '- USD ${discount.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      color: Color(0xff0d5ef9),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
               ),
-              const Divider(
-                color: Color(0xff8b8e90),
-              ),
+              Divider(color: const Color(0xff8b8e90).withOpacity(.5)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Total'),
-                  Text('- USD ${total.toStringAsFixed(2)}'),
+                  const Text(
+                    'Total',
+                    style: TextStyle(
+                      color: Color(0xff8b8e90),
+                      fontSize: 14.5,
+                    ),
+                  ),
+                  Text(
+                    'USD ${total.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ],
               ),
             ],
