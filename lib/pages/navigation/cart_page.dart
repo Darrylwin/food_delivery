@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_cart_tile.dart';
+import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:food_delivery/pages/payement_page.dart';
 import 'package:provider/provider.dart';
@@ -136,6 +137,9 @@ class CartPage extends StatelessWidget {
                 ),
               ),
 
+              //total price
+              const Total(),
+
               //button to pay
               MyButton(
                 text: 'PLACE MY ORDER',
@@ -148,8 +152,6 @@ class CartPage extends StatelessWidget {
                   );
                 },
               ),
-
-              const SizedBox(height: 25),
             ],
           ),
         );
