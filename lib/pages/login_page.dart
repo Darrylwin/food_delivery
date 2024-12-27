@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:food_delivery/components/registration_button.dart';
-import 'package:food_delivery/pages/home_page.dart';
+import 'package:food_delivery/pages/navigation/home_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../components/registration_button.dart';
-import 'home_page.dart';
+import 'navigation/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
