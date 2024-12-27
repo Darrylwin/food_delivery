@@ -4,13 +4,15 @@ class SearchTextField extends StatelessWidget {
   SearchTextField({
     super.key,
     required this.controller,
+    required this.sort,
   });
   TextEditingController controller = TextEditingController();
+  bool sort = false;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: TextField(
         controller: controller,
         cursorColor: const Color(0xFF666a6d), // Ajout de la couleur du curseur
@@ -19,10 +21,10 @@ class SearchTextField extends StatelessWidget {
             Icons.search_rounded,
             color: Color(0xFF666a6d),
           ),
-          suffixIcon: const Icon(
+          suffixIcon:this.sort ? const Icon(
             Icons.filter_list,
             color: Color(0xff575b5e),
-          ),
+          ) : null,
           filled: true,
           hintText: 'Search...',
           hintStyle: const TextStyle(
