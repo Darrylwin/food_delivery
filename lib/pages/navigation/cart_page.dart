@@ -78,20 +78,14 @@ class CartPage extends StatelessWidget {
                             )
                           : Expanded(
                               child: ListView.builder(
-                                  itemCount: userCart.length,
-                                  itemBuilder: (context, index) {
-                                    //get individual cart item
-                                    final cartItem = userCart[index];
+                                itemCount: userCart.length,
+                                itemBuilder: (context, index) {
+                                  //get individual cart item
+                                  final cartItem = userCart[index];
 
-                                    // return cart ui
-                                    // return ListTile(
-                                    //   title: Text(
-                                    //     userCart[index].food.name,
-                                    //   ),
-                                    // );
-
-                                    return MyCartTile(cartItem: cartItem);
-                                  }),
+                                  return MyCartTile(cartItem: cartItem);
+                                },
+                              ),
                             ),
                     ],
                   ),
@@ -99,7 +93,7 @@ class CartPage extends StatelessWidget {
 
                 //button to pay
                 MyButton(
-                  text: 'Go to check out',
+                  text: 'PLACE MY ORDER',
                   onTap: () {
                     Navigator.push(
                       context,

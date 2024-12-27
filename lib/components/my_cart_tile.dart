@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_quantity_selector.dart';
 import 'package:food_delivery/models/cart_item.dart';
@@ -28,11 +29,22 @@ class MyCartTile extends StatelessWidget {
                   //food image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      cartItem.food.imagePath,
+                    child: Container(
                       height: 100,
-                      // width: 100,
-                      fit: BoxFit.contain,
+                      width: 100,
+                      child: CachedNetworkImage(
+                        imageUrl: cartItem.food.imagePath,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => const Center(
+                          child: Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
 
@@ -41,25 +53,28 @@ class MyCartTile extends StatelessWidget {
                   //name and price
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      //food name
                       Text(cartItem.food.name),
-
                       //food price
-                      Text("\$ ${cartItem.food.price}",
-                      style: TextStyle(color: Theme.of(context).colorScheme.primary),),
+                      Text(
+                        "\$ ${cartItem.food.price}",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+
+                      const SizedBox(height: 23.5),
+
+                      // increment or decrement quantity
+                      MyQuantitySelector(
+                        quantity: cartItem.quantity,
+                        food: cartItem.food,
+                        onIncrement: () => restaurant.addToCart(
+                            cartItem.food, cartItem.selectedAddons),
+                        onDecrement: () => restaurant.removeFromCart(cartItem),
+                      ),
                     ],
-                  ),
-
-                  const Spacer(),
-
-                  // increment or decrement quantity
-                  MyQuantitySelector(
-                    quantity: cartItem.quantity,
-                    food: cartItem.food,
-                    onIncrement: () => restaurant.addToCart(
-                        cartItem.food, cartItem.selectedAddons),
-                    onDecrement: () => restaurant.removeFromCart(cartItem),
                   ),
                 ],
               ),
@@ -73,7 +88,7 @@ class MyCartTile extends StatelessWidget {
                 children: cartItem.selectedAddons
                     .map(
                       (addon) => Padding(
-                        padding: const EdgeInsets.only(right: 08),
+                        padding: const EdgeInsets.only(left: 08),
                         child: FilterChip(
                           label: Row(
                             children: [
@@ -82,7 +97,7 @@ class MyCartTile extends StatelessWidget {
 
                               //addon price
 
-                              Text('(\$${addon.price})'),
+                              Text(' (\$${addon.price})'),
                             ],
                           ),
                           shape: StadiumBorder(
