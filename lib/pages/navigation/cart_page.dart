@@ -82,26 +82,57 @@ class CartPage extends StatelessWidget {
               ),
               //list of cart
               Expanded(
-                child: Column(
-                  children: [
-                    userCart.isEmpty
-                        ? const Expanded(
-                            child: Center(
-                              child: Text("Cart is empty"),
-                            ),
-                          )
-                        : Expanded(
-                            child: ListView.builder(
-                              itemCount: userCart.length,
-                              itemBuilder: (context, index) {
-                                //get individual cart item
-                                final cartItem = userCart[index];
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: 11.5, vertical: 10),
+                  child: Column(
+                    children: [
+                      userCart.isEmpty
+                          ? const Expanded(
+                              child: Center(
+                                child: Text("Cart is empty"),
+                              ),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                itemCount: userCart.length,
+                                itemBuilder: (context, index) {
+                                  //get individual cart item
+                                  final cartItem = userCart[index];
 
-                                return MyCartTile(cartItem: cartItem);
-                              },
+                                  return Dismissible(
+                                    key: Key(cartItem.hashCode.toString()),
+                                    direction: DismissDirection.endToStart,
+                                    background: Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 10),
+                                      alignment: Alignment.centerRight,
+                                      padding: const EdgeInsets.only(right: 20),
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                                204, 153, 204, 255)
+                                            .withOpacity(.38),
+                                        borderRadius: const BorderRadius.only(
+                                          topRight: Radius.circular(8),
+                                          bottomRight: Radius.circular(8),
+                                        ),
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete_outlined,
+                                        color: Color(0xff0d5ef9),
+                                      ),
+                                    ),
+                                    onDismissed: (direction) {
+                                      //delete item from cart
+                                      restaurant.deleteFromCart(cartItem);
+                                    },
+                                    child: MyCartTile(cartItem: cartItem),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 

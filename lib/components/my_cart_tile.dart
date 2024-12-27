@@ -21,12 +21,13 @@ class MyCartTile extends StatelessWidget {
               color: const Color(0xff0d5ef9).withOpacity(0.3),
               spreadRadius: 1,
               blurRadius: 8,
-              offset: const Offset(2, 2), // changé pour ombre à droite et en bas
+              offset:
+                  const Offset(2, 2), // changé pour ombre à droite et en bas
             ),
           ],
           borderRadius: BorderRadius.circular(8),
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
         child: Column(
           children: [
             Padding(

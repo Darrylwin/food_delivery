@@ -514,6 +514,12 @@ class Restaurant extends ChangeNotifier {
     notifyListeners();
   }
 
+//method to remove from cart
+void deleteFromCart(CartItem item) {
+  _cart.remove(item);
+  notifyListeners();
+}
+
 /*
   HELPERS
   */
