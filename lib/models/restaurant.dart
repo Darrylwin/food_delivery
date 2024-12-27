@@ -554,7 +554,6 @@ void deleteFromCart(CartItem item) {
 
     return receipt.toString();
   }
-
   //format double price into money
   String _formatPrice(double price) => "\$ ${price.toStringAsFixed(2)}";
 
@@ -565,4 +564,5 @@ void deleteFromCart(CartItem item) {
 //format double value into money
 
 //format list of addons into string summary
+
 }
