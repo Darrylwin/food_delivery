@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import '../components/search_text_field.dart';
 
 class NotifsPage extends StatelessWidget {
-  const NotifsPage({super.key});
+  NotifsPage({super.key});
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        // automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
         title: const Text(
           'Notifications',
           style: TextStyle(
@@ -40,7 +43,30 @@ class NotifsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: null,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            expandedHeight: 50,
+            collapsedHeight: 57,
+            floating: false,
+            pinned: true,
+            shadowColor: Colors.white,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.white,
+            title: SearchTextField(
+              controller: controller,
+              sort: false,
+            ),
+          ),
+        ],
+        body: Container(
+          color: Colors.white,
+          child: const Center(
+            child: Text('Null'),
+          ),
+        ),
+      ),
     );
   }
 }
