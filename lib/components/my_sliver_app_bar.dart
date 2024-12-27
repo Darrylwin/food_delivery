@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/pages/navigation/cart_page.dart';
+import 'package:food_delivery/pages/notifs_page.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget title;
@@ -25,11 +25,11 @@ class MySliverAppBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const CartPage(),
+                builder: (context) => const NotifsPage(),
               ),
             );
           },
-          icon: const Icon(Icons.shopping_cart, color: Colors.black),
+          icon: const Icon(Icons.notifications_rounded, color: Colors.black),
         ),
       ],
       backgroundColor: Colors.white,
