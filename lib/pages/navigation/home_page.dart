@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage>
   // Liste des pages
   final List<Widget> _pages = [
     const HomeContent(),
-    const CartPage(),
+    CartPage(),
     const ProfilePage(),
     const MessagePage(),
   ];
