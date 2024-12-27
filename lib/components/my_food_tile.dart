@@ -72,9 +72,17 @@ class MyFoodTile extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xff0d5ef9),
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: const Color(0xff0d5ef9),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xff0d5ef9).withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(-2, 2), // gauche et bas
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(13),
                       bottomRight: Radius.circular(13),
                     ),
