@@ -15,7 +15,15 @@ class MyCartTile extends StatelessWidget {
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) => Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
           borderRadius: BorderRadius.circular(8),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
@@ -28,21 +36,19 @@ class MyCartTile extends StatelessWidget {
                 children: [
                   //food image
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Container(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CachedNetworkImage(
+                      imageUrl: cartItem.food.imagePath,
+                      fit: BoxFit.cover,
                       height: 100,
                       width: 100,
-                      child: CachedNetworkImage(
-                        imageUrl: cartItem.food.imagePath,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => const Center(
-                          child: Icon(
-                            Icons.error,
-                            color: Colors.red,
-                          ),
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                      errorWidget: (context, url, error) => const Center(
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.red,
                         ),
                       ),
                     ),
@@ -55,12 +61,17 @@ class MyCartTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(cartItem.food.name),
+                      Text(
+                        cartItem.food.name,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14.4),
+                      ),
                       //food price
                       Text(
                         "\$ ${cartItem.food.price}",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                        style: const TextStyle(
+                          color: Color(0xff0d5ef9),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
 
