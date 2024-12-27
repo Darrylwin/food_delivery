@@ -18,10 +18,10 @@ class MyCartTile extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
+              color: const Color(0xff0d5ef9).withOpacity(0.3),
               spreadRadius: 1,
               blurRadius: 8,
-              offset: const Offset(0, 2),
+              offset: const Offset(2, 2), // changé pour ombre à droite et en bas
             ),
           ],
           borderRadius: BorderRadius.circular(8),
