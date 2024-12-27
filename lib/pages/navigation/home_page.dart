@@ -57,32 +57,18 @@ class _HomePageState extends State<HomePage>
       body: _pages[_bottomNavBarIndex],
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        color: Colors.transparent,
         buttonBackgroundColor: Theme.of(context).colorScheme.surface,
-        // color: Colors.transparent,
         backgroundColor: Colors.transparent,
-        items: [
+        index: _bottomNavBarIndex,
+        items: List.generate(4, (index) => 
           Image.asset(
-            'assets/icons/home.png',
-            // color: Theme.of(context).colorScheme.primary,
+            'assets/icons/${index == 0 ? 'home' : index == 1 ? 'order' : index == 2 ? 'profil' : 'message'}.png',
+            color: _bottomNavBarIndex == index
+                ? const Color(0xff28303f)
+                : const Color(0xffb5b8bd),
             height: 25,
           ),
-          Image.asset(
-            'assets/icons/order.png',
-            // color: Theme.of(context).colorScheme.primary,
-            height: 25,
-          ),
-          Image.asset(
-            'assets/icons/profil.png',
-            // color: Theme.of(context).colorScheme.primary,
-            height: 25,
-          ),
-          Image.asset(
-            'assets/icons/message.png',
-            // color: Theme.of(context).colorScheme.primary,
-            height: 25,
-          ),
-        ],
+        ),
         onTap: (index) {
           setState(() {
             _bottomNavBarIndex = index;
