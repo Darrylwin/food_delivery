@@ -68,7 +68,7 @@ class MySliverAppBar extends StatelessWidget {
               ],
             ),
             child: const Icon(
-              Icons.notifications_rounded,
+              Icons.notifications_none_rounded,
               size: 22.5,
             ),
           ),
