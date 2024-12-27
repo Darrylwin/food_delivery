@@ -165,6 +165,7 @@ class _HomeContentState extends State<HomeContent> with SingleTickerProviderStat
             children: [
               SearchTextField(
                 controller: controller,
+                sort: true,
               ),
             ],
           ),
