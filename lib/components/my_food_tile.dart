@@ -40,20 +40,23 @@ class MyFoodTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          food.name,
-                          softWrap: true,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            food.name,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           '\$ ${food.price}',
                           style: const TextStyle(
-                            // color: Colors.black,
                             fontWeight: FontWeight.w500,
                             fontSize: 17,
                           ),
