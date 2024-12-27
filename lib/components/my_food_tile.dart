@@ -24,14 +24,19 @@ class MyFoodTile extends StatelessWidget {
               children: [
                 Expanded(
                   child: Container(
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white,
-                          Color(0xfff9f9ff),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(13),
+                        topRight: Radius.circular(13),
                       ),
                     ),
                     height: 200,
