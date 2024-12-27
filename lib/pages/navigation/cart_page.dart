@@ -5,8 +5,12 @@ import 'package:food_delivery/models/restaurant.dart';
 import 'package:food_delivery/pages/payement_page.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/my_drawer.dart';
+import '../../components/search_text_field.dart';
+
 class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+  CartPage({super.key});
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,91 +21,98 @@ class CartPage extends StatelessWidget {
 
         //scaffold ui
         return Scaffold(
+          drawer: const MyDrawer(),
           appBar: AppBar(
-            title: const Text("Cart"),
-            backgroundColor: Colors.transparent,
-            foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-            actions: [
-              //clear cart button
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                          "Are you sure you want to clear the cart ?"),
-                      actions: [
-                        //cancel button
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text("Cancel"),
-                        ),
-                        //yes button
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                            restaurant.clearCart();
-                          },
-                          child: const Text("Yes"),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.delete,
-                ),
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            title: const Text(
+              'Order details',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
               ),
-            ],
-          ),
-          body: Column(
-            children: [
-              //list of cart
-              Expanded(
-                child: Column(
-                  children: [
-                    userCart.isEmpty
-                        ? const Expanded(
-                            child: Center(
-                              child: Text("Cart is empty"),
-                            ),
-                          )
-                        : Expanded(
-                            child: ListView.builder(
-                                itemCount: userCart.length,
-                                itemBuilder: (context, index) {
-                                  //get individual cart item
-                                  final cartItem = userCart[index];
-
-                                  // return cart ui
-                                  // return ListTile(
-                                  //   title: Text(
-                                  //     userCart[index].food.name,
-                                  //   ),
-                                  // );
-
-                                  return MyCartTile(cartItem: cartItem);
-                                }),
-                          ),
+            ),
+            leading: GestureDetector(
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
+              child: Container(
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
                   ],
                 ),
+                child: const Icon(
+                  Icons.menu_rounded,
+                  size: 22.5,
+                ),
               ),
+            ),
+          ),
+          body: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                SearchTextField(
+                  controller: controller,
+                  sort: false,
+                ),
+                //list of cart
+                Expanded(
+                  child: Column(
+                    children: [
+                      userCart.isEmpty
+                          ? const Expanded(
+                              child: Center(
+                                child: Text("Cart is empty"),
+                              ),
+                            )
+                          : Expanded(
+                              child: ListView.builder(
+                                  itemCount: userCart.length,
+                                  itemBuilder: (context, index) {
+                                    //get individual cart item
+                                    final cartItem = userCart[index];
 
-              //button to pay
-              MyButton(
-                text: 'Go to check out',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PayementPage(),
-                    ),
-                  );
-                },
-              ),
+                                    // return cart ui
+                                    // return ListTile(
+                                    //   title: Text(
+                                    //     userCart[index].food.name,
+                                    //   ),
+                                    // );
 
-              const SizedBox(height: 25),
-            ],
+                                    return MyCartTile(cartItem: cartItem);
+                                  }),
+                            ),
+                    ],
+                  ),
+                ),
+
+                //button to pay
+                MyButton(
+                  text: 'Go to check out',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PayementPage(),
+                      ),
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 25),
+              ],
+            ),
           ),
         );
       },
