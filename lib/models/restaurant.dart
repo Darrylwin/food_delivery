@@ -460,6 +460,8 @@ class Restaurant extends ChangeNotifier {
     } else {
       _cart.add(
         CartItem(
+          name: food.name,
+          price: food.price,
           food: food,
           selectedAddons: selectedAddons,
         ),
@@ -498,6 +500,17 @@ class Restaurant extends ChangeNotifier {
     return total;
   }
 
+  // Remplacez la méthode getCartItems() par celle-ci
+  List<CartItem> getCartItems() {
+    return _cart.map((item) => CartItem(
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          food: item.food,
+          selectedAddons: item.selectedAddons,
+        )).toList();
+  }
+
 //get total number of items in cart
   int getTotalItemsCount() {
     int totalItemCount = 0;
@@ -515,10 +528,10 @@ class Restaurant extends ChangeNotifier {
   }
 
 //method to remove from cart
-void deleteFromCart(CartItem item) {
-  _cart.remove(item);
-  notifyListeners();
-}
+  void deleteFromCart(CartItem item) {
+    _cart.remove(item);
+    notifyListeners();
+  }
 
 /*
   HELPERS
@@ -554,6 +567,7 @@ void deleteFromCart(CartItem item) {
 
     return receipt.toString();
   }
+
   //format double price into money
   String _formatPrice(double price) => "\$ ${price.toStringAsFixed(2)}";
 
@@ -564,5 +578,4 @@ void deleteFromCart(CartItem item) {
 //format double value into money
 
 //format list of addons into string summary
-
 }

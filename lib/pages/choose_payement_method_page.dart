@@ -17,7 +17,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
         double discount = (restaurant.getTotalPrice() * 3.75) / 100;
         double total = restaurant.getTotalPrice() - discount;
 
-        void Function()? paypalPayement(BuildContext context) {
+        void paypalPayement(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -30,27 +30,23 @@ class ChoosePayementMethodPage extends StatelessWidget {
                       'total': total.toStringAsFixed(2),
                       'currency': 'USD',
                       'details': {
-                        'subtotal': total.toStringAsFixed(2),
+                        'subtotal':
+                            restaurant.getTotalPrice().toStringAsFixed(2),
                         'shipping': "3.75%",
-                        'shipping_discount': discount,
+                        'shipping_discount': discount.toStringAsFixed(2),
                       },
                     },
-                    'description': 'Pay with Paypal',
-                    'items_list': const {
-                      'items': [
-                        {
-                          "name": "Apple",
-                          "quantity": 4,
-                          "price": '5',
-                          "currency": "USD"
-                        },
-                        {
-                          "name": "Pineapple",
-                          "quantity": 5,
-                          "price": '10',
-                          "currency": "USD"
-                        },
-                      ],
+                    'description': 'Commande Food Delivery',
+                    'items_list': {
+                      'items': restaurant
+                          .getCartItems()
+                          .map((item) => {
+                                'name': item.name,
+                                'quantity': item.quantity,
+                                'price': item.price.toStringAsFixed(2),
+                                'currency': 'USD'
+                              })
+                          .toList(),
                     },
                   },
                 ],
@@ -122,7 +118,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 7),
                     child: ChoosePayementMethod(
                       icon: 'assets/icons/paypal.png',
-                      onTap: paypalPayement(context),
+                      onTap: () => paypalPayement(context), // Correction ici
                     ),
                   ),
                   Container(

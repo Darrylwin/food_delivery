@@ -1,16 +1,19 @@
-
 import 'food.dart';
 
 class CartItem {
-  CartItem({
-    required this.food,
-    this.quantity = 1,
-    required this.selectedAddons,
-  });
-
+  String name;
+  int quantity;
+  double price;
   Food food;
   List<Addons> selectedAddons;
-  int quantity;
+
+  CartItem({
+    required this.name,
+    this.quantity = 1,
+    required this.price,
+    required this.food,
+    this.selectedAddons = const [],
+  });
 
   double get totalPrice {
     double addonsPrice =
