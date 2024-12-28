@@ -3,6 +3,7 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_cart_tile.dart';
 import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/pages/choose_payement_method_page.dart';
 import 'package:food_delivery/pages/payement_page.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +40,6 @@ class CartPage extends StatelessWidget {
               child: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
-                elevation: 0,
                 title: const Text(
                   'Order details',
                   style: TextStyle(
@@ -74,84 +74,87 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SearchTextField(
-                        controller: controller,
-                        sort: false,
-                      ),
-                      //list of cart
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 11.5, vertical: 10),
-                        child: userCart.isEmpty
-                            ? const Center(
-                                child: Text("Cart is empty"),
-                              )
-                            : Column(
-                                children: userCart.map((cartItem) {
-                                  return Dismissible(
-                                    key: Key(cartItem.hashCode.toString()),
-                                    direction: DismissDirection.endToStart,
-                                    background: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 10),
-                                      alignment: Alignment.centerRight,
-                                      padding: const EdgeInsets.only(right: 20),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                                204, 153, 204, 255)
-                                            .withOpacity(.38),
-                                        borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
+          body: Container(color: Colors.white,
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SearchTextField(
+                          controller: controller,
+                          sort: false,
+                        ),
+                        //list of cart
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 11.5, vertical: 10),
+                          child: userCart.isEmpty
+                              ? const Center(
+                                  child: Text("Cart is empty"),
+                                )
+                              : Column(
+                                  children: userCart.map((cartItem) {
+                                    return Dismissible(
+                                      key: Key(cartItem.hashCode.toString()),
+                                      direction: DismissDirection.endToStart,
+                                      background: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 10),
+                                        alignment: Alignment.centerRight,
+                                        padding: const EdgeInsets.only(right: 20),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                                  204, 153, 204, 255)
+                                              .withOpacity(.38),
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(20),
+                                            bottomRight: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.delete_outlined,
+                                          color: Color(0xff0d5ef9),
                                         ),
                                       ),
-                                      child: const Icon(
-                                        Icons.delete_outlined,
-                                        color: Color(0xff0d5ef9),
-                                      ),
+                                      onDismissed: (direction) {
+                                        //delete item from cart
+                                        restaurant.deleteFromCart(cartItem);
+                                      },
+                                      child: MyCartTile(cartItem: cartItem),
+                                    );
+                                  }).toList(),
+                                ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              const Total(),
+                              MyButton(
+                                text: 'PLACE MY ORDER',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ChoosePayementMethodPage(),
                                     ),
-                                    onDismissed: (direction) {
-                                      //delete item from cart
-                                      restaurant.deleteFromCart(cartItem);
-                                    },
-                                    child: MyCartTile(cartItem: cartItem),
                                   );
-                                }).toList(),
+                                },
                               ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
+                            ],
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            const Total(),
-                            MyButton(
-                              text: 'PLACE MY ORDER',
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const PayementPage(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
