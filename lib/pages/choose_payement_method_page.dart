@@ -44,30 +44,50 @@ class ChoosePayementMethodPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 7),
-              child:
-                  const ChoosePayementMethod(icon: 'assets/icons/paypal.png'),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 7),
-              child: const ChoosePayementMethod(
-                  icon: 'assets/icons/master_card.png'),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: MyButton(
-                text: 'ADD CARD +',
-                onTap: () {},
-                color: const Color.fromARGB(255, 201, 233, 255).withOpacity(.8),
-                textColor: const Color(0xff0d5ef9),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child:
+                    const ChoosePayementMethod(icon: 'assets/icons/paypal.png'),
               ),
-            ),
-          ],
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child: const ChoosePayementMethod(
+                    icon: 'assets/icons/master_card.png'),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: MyButton(
+                  text: 'ADD CARD +',
+                  onTap: () {},
+                  color:
+                      const Color.fromARGB(255, 201, 233, 255).withOpacity(.8),
+                  textColor: const Color(0xff0d5ef9),
+                ),
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Other methods',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 13,
+                ),
+              ),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 7),
+                child: const ChoosePayementMethod(
+                  icon: 'assets/icons/cash.png',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
