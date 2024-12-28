@@ -86,19 +86,15 @@ class CartPage extends StatelessWidget {
                         sort: false,
                       ),
                       //list of cart
-                      Container(
-                        margin: const EdgeInsets.symmetric(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 11.5, vertical: 10),
-                        height: MediaQuery.of(context).size.height *
-                            0.5, // Hauteur fixe pour la liste
                         child: userCart.isEmpty
                             ? const Center(
                                 child: Text("Cart is empty"),
                               )
-                            : ListView.builder(
-                                itemCount: userCart.length,
-                                itemBuilder: (context, index) {
-                                  final cartItem = userCart[index];
+                            : Column(
+                                children: userCart.map((cartItem) {
                                   return Dismissible(
                                     key: Key(cartItem.hashCode.toString()),
                                     direction: DismissDirection.endToStart,
@@ -127,21 +123,13 @@ class CartPage extends StatelessWidget {
                                     },
                                     child: MyCartTile(cartItem: cartItem),
                                   );
-                                },
+                                }).toList(),
                               ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         decoration: const BoxDecoration(
                           color: Colors.white,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     color: Colors.grey.withOpacity(0.2),
-                          //     spreadRadius: 1,
-                          //     blurRadius: 6,
-                          //     offset: const Offset(0, -2),
-                          //   ),
-                          // ],
                         ),
                         child: Column(
                           children: [
