@@ -75,7 +75,7 @@ class Total extends StatelessWidget {
                     'USD ${total.toStringAsFixed(2)}',
                     style: const TextStyle(
                       fontSize: 14,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
