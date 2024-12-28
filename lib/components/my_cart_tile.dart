@@ -25,7 +25,7 @@ class MyCartTile extends StatelessWidget {
                   const Offset(2, 2), // changé pour ombre à droite et en bas
             ),
           ],
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
         child: Column(
@@ -37,7 +37,7 @@ class MyCartTile extends StatelessWidget {
                 children: [
                   //food image
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     child: CachedNetworkImage(
                       imageUrl: cartItem.food.imagePath,
                       fit: BoxFit.cover,
