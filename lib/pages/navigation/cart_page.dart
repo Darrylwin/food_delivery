@@ -77,30 +77,28 @@ class CartPage extends StatelessWidget {
           ),
           body: Column(
             children: [
-              SearchTextField(
-                controller: controller,
-                sort: false,
-              ),
-              //list of cart
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(
-                      horizontal: 11.5, vertical: 10),
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      userCart.isEmpty
-                          ? const Expanded(
-                              child: Center(
+                      SearchTextField(
+                        controller: controller,
+                        sort: false,
+                      ),
+                      //list of cart
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 11.5, vertical: 10),
+                        height: MediaQuery.of(context).size.height *
+                            0.5, // Hauteur fixe pour la liste
+                        child: userCart.isEmpty
+                            ? const Center(
                                 child: Text("Cart is empty"),
-                              ),
-                            )
-                          : Expanded(
-                              child: ListView.builder(
+                              )
+                            : ListView.builder(
                                 itemCount: userCart.length,
                                 itemBuilder: (context, index) {
-                                  //get individual cart item
                                   final cartItem = userCart[index];
-
                                   return Dismissible(
                                     key: Key(cartItem.hashCode.toString()),
                                     direction: DismissDirection.endToStart,
@@ -114,8 +112,8 @@ class CartPage extends StatelessWidget {
                                                 204, 153, 204, 255)
                                             .withOpacity(.38),
                                         borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(8),
-                                          bottomRight: Radius.circular(8),
+                                          topRight: Radius.circular(20),
+                                          bottomRight: Radius.circular(20),
                                         ),
                                       ),
                                       child: const Icon(
@@ -131,31 +129,43 @@ class CartPage extends StatelessWidget {
                                   );
                                 },
                               ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 6,
+                              offset: const Offset(0, -2),
                             ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            const Total(),
+                            MyButton(
+                              text: 'PLACE MY ORDER',
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const PayementPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
 
-              //total price
-              Container(
-                // margin:
-                //     const EdgeInsets.symmetric(horizontal: 11.5, vertical: 10),
-                child: const Total(),
-              ),
-
-              //button to pay
-              MyButton(
-                text: 'PLACE MY ORDER',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const PayementPage(),
-                    ),
-                  );
-                },
-              ),
+              // Partie fixe en bas
             ],
           ),
         );
