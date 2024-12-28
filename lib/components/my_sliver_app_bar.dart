@@ -19,29 +19,29 @@ class MySliverAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       leading: GestureDetector(
-          onTap: () {
-            Scaffold.of(context).openDrawer();
-          },
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: const Icon(
-              Icons.menu_rounded,
-              size: 22.5,
-            ),
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: const Icon(
+            Icons.menu_rounded,
+            size: 22.5,
           ),
         ),
+      ),
       actions: [
         // notifs button
         GestureDetector(
@@ -80,9 +80,8 @@ class MySliverAppBar extends StatelessWidget {
       title: const Text(
         "Popular menu",
         style: TextStyle(
-          color: Colors.black,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
         ),
       ),
       flexibleSpace: FlexibleSpaceBar(

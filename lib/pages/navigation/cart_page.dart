@@ -40,7 +40,6 @@ class CartPage extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
                 elevation: 0,
-                centerTitle: true,
                 title: const Text(
                   'Order details',
                   style: TextStyle(
