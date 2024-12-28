@@ -74,7 +74,8 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          body: Container(color: Colors.white,
+          body: Container(
+            color: Colors.white,
             child: Column(
               children: [
                 Expanded(
@@ -102,7 +103,8 @@ class CartPage extends StatelessWidget {
                                         margin: const EdgeInsets.symmetric(
                                             horizontal: 5, vertical: 10),
                                         alignment: Alignment.centerRight,
-                                        padding: const EdgeInsets.only(right: 20),
+                                        padding:
+                                            const EdgeInsets.only(right: 20),
                                         decoration: BoxDecoration(
                                           color: const Color.fromARGB(
                                                   204, 153, 204, 255)
