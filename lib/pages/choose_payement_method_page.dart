@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:food_delivery/components/choose_payement_method.dart';
 import 'package:food_delivery/components/my_button.dart';
 
 class ChoosePayementMethodPage extends StatelessWidget {
   const ChoosePayementMethodPage({super.key});
+
+  void Function()? paypalPayement(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PaypalCheckoutView(
+          clientId: '',
+          
+
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +66,17 @@ class ChoosePayementMethodPage extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 7),
-                child:
-                    const ChoosePayementMethod(icon: 'assets/icons/paypal.png'),
+                child: ChoosePayementMethod(
+                  icon: 'assets/icons/paypal.png',
+                  onTap: paypalPayement(context),
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 7),
-                child: const ChoosePayementMethod(
-                    icon: 'assets/icons/master_card.png'),
+                child: ChoosePayementMethod(
+                  icon: 'assets/icons/master_card.png',
+                  onTap: () {},
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -82,8 +100,9 @@ class ChoosePayementMethodPage extends StatelessWidget {
               const SizedBox(height: 15),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 7),
-                child: const ChoosePayementMethod(
+                child: ChoosePayementMethod(
                   icon: 'assets/icons/cash.png',
+                  onTap: () {},
                 ),
               ),
             ],
