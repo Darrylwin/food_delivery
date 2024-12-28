@@ -132,16 +132,16 @@ class CartPage extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 6,
-                              offset: const Offset(0, -2),
-                            ),
-                          ],
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     color: Colors.grey.withOpacity(0.2),
+                          //     spreadRadius: 1,
+                          //     blurRadius: 6,
+                          //     offset: const Offset(0, -2),
+                          //   ),
+                          // ],
                         ),
                         child: Column(
                           children: [
@@ -164,8 +164,6 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Partie fixe en bas
             ],
           ),
         );
