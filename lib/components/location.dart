@@ -51,17 +51,17 @@ class Location extends StatelessWidget {
               children: [
                 Text(
                   place,
-                  style: const TextStyle(
-                    fontSize: 13,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey.shade600,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   address,
-                  style: TextStyle(
-                    fontSize: 10,
-                    // fontWeight: FontWeight.w500,
-                    color: Colors.grey.shade600,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ],

@@ -56,7 +56,7 @@ class DeliverToPage extends StatelessWidget {
             ),
             Location(
               place: 'Office',
-              address: '123 Main Street, Za warudo',
+              address: '26 Street, Za warudo',
             ),
             const Spacer(),
             const Total(),
