@@ -50,11 +50,11 @@ class DeliverToPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: Column(
           children: [
-            Location(
+            const Location(
               place: 'Home',
               address: '123 Main Street, Mundo',
             ),
-            Location(
+            const Location(
               place: 'Office',
               address: '26 Street, Za warudo',
             ),

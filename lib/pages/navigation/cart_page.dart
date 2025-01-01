@@ -4,7 +4,6 @@ import 'package:food_delivery/components/my_cart_tile.dart';
 import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:food_delivery/pages/choose_payement_method_page.dart';
-import 'package:food_delivery/pages/payement_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../components/my_drawer.dart';

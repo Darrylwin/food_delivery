@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   collection: ^1.18.0
-  flutter_credit_card: ^4.0.1
+  # flutter_credit_card: ^4.0.1
   intl: ^0.20.1
   http: ^1.2.2
   supabase_flutter: ^2.8.2
