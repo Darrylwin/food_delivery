@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:food_delivery/components/choose_payement_method.dart';
 import 'package:food_delivery/components/my_button.dart';
+import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/pages/deliver_to_page.dart';
 import 'package:provider/provider.dart';
 
 import 'delivery_progress_page.dart';
@@ -110,13 +112,16 @@ class ChoosePayementMethodPage extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
                     child: ChoosePayementMethod(
+                      text: 'Example@example.com',
+                      subTitle: null,
                       icon: 'assets/icons/paypal.png',
                       onTap: () => paypalPayement(context), // Correction ici
                     ),
@@ -124,6 +129,8 @@ class ChoosePayementMethodPage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
                     child: ChoosePayementMethod(
+                      text: '**** **** **** 1234',
+                      subTitle: 'Express 03/27',
                       icon: 'assets/icons/master_card.png',
                       onTap: () {},
                     ),
@@ -151,9 +158,26 @@ class ChoosePayementMethodPage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
                     child: ChoosePayementMethod(
+                      text: 'Cash Payment',
+                      subTitle: 'Default method',
                       icon: 'assets/icons/cash.png',
                       onTap: () {},
                     ),
+                  ),
+                  // const Spacer(),
+                  const Total(),
+                  MyButton(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DeliverToPage(),
+                        ),
+                      );
+                    },
+                    text: 'ORDER NOW',
+                    color: const Color(0xff0d5ef9),
+                    textColor: Colors.white,
                   ),
                 ],
               ),
