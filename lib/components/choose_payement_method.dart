@@ -5,9 +5,13 @@ class ChoosePayementMethod extends StatelessWidget {
     super.key,
     required this.icon,
     required this.onTap,
+    required this.text,
+    required this.subTitle,
   });
 
   final String icon;
+  final String text;
+  final String? subTitle;
   void Function()? onTap;
 
   @override
@@ -41,13 +45,35 @@ class ChoosePayementMethod extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
-                icon,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
-              ),
+              child: subTitle != null
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          text,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                        ),
+                        Text(
+                          subTitle!,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Text(
+                      text,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
+                    ),
             ),
           ],
         ),
