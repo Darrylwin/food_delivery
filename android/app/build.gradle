@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace "com.example.food_delivery"
+    namespace = "com.example.food_delivery"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -38,6 +38,7 @@ android {
         }
     }
 }
+
 flutter {
     source = "../.."
 }

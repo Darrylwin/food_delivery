@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.5.4
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -39,11 +39,10 @@ dependencies:
   flutter_credit_card: ^4.0.1
   intl: ^0.20.1
   http: ^1.2.2
-  supabase_flutter: ^2.8.2  # Vérifiez la dernière version sur pub.dev
+  supabase_flutter: ^2.8.2
   curved_navigation_bar: ^1.0.6
   cached_network_image: ^3.4.1
   flutter_paypal_payment: ^1.0.8
-
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +53,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

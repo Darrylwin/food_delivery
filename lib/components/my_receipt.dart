@@ -11,7 +11,7 @@ class MyReceipt extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25, top: 50),
       child: Center(
         child: Column(
-          spacing: 25,
+          // spacing: 25,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Thanks for your order 🙏"),
