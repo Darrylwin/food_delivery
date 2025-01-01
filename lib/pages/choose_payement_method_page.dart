@@ -24,8 +24,10 @@ class ChoosePayementMethodPage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => PaypalCheckoutView(
-                clientId: '',
-                secretKey: '',
+                clientId:
+                    "AeAF4uFcmr3sm48yAi5tcOGKXfCVjwDIOxpWJVfXVkQScNl128KvabA5bCtukML52c1dq1HvJmxNnfXX",
+                secretKey:
+                    "EMaPE79Y7ccGqbirLO9uwO18ijGEA_lEJNNMch6F30TF-AoMsQ1Gp3295DhYxRDH44GNiCvb7p7S5tDB",
                 transactions: [
                   {
                     'amount': {
@@ -34,22 +36,20 @@ class ChoosePayementMethodPage extends StatelessWidget {
                       'details': {
                         'subtotal':
                             restaurant.getTotalPrice().toStringAsFixed(2),
-                        'shipping': "3.75%",
+                        'shipping': "1.25",
                         'shipping_discount': discount.toStringAsFixed(2),
                       },
                     },
                     'description': 'Commande Food Delivery',
-                    'items_list': {
-                      'items': restaurant
-                          .getCartItems()
-                          .map((item) => {
-                                'name': item.name,
-                                'quantity': item.quantity,
-                                'price': item.price.toStringAsFixed(2),
-                                'currency': 'USD'
-                              })
-                          .toList(),
-                    },
+                    'items': restaurant
+                        .getCartItems()
+                        .map((item) => {
+                              'name': item.name,
+                              'quantity': item.quantity.toString(),
+                              'price': item.price.toStringAsFixed(2),
+                              'currency': 'USD',
+                            })
+                        .toList(),
                   },
                 ],
                 note: 'Contact us for any question on your order',
