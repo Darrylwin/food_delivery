@@ -32,16 +32,18 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      width: MediaQuery.of(context).size.width * 0.7,
+      elevation: 10,
+      backgroundColor: Colors.white,
       child: Column(
         children: [
           // app logo
           Padding(
             padding: const EdgeInsets.only(top: 100.0),
-            child: Icon(
-              Icons.lock_open_rounded,
-              size: 80,
-              color: Theme.of(context).colorScheme.inversePrimary,
+            child: Image.asset(
+              'assets/images/nom.png',
+              height: 80,
+              width: 80,
             ),
           ),
 
@@ -54,14 +56,14 @@ class MyDrawer extends StatelessWidget {
 
           // home list tile
           MyDrawerTile(
-            text: 'H O M E',
+            text: 'HOME',
             icon: Icons.home,
             onTap: () => Navigator.pop(context),
           ),
 
           // settings list tile
           MyDrawerTile(
-            text: 'S E T T I N G S',
+            text: 'SETTINGS',
             icon: Icons.settings,
             onTap: () {
               Navigator.pop(context);
@@ -78,7 +80,7 @@ class MyDrawer extends StatelessWidget {
 
           // logout list tile
           MyDrawerTile(
-            text: 'L O G  O U T',
+            text: 'LOG OUT',
             icon: Icons.logout,
             onTap: () => signUserOut(context),
           ),
