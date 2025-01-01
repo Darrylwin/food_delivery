@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 buildscript {
     repositories {
         google()
@@ -8,6 +9,8 @@ buildscript {
     }
 }
 
+=======
+>>>>>>> e089294 (modify files for support flutter 3.27 env)
 allprojects {
     repositories {
         google()
