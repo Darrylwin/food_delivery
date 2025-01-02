@@ -25,9 +25,9 @@ class ChoosePayementMethodPage extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => PaypalCheckoutView(
                 clientId:
-                    "AeAF4uFcmr3sm48yAi5tcOGKXfCVjwDIOxpWJVfXVkQScNl128KvabA5bCtukML52c1dq1HvJmxNnfXX",
+                    'AWHjoN78qpi7IYRErdGczCCqDLPXRJpySYJ1ObaNuPKUnn10CktUzXHNRq7ReTfLaSP-vinjrG8YDcTw',
                 secretKey:
-                    "EMaPE79Y7ccGqbirLO9uwO18ijGEA_lEJNNMch6F30TF-AoMsQ1Gp3295DhYxRDH44GNiCvb7p7S5tDB",
+                    'EKhQGCSlDr8cuEjUCjczyTE7GODTOBccxBPlYTzCRWRqLU_k8sVw3b4X_tTR2QRtM8eYBE3TqKeQgZPQ',
                 transactions: [
                   {
                     'amount': {
