@@ -22,14 +22,6 @@ class MyReceipt extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 borderRadius: BorderRadius.circular(10),
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Theme.of(context).colorScheme.tertiary,
-                //     offset: const Offset(5, 5),
-                //     blurRadius: 15,
-                //     spreadRadius: 5,
-                //   ),
-                // ],
               ),
               child: Consumer<Restaurant>(
                 builder: (context, restaurant, child) =>

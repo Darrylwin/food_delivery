@@ -15,23 +15,6 @@ class Food {
     required this.availableAddons,
     required this.category,
   });
-
-// static List<Food> getFood() {
-//   List<Food> foods = [];
-//
-//   foods.add(
-//     Food(
-//       imagePath: imagePath,
-//       description: description,
-//       price: price,
-//       name: name,
-//     ),
-//
-//   );
-//
-//   return foods;
-// }
-
 }
 
 //food category
