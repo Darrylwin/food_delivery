@@ -437,33 +437,29 @@ class Restaurant extends ChangeNotifier {
 
   void fetchMenuWithRealTimeUpdate() {
     try {
-      supabase
-          .from('foods')
-          .stream(primaryKey: ['uuid'])
-          .order('name')
-          .listen((List<Map<String, dynamic>> data) {
-            _menu = data
-                .map(
-                  (food) => Food(
-                    name: food['name'],
-                    description: food['description'],
-                    price: food['price'],
-                    imagePath: food['image_path'],
-                    category: FoodCategory.values.byName(food['category']),
-                    availableAddons: (food['available_addons'] as List<dynamic>)
-                        .map(
-                          (addon) => Addons(
-                            name: addon['name'],
-                            price: addon['price'],
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-                .toList();
+      final response = await supabase.from('foods').select();
 
-            notifyListeners();
-          });
+      _menu = response
+          .map(
+            (food) => Food(
+              name: food['name'],
+              description: food['description'],
+              price: food['price'],
+              imagePath: food['image_path'],
+              category: FoodCategory.values.byName(food['category']),
+              availableAddons: (food['available_addons'] as List<dynamic>)
+                  .map(
+                    (addon) => Addons(
+                      name: addon['name'],
+                      price: addon['price'],
+                    ),
+                  )
+                  .toList(),
+            ),
+          )
+          .toList();
+
+      notifyListeners();
     } catch (e) {
       print('Error fetching menu: $e');
     }
