@@ -58,7 +58,7 @@ class MyFoodTile extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 10),
                         Text(
                           '\$ ${food.price}',
                           style: const TextStyle(
@@ -121,15 +121,15 @@ class MyFoodTile extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: Container(
-                height: 100,
-                width: 100,
+                height: 110,
+                width: 150,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: CachedNetworkImageProvider(
                       food.imagePath,
                     ),
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
