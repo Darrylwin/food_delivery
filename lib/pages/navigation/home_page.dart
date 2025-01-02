@@ -39,8 +39,12 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabsController =
-        TabController(length: FoodCategory.values.length, vsync: this);
+    _tabsController = TabController(
+      length: FoodCategory.values.length,
+      vsync: this,
+    );
+    //fetch menu when pags loaded
+    Provider.of<Restaurant>(context, listen: false).fetchMenu();
   }
 
   @override
@@ -61,8 +65,9 @@ class _HomePageState extends State<HomePage>
         buttonBackgroundColor: Theme.of(context).colorScheme.surface,
         backgroundColor: Colors.transparent,
         index: _bottomNavBarIndex,
-        items: List.generate(4, (index) => 
-          Image.asset(
+        items: List.generate(
+          4,
+          (index) => Image.asset(
             'assets/icons/${index == 0 ? 'home' : index == 1 ? 'order' : index == 2 ? 'profil' : 'message'}.png',
             color: _bottomNavBarIndex == index
                 ? const Color(0xff28303f)
