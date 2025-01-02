@@ -2,12 +2,14 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/cart_item.dart';
 import 'package:intl/intl.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'food.dart';
 
 class Restaurant extends ChangeNotifier {
+  final SupabaseClient supabase = Supabase.instance.client;
   // list of food menu
-  final List<Food> _menu = [
+  List<Food> _menu = [
     // Burgers
     /*
     Food(
@@ -432,6 +434,36 @@ class Restaurant extends ChangeNotifier {
     ),
 */
   ];
+
+  Future<void> fetchMenu() async {
+    try {
+      final response = await supabase.from('foods').select();
+
+      _menu = response
+          .map(
+            (food) => Food(
+              name: food['name'],
+              description: food['description'],
+              price: food['price'],
+              imagePath: food['image_path'],
+              category: FoodCategory.values.byName(food['category']),
+              availableAddons: (food['available_addons'] as List<dynamic>)
+                  .map(
+                    (addon) => Addons(
+                      name: addon['name'],
+                      price: addon['price'],
+                    ),
+                  )
+                  .toList(),
+            ),
+          )
+          .toList();
+
+      notifyListeners();
+    } catch (e) {
+      print('Error fetching menu: $e');
+    }
+  }
 
   /*
   * GETTERS
