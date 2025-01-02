@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage>
       vsync: this,
     );
     //fetch menu when pags loaded
-    Provider.of<Restaurant>(context, listen: false).fetchMenu();
+    Provider.of<Restaurant>(context, listen: false).fetchMenuWithRealTimeUpdate();
   }
 
   @override
