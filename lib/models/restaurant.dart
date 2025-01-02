@@ -9,6 +9,7 @@ class Restaurant extends ChangeNotifier {
   // list of food menu
   final List<Food> _menu = [
     // Burgers
+    /*
     Food(
       name: "Double Cheese Burger",
       description:
@@ -79,8 +80,9 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Jalapenos", price: 0.75),
       ],
     ),
-
+*/
     // Pizza
+    /*
     Food(
       name: "Margherita Pizza",
       description:
@@ -150,8 +152,9 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Feta Cheese", price: 1.50),
       ],
     ),
-
+*/
     // Pasta
+    /*
     Food(
       name: "Fettuccine Alfredo",
       description:
@@ -219,8 +222,9 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Bread Crumbs", price: 0.50),
       ],
     ),
-
+*/
 // Salads
+/*
     Food(
       name: "Caesar Salad",
       description:
@@ -289,8 +293,9 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Jalapenos", price: 0.75),
       ],
     ),
-
+*/
 // Desserts
+/*
     Food(
       name: "Chocolate Cake",
       description: "A rich and decadent chocolate cake",
@@ -358,8 +363,9 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Jalapenos", price: 0.75),
       ],
     ),
-
+*/
 // Drinks
+/*
     Food(
       name: "Coca-Cola",
       description: "A classic carbonated soft drink",
@@ -424,6 +430,7 @@ class Restaurant extends ChangeNotifier {
         Addons(name: "Jalapenos", price: 0.75),
       ],
     ),
+*/
   ];
 
   /*
@@ -502,13 +509,15 @@ class Restaurant extends ChangeNotifier {
 
   // Remplacez la méthode getCartItems() par celle-ci
   List<CartItem> getCartItems() {
-    return _cart.map((item) => CartItem(
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-          food: item.food,
-          selectedAddons: item.selectedAddons,
-        )).toList();
+    return _cart
+        .map((item) => CartItem(
+              name: item.name,
+              quantity: item.quantity,
+              price: item.price,
+              food: item.food,
+              selectedAddons: item.selectedAddons,
+            ))
+        .toList();
   }
 
 //get total number of items in cart
@@ -574,8 +583,4 @@ class Restaurant extends ChangeNotifier {
   //format list of addons into a string summary
   String _formatAddons(List<Addons> addons) =>
       " ${addons.map((addon) => "${addon.name} (${_formatPrice(addon.price)})").join(', ')}";
-
-//format double value into money
-
-//format list of addons into string summary
 }
