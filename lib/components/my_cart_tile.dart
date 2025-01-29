@@ -64,8 +64,13 @@ class MyCartTile extends StatelessWidget {
                     children: [
                       Text(
                         cartItem.food.name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14.4),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.4,
+                        ),
                       ),
                       //food price
                       Text(

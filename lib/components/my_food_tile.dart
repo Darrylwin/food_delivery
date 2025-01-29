@@ -50,8 +50,6 @@ class MyFoodTile extends StatelessWidget {
                           child: Text(
                             food.name,
                             textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
