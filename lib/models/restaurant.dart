@@ -15,7 +15,7 @@ class Restaurant extends ChangeNotifier {
     try {
       supabase
           .from('foods')
-          .stream(primaryKey: ['uuid'])
+          .stream(primaryKey: ['id'])
           .order('name', ascending: true)
           .listen((List<Map<String, dynamic>> data) {
             _menu = data

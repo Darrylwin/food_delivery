@@ -94,7 +94,7 @@ class MyFoodTile extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.shopping_bag_rounded,
-                          color: Colors.white,
+                          color: Colors.white, 
                           size: 15,
                         ),
                         Text(

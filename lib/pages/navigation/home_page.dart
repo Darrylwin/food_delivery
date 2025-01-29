@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage>
       drawer: const MyDrawer(),
       body: _pages[_bottomNavBarIndex],
       bottomNavigationBar: CurvedNavigationBar(
-        height: 44,
+        height: 60,
         key: _bottomNavigationKey,
         buttonBackgroundColor: Theme.of(context).colorScheme.surface,
         backgroundColor: Colors.transparent,

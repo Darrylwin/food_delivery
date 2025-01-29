@@ -110,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 13),
               //logo
 
               Center(
