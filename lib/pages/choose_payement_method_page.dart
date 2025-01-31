@@ -10,7 +10,30 @@ import 'package:provider/provider.dart';
 import 'delivery_progress_page.dart';
 
 class ChoosePayementMethodPage extends StatelessWidget {
-  const ChoosePayementMethodPage({super.key});
+  ChoosePayementMethodPage({super.key});
+
+  int selectedMethod = 2;
+  final List<ChoosePayementMethod> paiementMethods = [
+    ChoosePayementMethod(
+        text: 'Example@example.com',
+        subTitle: null,
+        icon: 'assets/icons/paypal.png',
+        onTap: () => ()
+        //  paypalPayement(context), // Correction ici
+        ),
+    ChoosePayementMethod(
+      text: '**** **** **** 1234',
+      subTitle: 'Express 03/27',
+      icon: 'assets/icons/master_card.png',
+      onTap: () {},
+    ),
+    ChoosePayementMethod(
+      text: 'Cash Payment',
+      subTitle: 'Default method',
+      icon: 'assets/icons/cash.png',
+      onTap: () {},
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -119,21 +142,11 @@ class ChoosePayementMethodPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: ChoosePayementMethod(
-                      text: 'Example@example.com',
-                      subTitle: null,
-                      icon: 'assets/icons/paypal.png',
-                      onTap: () => paypalPayement(context), // Correction ici
-                    ),
+                    child: paiementMethods[0],
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: ChoosePayementMethod(
-                      text: '**** **** **** 1234',
-                      subTitle: 'Express 03/27',
-                      icon: 'assets/icons/master_card.png',
-                      onTap: () {},
-                    ),
+                    child: paiementMethods[1],
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -157,12 +170,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
                   const SizedBox(height: 15),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: ChoosePayementMethod(
-                      text: 'Cash Payment',
-                      subTitle: 'Default method',
-                      icon: 'assets/icons/cash.png',
-                      onTap: () {},
-                    ),
+                    child: paiementMethods[2],
                   ),
                   // const Spacer(),
                   const Total(),
