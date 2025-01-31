@@ -89,12 +89,12 @@ class CartPage extends StatelessWidget {
 
                         userCart.isEmpty
                             ? const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 11.5, vertical: 10),
-                              child: Center(
-                                child: Text("Cart is empty"),
-                              ),
-                            )
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 11.5, vertical: 10),
+                                child: Center(
+                                  child: Text("Cart is empty"),
+                                ),
+                              )
                             : Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 11.5,
@@ -147,7 +147,7 @@ class CartPage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const ChoosePayementMethodPage(),
+                                                ChoosePayementMethodPage(),
                                           ),
                                         );
                                       },
