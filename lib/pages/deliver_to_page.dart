@@ -5,9 +5,14 @@ import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/pages/delivery_progress_page.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
 
-class DeliverToPage extends StatelessWidget {
+class DeliverToPage extends StatefulWidget {
   const DeliverToPage({super.key});
 
+  @override
+  State<DeliverToPage> createState() => _DeliverToPageState();
+}
+
+class _DeliverToPageState extends State<DeliverToPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

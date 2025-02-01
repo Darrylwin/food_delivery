@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:io';
 
 class NotifService {
   final notificationPlugin = FlutterLocalNotificationsPlugin();
@@ -7,7 +8,6 @@ class NotifService {
 
   bool get isInitialised => _isInitialized;
 
-//INITIALIZE
   Future<void> initNotifiaction() async {
     if (_isInitialized) return;
 
@@ -29,10 +29,28 @@ class NotifService {
     );
 
     //Initialize the plugin
-    await notificationPlugin.initialize(initSettings);
+    await notificationPlugin.initialize(
+      initSettings,
+      onDidReceiveNotificationResponse: (details) {
+        // Gérer le tap sur la notification ici
+      },
+    );
+
+    // Demander les permissions explicitement pour iOS
+    if (Platform.isIOS) {
+      await notificationPlugin
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+    }
+
+    _isInitialized = true;
   }
 
-//NOTIFICATION DETAIL SETUP
   NotificationDetails notificationDetails() {
     return const NotificationDetails(
       android: AndroidNotificationDetails(
@@ -46,19 +64,20 @@ class NotifService {
     );
   }
 
-//SHOW NOTIFICATION
   Future<void> showNotification({
     int id = 0,
     String? title,
     String? body,
   }) async {
-    return notificationPlugin.show(
+    if (!_isInitialized) {
+      await initNotifiaction();
+    }
+
+    await notificationPlugin.show(
       id,
       title,
       body,
-      const NotificationDetails(),
+      notificationDetails(), // Utiliser les détails configurés
     );
   }
-
-//ON NOTI TAP
 }
