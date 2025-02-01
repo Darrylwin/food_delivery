@@ -3,6 +3,7 @@ import 'package:food_delivery/components/location.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/pages/delivery_progress_page.dart';
+import 'package:food_delivery/services/notifications/notif_service.dart';
 
 class DeliverToPage extends StatelessWidget {
   const DeliverToPage({super.key});
@@ -63,11 +64,16 @@ class DeliverToPage extends StatelessWidget {
             const SizedBox(height: 8),
             MyButton(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DeliveryProgressPage(),
-                  ),
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const DeliveryProgressPage(),
+                //   ),
+                // );
+                NotifService().showNotification(
+                  title: 'Food Delivery',
+                  body:
+                      'Your payment has been processed. Food awaiting delivery',
                 );
               },
               text: 'NEXT',
