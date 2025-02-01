@@ -4,7 +4,7 @@ class ChoosePayementMethod extends StatelessWidget {
   ChoosePayementMethod({
     super.key,
     required this.icon,
-    required this.onTap,
+    required this.onChanged,
     required this.text,
     required this.subTitle,
   });
@@ -12,12 +12,12 @@ class ChoosePayementMethod extends StatelessWidget {
   final String icon;
   final String text;
   final String? subTitle;
-  void Function()? onTap;
+  void Function()? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onChanged,
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
