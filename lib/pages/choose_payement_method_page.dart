@@ -20,29 +20,7 @@ class ChoosePayementMethodPage extends StatefulWidget {
 }
 
 class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
-  int? selectedMethod = 2;
-
-  final List<ChoosePayementMethod> paiementMethods = [
-    ChoosePayementMethod(
-        text: 'Example@example.com',
-        subTitle: null,
-        icon: 'assets/icons/paypal.png',
-        onTap: () => ()
-        //  paypalPayement(context), // Correction ici
-        ),
-    ChoosePayementMethod(
-      text: '**** **** **** 1234',
-      subTitle: 'Express 03/27',
-      icon: 'assets/icons/master_card.png',
-      onTap: () {},
-    ),
-    ChoosePayementMethod(
-      text: 'Cash Payment',
-      subTitle: 'Default method',
-      icon: 'assets/icons/cash.png',
-      onTap: () {},
-    ),
-  ];
+  int selectedIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +28,40 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
       builder: (context, restaurant, child) {
         double discount = (restaurant.getTotalPrice() * 3.75) / 100;
         double total = restaurant.getTotalPrice() - discount;
+
+        final List<ChoosePayementMethod> paiementMethods = [
+          ChoosePayementMethod(
+            text: 'Example@example.com',
+            subTitle: null,
+            icon: 'assets/icons/paypal.png',
+            //  paypalPayement(context), // Correction ici
+            onChanged: () {
+              setState(() {
+                selectedIndex = 0;
+              });
+            },
+          ),
+          ChoosePayementMethod(
+            text: '**** **** **** 1234',
+            subTitle: 'Express 03/27',
+            icon: 'assets/icons/master_card.png',
+            onChanged: () {
+              setState(() {
+                selectedIndex = 1;
+              });
+            },
+          ),
+          ChoosePayementMethod(
+            text: 'Cash Payment',
+            subTitle: 'Default method',
+            icon: 'assets/icons/cash.png',
+            onChanged: () {
+              setState(() {
+                selectedIndex = 2;
+              });
+            },
+          ),
+        ];
 
         Function()? cashPayment() {
           //TODO: implementer la logique de paiement par cash
@@ -126,11 +138,11 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
         }
 
         Function()? selectedPaymentMethod() {
-          if (selectedMethod == 0)
+          if (selectedIndex == 0)
             paypalPayement(context);
-          else if (selectedMethod == 1)
+          else if (selectedIndex == 1)
             masterCardPayment();
-          else if (selectedMethod == 2) cashPayment();
+          else if (selectedIndex == 2) cashPayment();
         }
 
         return Scaffold(
@@ -177,29 +189,45 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RadioListTile<int>(
-                    value: 0,
-                    groupValue: selectedMethod,
-                    onChanged: (value) {
+                  GestureDetector(
+                    onTap: () {
                       setState(() {
-                        selectedMethod = value;
+                        selectedIndex = 0;
                       });
                     },
-                    title: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 7),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: selectedIndex == 0
+                              ? const Color(0xff0d5ef9)
+                              : Colors.grey.withOpacity(0.3),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: paiementMethods[0],
                     ),
                   ),
-                  RadioListTile(
-                    value: 1,
-                    groupValue: selectedMethod,
-                    onChanged: (value) {
+                  GestureDetector(
+                    onTap: () {
                       setState(() {
-                        selectedMethod = value;
+                        selectedIndex = 1;
                       });
                     },
-                    title: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 7),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: selectedIndex == 1
+                              ? const Color(0xff0d5ef9)
+                              : Colors.grey.withOpacity(0.3),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: paiementMethods[1],
                     ),
                   ),
@@ -223,23 +251,30 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  RadioListTile(
-                    value: 2,
-                    groupValue: selectedMethod,
-                    onChanged: (value) {
+                  GestureDetector(
+                    onTap: () {
                       setState(() {
-                        selectedMethod = value;
+                        selectedIndex = 2;
                       });
                     },
-                    title: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 7),
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(bottom: 8),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: selectedIndex == 2
+                              ? const Color(0xff0d5ef9)
+                              : Colors.grey.withOpacity(0.3),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: paiementMethods[2],
                     ),
                   ),
-                  // const Spacer(),
                   const Total(),
                   MyButton(
-                    onTap: cashPayment,
+                    onTap: selectedPaymentMethod,
                     text: 'ORDER NOW',
                     color: const Color(0xff0d5ef9),
                     textColor: Colors.white,
