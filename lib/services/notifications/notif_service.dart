@@ -26,12 +26,25 @@ class NotifService {
     const initSettings = InitializationSettings(
       android: initSettingAndroid,
       iOS: initSettingsIOS,
-    )
+    );
 
     //Initialize the plugin
     await notificationPlugin.initialize(initSettings);
   }
+
 //NOTIFICATION DETAIL SETUP
+  NotificationDetails notificationDetails() {
+    return const NotificationDetails(
+      android: AndroidNotificationDetails(
+        'daily_channel_id',
+        'Daily Notification',
+        channelDescription: 'Daily Notification Channel',
+        importance: Importance.max,
+        priority: Priority.high,
+      ),
+      iOS: DarwinNotificationDetails(),
+    );
+  }
 
 //SHOW NOTIFICATION
 
