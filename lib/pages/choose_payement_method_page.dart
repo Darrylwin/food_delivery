@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:food_delivery/components/choose_payement_method.dart';
@@ -37,6 +39,33 @@ class ChoosePayementMethodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void Function()? paypalPayment() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DeliverToPage(),
+        ),
+      );
+    }
+
+    void Function()? masterCardPayment() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DeliverToPage(),
+        ),
+      );
+    }
+
+    void Function()? cashPayment() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DeliverToPage(),
+        ),
+      );
+    }
+
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) {
         double discount = (restaurant.getTotalPrice() * 3.75) / 100;
@@ -175,14 +204,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
                   // const Spacer(),
                   const Total(),
                   MyButton(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const DeliverToPage(),
-                        ),
-                      );
-                    },
+                    onTap: cashPayment(),
                     text: 'ORDER NOW',
                     color: const Color(0xff0d5ef9),
                     textColor: Colors.white,
