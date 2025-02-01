@@ -1,4 +1,4 @@
-// ignore_for_file: body_might_complete_normally_nullable
+// ignore_for_file: body_might_complete_normally_nullable, curly_braces_in_flow_control_structures
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -11,10 +11,17 @@ import 'package:provider/provider.dart';
 
 import 'delivery_progress_page.dart';
 
-class ChoosePayementMethodPage extends StatelessWidget {
+class ChoosePayementMethodPage extends StatefulWidget {
   ChoosePayementMethodPage({super.key});
 
-  int selectedMethod = 2;
+  @override
+  State<ChoosePayementMethodPage> createState() =>
+      _ChoosePayementMethodPageState();
+}
+
+class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
+  int? selectedMethod = 2;
+
   final List<ChoosePayementMethod> paiementMethods = [
     ChoosePayementMethod(
         text: 'Example@example.com',
@@ -54,7 +61,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
           );
         }
 
-        void Function()? masterCardPayment() {
+        Function()? masterCardPayment() {
           //TODO: implementer la logique de paiement par mastercard
           Navigator.push(
             context,
@@ -64,7 +71,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
           );
         }
 
-        void paypalPayement(BuildContext context) {
+        Function()? paypalPayement(BuildContext context) {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -118,6 +125,14 @@ class ChoosePayementMethodPage extends StatelessWidget {
           );
         }
 
+        Function()? selectedPaymentMethod() {
+          if (selectedMethod == 0)
+            paypalPayement(context);
+          else if (selectedMethod == 1)
+            masterCardPayment();
+          else if (selectedMethod == 2) cashPayment();
+        }
+
         return Scaffold(
           appBar: AppBar(
             // automaticallyImplyLeading: false,
@@ -162,13 +177,31 @@ class ChoosePayementMethodPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: paiementMethods[0],
+                  RadioListTile<int>(
+                    value: 0,
+                    groupValue: selectedMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedMethod = value;
+                      });
+                    },
+                    title: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 7),
+                      child: paiementMethods[0],
+                    ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: paiementMethods[1],
+                  RadioListTile(
+                    value: 1,
+                    groupValue: selectedMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedMethod = value;
+                      });
+                    },
+                    title: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 7),
+                      child: paiementMethods[1],
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -190,9 +223,18 @@ class ChoosePayementMethodPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 7),
-                    child: paiementMethods[2],
+                  RadioListTile(
+                    value: 2,
+                    groupValue: selectedMethod,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedMethod = value;
+                      });
+                    },
+                    title: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 7),
+                      child: paiementMethods[2],
+                    ),
                   ),
                   // const Spacer(),
                   const Total(),
