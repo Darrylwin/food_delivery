@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/components/location.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/total.dart';
+import 'package:food_delivery/models/restaurant.dart';
+import 'package:provider/provider.dart';
 import 'package:food_delivery/pages/delivery_progress_page.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
+import 'package:food_delivery/pages/navigation/home_page.dart';
 
 class DeliverToPage extends StatefulWidget {
   const DeliverToPage({super.key});
@@ -69,16 +72,20 @@ class _DeliverToPageState extends State<DeliverToPage> {
             const SizedBox(height: 8),
             MyButton(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const DeliveryProgressPage(),
-                //   ),
-                // );
+                // Effacer le panier
+                Provider.of<Restaurant>(context, listen: false).clearCart();
+                
+                // Afficher la notification
                 NotifService().showNotification(
-                  title: 'Food Delivery',
-                  body:
-                      'Your payment has been processed. Food awaiting delivery',
+                  title: 'Payment Processed',
+                  body: 'Payment has been processed. Food awaiting delivery',
+                );
+                
+                // Retourner à la HomePage
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                  (route) => false,
                 );
               },
               text: 'NEXT',
