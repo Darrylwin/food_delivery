@@ -47,6 +47,18 @@ class NotifService {
   }
 
 //SHOW NOTIFICATION
+  Future<void> showNotification({
+    int id = 0,
+    String? title,
+    String? body,
+  }) async {
+    return notificationPlugin.show(
+      id,
+      title,
+      body,
+      const NotificationDetails(),
+    );
+  }
 
 //ON NOTI TAP
 }

@@ -3,10 +3,12 @@ import 'package:food_delivery/backend/supabase_config.dart';
 import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 import 'models/restaurant.dart';
+import 'services/notifications/notif_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SupabaseConfig.initialize();
+  NotifService().initNotifiaction();
 
   runApp(
     ChangeNotifierProvider(
