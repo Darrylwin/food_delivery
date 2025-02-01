@@ -39,37 +39,30 @@ class ChoosePayementMethodPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void Function()? paypalPayment() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DeliverToPage(),
-        ),
-      );
-    }
-
-    void Function()? masterCardPayment() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DeliverToPage(),
-        ),
-      );
-    }
-
-    void Function()? cashPayment() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DeliverToPage(),
-        ),
-      );
-    }
-
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) {
         double discount = (restaurant.getTotalPrice() * 3.75) / 100;
         double total = restaurant.getTotalPrice() - discount;
+
+        Function()? cashPayment() {
+          //TODO: implementer la logique de paiement par cash
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DeliverToPage(),
+            ),
+          );
+        }
+
+        void Function()? masterCardPayment() {
+          //TODO: implementer la logique de paiement par mastercard
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DeliverToPage(),
+            ),
+          );
+        }
 
         void paypalPayement(BuildContext context) {
           Navigator.push(
@@ -204,7 +197,7 @@ class ChoosePayementMethodPage extends StatelessWidget {
                   // const Spacer(),
                   const Total(),
                   MyButton(
-                    onTap: cashPayment(),
+                    onTap: cashPayment,
                     text: 'ORDER NOW',
                     color: const Color(0xff0d5ef9),
                     textColor: Colors.white,
