@@ -7,8 +7,8 @@ import 'services/notifications/notif_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SupabaseConfig.initialize();
   NotifService().initNotifiaction();
+  await SupabaseConfig.initialize();
 
   runApp(
     ChangeNotifierProvider(
