@@ -43,6 +43,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   cached_network_image: ^3.4.1
   flutter_paypal_payment: ^1.0.8
+  flutter_local_notifications: ^18.0.1
 
 dev_dependencies:
   flutter_test:
