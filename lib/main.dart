@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/backend/supabase_config.dart';
+import 'package:food_delivery/models/my_notification.dart';
 import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 import 'models/restaurant.dart';
@@ -11,8 +12,11 @@ void main() async {
   await SupabaseConfig.initialize();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => Restaurant(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Restaurant()),
+        ChangeNotifierProvider(create: (context) => MyNotification()),
+      ],
       child: const MyApp(),
     ),
   );
