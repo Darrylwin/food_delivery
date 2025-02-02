@@ -4,7 +4,6 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/total.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
-import 'package:food_delivery/pages/delivery_progress_page.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
 import 'package:food_delivery/pages/navigation/home_page.dart';
 

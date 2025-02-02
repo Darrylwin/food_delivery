@@ -9,8 +9,6 @@ import 'package:food_delivery/models/restaurant.dart';
 import 'package:food_delivery/pages/deliver_to_page.dart';
 import 'package:provider/provider.dart';
 
-import 'delivery_progress_page.dart';
-
 class ChoosePayementMethodPage extends StatefulWidget {
   ChoosePayementMethodPage({super.key});
 
@@ -121,7 +119,7 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const DeliveryProgressPage(),
+                      builder: (context) => const DeliverToPage(),
                     ),
                   );
                 },
