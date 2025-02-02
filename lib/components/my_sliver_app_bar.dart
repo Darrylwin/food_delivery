@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/models/my_notification.dart';
 import 'package:food_delivery/pages/notifs_page.dart';
+import 'package:provider/provider.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget title;
@@ -67,9 +69,20 @@ class MySliverAppBar extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.notifications_none_rounded,
-              size: 22.5,
+            // child: const Icon(
+            //   Icons.notifications_none_rounded,
+            //   size: 22.5,
+            // ),
+            child: Consumer<MyNotification>(
+              builder: (context, notificationProvider, child) => Badge(
+                isLabelVisible: notificationProvider.notifications.isNotEmpty,
+                label: Text('${notificationProvider.notifications.length}'),
+                backgroundColor: Colors.red,
+                child: const Icon(
+                  Icons.notifications_none_rounded,
+                  size: 22.5,
+                ),
+              ),
             ),
           ),
         ),
