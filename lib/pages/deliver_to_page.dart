@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/components/location.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/total.dart';
+import 'package:food_delivery/models/my_notification.dart';
+import 'package:food_delivery/models/notification_item.dart';
 import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
@@ -71,21 +73,33 @@ class _DeliverToPageState extends State<DeliverToPage> {
             const SizedBox(height: 8),
             MyButton(
               onTap: () {
-                // Effacer le panier
-                Provider.of<Restaurant>(context, listen: false).clearCart();
-                
                 // Afficher la notification
                 NotifService().showNotification(
                   title: 'Payment Processed',
-                  body: 'Payment has been processed. Food awaiting delivery',
+                  body:
+                      'Your Payment has been processed. Food awaiting delivery',
                 );
-                
+
+                // Ajouter la notification
+                Provider.of<MyNotification>(context, listen: false)
+                    .addNotification(
+                  NotificationItem(
+                    title: "Payment Processed",
+                    description:
+                        "Your Payment has been processed. Food awaiting delivery",
+                    time: "${DateTime.now().hour}:${DateTime.now().minute}",
+                  ),
+                );
+
                 // Retourner à la HomePage
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
                   (route) => false,
                 );
+
+                // Effacer le panier
+                Provider.of<Restaurant>(context, listen: false).clearCart();
               },
               text: 'NEXT',
             ),
