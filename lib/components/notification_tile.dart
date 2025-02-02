@@ -40,7 +40,7 @@ class NotificationTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(
-                Icons.notifications_outlined,
+                Icons.check,
                 color: Color.fromARGB(255, 0, 55, 255),
                 size: 22,
               ),
