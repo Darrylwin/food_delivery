@@ -9,6 +9,12 @@ A Flutter project for a food delivery application.
 - View cart summary and total price
 - Generate a receipt for the cart items
 - Backend powered by Supabase for real-time data synchronization and user authentication
+- Real-time notifications system
+- Multiple delivery addresses management
+- Modern and responsive UI
+- User authentication with Supabase
+- Search functionality
+- Order tracking
 
 ## Getting Started
 
@@ -42,10 +48,40 @@ A Flutter project for a food delivery application.
 
 ## Project Structure
 
-- `lib/models`: Contains the data models for the app (e.g., `food.dart`, `cart_item.dart`, `restaurant.dart`).
-- `lib/screens`: Contains the UI screens for the app.
-- `lib/widgets`: Contains reusable UI components.
-- `lib/services`: Contains Supabase configuration and API services.
+```
+lib/
+├── backend/              # Database and API configuration
+├── components/           # Reusable UI widgets
+│   ├── cart/            # Cart related components
+│   └── common/          # Common UI elements
+├── models/              # Data models and providers
+├── pages/              # Application screens
+│   ├── auth/          # Authentication pages
+│   └── navigation/    # Main app navigation
+├── services/          # Business logic and services
+│   ├── auth/         # Authentication services
+│   └── notifications/# Notification handling
+└── main.dart         # Application entry point
+```
+
+### State Management
+- Provider pattern for state management
+- Multiple providers:
+  - Restaurant: Cart and orders management
+  - MyNotification: Notifications handling
+
+### Services
+- NotifService: Push notification management
+- SupabaseConfig: Backend services and authentication
+
+## Technical Stack
+
+- Flutter: Frontend framework
+- Dart: Programming language
+- Supabase: Backend as a Service
+- Provider: State management
+- Local Notifications
+- Material Design
 
 ## Contributing
 
