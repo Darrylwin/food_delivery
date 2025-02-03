@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/location.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/total.dart';
+import 'package:food_delivery/models/cart_item.dart';
+import 'package:food_delivery/models/food.dart';
 import 'package:food_delivery/models/my_notification.dart';
 import 'package:food_delivery/models/notification_item.dart';
 import 'package:food_delivery/models/restaurant.dart';
@@ -75,56 +79,74 @@ class _DeliverToPageState extends State<DeliverToPage> {
             const SizedBox(height: 8),
             MyButton(
               onTap: () async {
-                //send paiement to supabase
                 final User? user = Supabase.instance.client.auth.currentUser;
-                final cartItems =
+                final List<CartItem> cartItems =
                     Provider.of<Restaurant>(context, listen: false).cart;
-                final itemsJson = cartItems
-                    .map((item) => {
+                final List<Map<String, Object>> itemsJson = cartItems
+                    .map((CartItem item) => {
                           'food_name': item.name,
                           'food_price': item.price,
                           'food_quantity': item.quantity,
-                          'selected_addons': item.selectedAddons,
+                          'selected_addons': item.selectedAddons
+                              .map((Addons addon) => {
+                                    'name': addon.name,
+                                    'price': addon.price,
+                                  })
+                              .toList(),
                         })
                     .toList();
 
-                await supabase.from('payments').insert({
-                  'user_id': user!.id,
-                  'total_amount':
-                      Provider.of<Restaurant>(context, listen: false)
-                          .getTotalPrice(),
-                  'items': itemsJson,
-                  'status': 'procesed',
-                  'delivrey_adress': 'Home',
-                });
+                try {
+                  await supabase.from('payments').insert({
+                    'user_id': user!.id,
+                    'created_at': DateTime.timestamp().toIso8601String(),
+                    'total_amount':
+                        Provider.of<Restaurant>(context, listen: false)
+                                .getTotalPrice() -
+                            ((Provider.of<Restaurant>(context, listen: false)
+                                        .getTotalPrice() *
+                                    3.75) /
+                                100),
+                    'items': itemsJson,
+                    'status': 'processed',
+                    'delivery_address': 'Home',
+                  });
 
-                // Afficher la notification
-                NotifService().showNotification(
-                  title: 'Payment Processed',
-                  body:
-                      'Your Payment has been processed. Food awaiting delivery',
-                );
+                  //show notification
+                  NotifService().showNotification(
+                    title: 'Payment Processed',
+                    body:
+                        'Your Payment has been processed. Food awaiting delivery',
+                  );
 
-                // Ajouter la notification
-                Provider.of<MyNotification>(context, listen: false)
-                    .addNotification(
-                  NotificationItem(
-                    title: "Payment Processed",
-                    description:
-                        "Your Payment has been processed. Food awaiting delivery",
-                    time: "${DateTime.now().hour}:${DateTime.now().minute}",
-                  ),
-                );
+                  // Ajouter la notification
+                  Provider.of<MyNotification>(context, listen: false)
+                      .addNotification(
+                    NotificationItem(
+                      title: "Payment Processed",
+                      description:
+                          "Your Payment has been processed. Food awaiting delivery",
+                      time: "${DateTime.now().hour}:${DateTime.now().minute}",
+                    ),
+                  );
 
-                // Retourner à la HomePage
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                  (route) => false,
-                );
+                  // Effacer le panier
+                  Provider.of<Restaurant>(context, listen: false).clearCart();
 
-                // Effacer le panier
-                Provider.of<Restaurant>(context, listen: false).clearCart();
+                  // Retourner à la HomePage
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    (route) => false,
+                  );
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Payment failed: $e'),
+                    ),
+                  );
+                  print('Payment failed: $e');
+                }
               },
               text: 'NEXT',
             ),
