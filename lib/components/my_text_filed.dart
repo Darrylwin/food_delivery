@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MyTextFiled extends StatelessWidget {
-  final bool obscureText;
-  final String hintText;
   final TextEditingController controller;
+  final String hintText;
+  final bool obscureText;
 
   const MyTextFiled({
     super.key,
+    required this.controller,
     required this.hintText,
     required this.obscureText,
-    required this.controller,
   });
 
   @override
@@ -21,15 +21,17 @@ class MyTextFiled extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).colorScheme.tertiary),
+            borderSide: BorderSide(color: Colors.grey[300]!),
+            borderRadius: BorderRadius.circular(15),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(color: Theme.of(context).colorScheme.primary),
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: Colors.grey[300]!),
           ),
+          fillColor: Colors.grey[100],
+          filled: true,
           hintText: hintText,
-          hintStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
+          hintStyle: TextStyle(color: Colors.grey[500]),
         ),
       ),
     );

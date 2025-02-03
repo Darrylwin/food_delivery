@@ -3,7 +3,8 @@ import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'home_page.dart';
+import '../components/registration_button.dart';
+import 'navigation/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
@@ -44,7 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
         if (response.error == null) {
           // Utilisateur créé avec succès, informer l'utilisateur de vérifier son email
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
+            const SnackBar(
+                content: Text(
+                    'Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
           );
 
           // Attendre la confirmation de l'email
@@ -101,30 +104,32 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
-        children: [
-          Column(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: MediaQuery.of(context).size.height / 5),
+              const SizedBox(height: 13),
               //logo
+
               Center(
-                child: Icon(
-                  Icons.lock_open_rounded,
-                  size: 100,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                child: Image.asset(
+                  'assets/images/nom.png',
+                  height: 120,
+                  fit: BoxFit.cover,
                 ),
               ),
 
               const SizedBox(height: 25),
 
               // app welcome message
-              Text(
-                "A new member ! Let's Create an account",
+              const Text(
+                "Let's create an account for you",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
@@ -137,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: false,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 33),
 
               //password textfield
               MyTextFiled(
@@ -146,9 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
               ),
 
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 33),
 
               // confirm password textfield
               MyTextFiled(
@@ -157,29 +160,40 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
               ),
 
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 33),
 
               // sign up button
               MyButton(
                 onTap: signUp,
-                text: "Sign up",
+                text: "SIGN UP",
               ),
 
-              const SizedBox(
-                height: 25,
-              ),
-
-              // already havea an account ?
+              const SizedBox(height: 19),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  RegistrationButton(
+                    image: 'assets/icons/facebook.png',
+                    onTap: () {},
+                  ),
+                  RegistrationButton(
+                    image: 'assets/icons/google.png',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 10),
+
+              // already havea an account ?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    "Already have an account ?",
+                    "Already have an account? ?",
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
+                      color: Colors.grey[700],
                     ),
                   ),
                   const SizedBox(
@@ -187,19 +201,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   GestureDetector(
                     onTap: widget.onTap,
-                    child: Text(
-                      "Login now",
+                    child: const Text(
+                      "Login Now",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold,
+                        color: Color(0xff0d5ef9),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(height: 20),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

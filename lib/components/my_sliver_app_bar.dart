@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery/pages/cart_page.dart';
+import 'package:food_delivery/models/my_notification.dart';
+import 'package:food_delivery/pages/notifs_page.dart';
+import 'package:provider/provider.dart';
 
 class MySliverAppBar extends StatelessWidget {
   final Widget title;
@@ -14,30 +16,87 @@ class MySliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 340,
-      collapsedHeight: 120,
+      expandedHeight: 180,
+      collapsedHeight: 100,
       floating: false,
       pinned: true,
+      leading: GestureDetector(
+        onTap: () {
+          Scaffold.of(context).openDrawer();
+        },
+        child: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: const Icon(
+            Icons.menu_rounded,
+            size: 22.5,
+          ),
+        ),
+      ),
       actions: [
-        // cart button
-        IconButton(
-          onPressed: () {
+        // notifs button
+        GestureDetector(
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const CartPage(),
+                builder: (context) => NotifsPage(),
               ),
             );
           },
-          icon: const Icon(Icons.shopping_cart),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            // child: const Icon(
+            //   Icons.notifications_none_rounded,
+            //   size: 22.5,
+            // ),
+            child: Consumer<MyNotification>(
+              builder: (context, notificationProvider, child) => Badge(
+                isLabelVisible: notificationProvider.notifications.isNotEmpty,
+                label: Text('${notificationProvider.notifications.length}'),
+                backgroundColor: Colors.red,
+                child: const Icon(
+                  Icons.notifications_none_rounded,
+                  size: 22.5,
+                ),
+              ),
+            ),
+          ),
         ),
+        const SizedBox(width: 10),
       ],
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       title: const Text(
-        "Sunset Diner",
+        "Popular menu",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        ),
       ),
-      centerTitle: true,
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(bottom: 50.0),

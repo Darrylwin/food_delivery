@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/components/my_text_filed.dart';
-import 'package:food_delivery/pages/home_page.dart';
+import 'package:food_delivery/components/registration_button.dart';
+import 'package:food_delivery/pages/navigation/home_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,13 +29,12 @@ class _LoginPageState extends State<LoginPage> {
     // Récupérez les valeurs des champs de texte
     String email = emailController.text;
     String password = passwordController.text;
-          
 
     // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
     print('Email: $email');
     print('Password: $password');
 
-     try {
+    try {
       final response = await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
 
       if (response.error == null) {
         // Connexion réussie
-         ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Connexion réussie')),
         );
         Navigator.push(
@@ -60,94 +60,147 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          //logo
-          Center(
-            child: Icon(
-              Icons.lock_open_rounded,
-              size: 100,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ),
-
-          const SizedBox(height: 25),
-
-          // app welcome message
-          Text(
-            "Welcome back ! Let's Log In",
-            style: TextStyle(
-              fontSize: 16,
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ),
-
-          const SizedBox(height: 25),
-
-          // email textfield
-          MyTextFiled(
-            controller: emailController,
-            hintText: "Email",
-            obscureText: false,
-          ),
-
-          const SizedBox(height: 20),
-
-          //password textfield
-          MyTextFiled(
-            controller: passwordController,
-            hintText: "Password",
-            obscureText: true,
-          ),
-
-          const SizedBox(
-            height: 20,
-          ),
-
-          // sign in button
-          MyButton(
-            onTap: logIn,
-            text: "Sign In",
-          ),
-
-          const SizedBox(
-            height: 25,
-          ),
-
-          // not a member ? register now
-
-          Row(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Not a member ?",
+              const SizedBox(height: 13),
+
+              //logo
+              Center(
+                child: Image.asset(
+                  'assets/images/nom.png',
+                  height: 120,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
+              // app welcome message
+              const Text(
+                "Sign in your account",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
+
+              const SizedBox(height: 25),
+
+              // email textfield
+              MyTextFiled(
+                controller: emailController,
+                hintText: "Email",
+                obscureText: false,
+              ),
+
+              const SizedBox(height: 35),
+
+              //password textfield
+              MyTextFiled(
+                controller: passwordController,
+                hintText: "Password",
+                obscureText: true,
+              ),
+
+              const SizedBox(height: 35),
+
+              // sign in button
+              MyButton(
+                onTap: logIn,
+                text: "SIGN IN",
+              ),
+
               const SizedBox(
-                width: 16,
+                height: 25,
               ),
-              GestureDetector(
-                onTap: widget.onTap,
-                child: Text(
-                  "Register Now",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
+
+              const Text(
+                'Forgot Password ?',
+                style: TextStyle(
+                  color: Color(0xff0d5ef9),
+                  fontSize: 14,
                 ),
               ),
+
+              const SizedBox(height: 20),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Divider(
+                    indent: 25,
+                    endIndent: 25,
+                    color: Colors.grey[400],
+                  ),
+                  Text(
+                    'Or continue with',
+                    style: TextStyle(color: Colors.grey[700]),
+                  ),
+                  Divider(
+                    indent: 25,
+                    endIndent: 25,
+                    color: Colors.grey[400],
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RegistrationButton(
+                    image: 'assets/icons/facebook.png',
+                    onTap: () {},
+                  ),
+                  RegistrationButton(
+                    image: 'assets/icons/google.png',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 12),
+
+              // not a member ? register now
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Not a member ?",
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: const Text(
+                      "Register Now",
+                      style: TextStyle(
+                        color: Color(0xff0d5ef9),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
