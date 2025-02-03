@@ -8,6 +8,7 @@ import 'package:food_delivery/models/restaurant.dart';
 import 'package:provider/provider.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
 import 'package:food_delivery/pages/navigation/home_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DeliverToPage extends StatefulWidget {
   const DeliverToPage({super.key});
@@ -17,6 +18,7 @@ class DeliverToPage extends StatefulWidget {
 }
 
 class _DeliverToPageState extends State<DeliverToPage> {
+  final SupabaseClient supabase = Supabase.instance.client;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +74,30 @@ class _DeliverToPageState extends State<DeliverToPage> {
             const Total(),
             const SizedBox(height: 8),
             MyButton(
-              onTap: () {
+              onTap: () async {
+                //send paiement to supabase
+                final User? user = Supabase.instance.client.auth.currentUser;
+                final cartItems =
+                    Provider.of<Restaurant>(context, listen: false).cart;
+                final itemsJson = cartItems
+                    .map((item) => {
+                          'food_name': item.name,
+                          'food_price': item.price,
+                          'food_quantity': item.quantity,
+                          'selected_addons': item.selectedAddons,
+                        })
+                    .toList();
+
+                await supabase.from('payments').insert({
+                  'user_id': user!.id,
+                  'total_amount':
+                      Provider.of<Restaurant>(context, listen: false)
+                          .getTotalPrice(),
+                  'items': itemsJson,
+                  'status': 'procesed',
+                  'delivrey_adress': 'Home',
+                });
+
                 // Afficher la notification
                 NotifService().showNotification(
                   title: 'Payment Processed',
