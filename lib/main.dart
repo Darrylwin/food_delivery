@@ -5,18 +5,21 @@ import 'package:food_delivery/pages/navigation/home_page.dart';
 import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 import 'models/restaurant.dart';
+import 'services/location/location_service.dart';
 import 'services/notifications/notif_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotifService().initNotifiaction();
   await SupabaseConfig.initialize();
+  await LocationService().initialize();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Restaurant()),
         ChangeNotifierProvider(create: (context) => MyNotification()),
+        ChangeNotifierProvider(create: (context) => LocationService()),
       ],
       child: const MyApp(),
     ),

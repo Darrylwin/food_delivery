@@ -10,6 +10,7 @@ import 'package:food_delivery/models/food.dart';
 import 'package:food_delivery/models/my_notification.dart';
 import 'package:food_delivery/models/notification_item.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/services/location/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -28,25 +29,19 @@ class _DeliverToPageState extends State<DeliverToPage> {
   final SupabaseClient supabase = Supabase.instance.client;
   final MapController mapController = MapController();
   LatLng? _selectedLocation;
-  LatLng? _currentLocation;
+  late LocationService locationService;
 
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+    locationService = Provider.of<LocationService>(context, listen: false);
   }
 
-  Future<void> _getCurrentLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.whileInUse ||
-        permission == LocationPermission.whileInUse) {
-      final Position position = await Geolocator.getCurrentPosition();
+  Future<void> _initializeMap() async {
+    final position = locationService.currentPosition;
+    if (position != null) {
       setState(() {
-        _currentLocation = LatLng(position.latitude, position.longitude);
+        _selectedLocation = LatLng(position.latitude, position.longitude);
       });
     }
   }
@@ -91,65 +86,75 @@ class _DeliverToPageState extends State<DeliverToPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6),
         child: Column(
           children: [
             Expanded(
-              child: SizedBox(
-                // height: MediaQuery.of(context).size.height - 100,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: FlutterMap(
-                    mapController: mapController,
-                    options: MapOptions(
-                        initialCenter: _currentLocation!,
-                        initialZoom: 15,
-                        onTap: (TapPosition tapPosition, LatLng point) {
-                          setState(() {
-                            _selectedLocation = point;
-                          });
-                        }),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName: 'com.example.app',
-                        tileBuilder: (context, child, tile) {
-                          return Opacity(
-                            opacity: 0.8,
-                            child: child,
-                          );
-                        },
-                      ),
-                      MarkerLayer(
-                        markers: [
-                          if (_selectedLocation != null)
-                            Marker(
-                              point: _selectedLocation!,
-                              width: 80,
-                              height: 80,
-                              child: const Icon(
-                                Icons.location_pin,
-                                color: Colors.red,
-                                size: 45,
+              child: Consumer<LocationService>(
+                builder: (context, locationService, child) {
+                  final position = locationService.currentPosition;
+
+                  if (position == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  return SizedBox(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: FlutterMap(
+                        mapController: mapController,
+                        options: MapOptions(
+                            initialCenter:
+                                LatLng(position.latitude, position.longitude),
+                            initialZoom: 15,
+                            onTap: (TapPosition tapPosition, LatLng point) {
+                              setState(() {
+                                _selectedLocation = point;
+                              });
+                            }),
+                        children: [
+                          TileLayer(
+                            urlTemplate:
+                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                            userAgentPackageName: 'com.example.app',
+                            // tileBuilder: (context, child, tile) {
+                            //   return Opacity(
+                            //     opacity: 0.8,
+                            //     child: child,
+                            //   );
+                            // },
+                          ),
+                          MarkerLayer(
+                            markers: [
+                              if (_selectedLocation != null)
+                                Marker(
+                                  point: _selectedLocation!,
+                                  width: 80,
+                                  height: 80,
+                                  child: const Icon(
+                                    Icons.location_pin,
+                                    color: Colors.red,
+                                    size: 45,
+                                  ),
+                                ),
+                              Marker(
+                                point: LatLng(
+                                    position.latitude, position.longitude),
+                                width: 80,
+                                height: 80,
+                                child: const Icon(
+                                  Icons.my_location,
+                                  color: Colors.blue,
+                                  size: 40,
+                                ),
                               ),
-                            ),
-                          if (_currentLocation != null)
-                            Marker(
-                              point: _currentLocation!,
-                              width: 80,
-                              height: 80,
-                              child: const Icon(
-                                Icons.my_location,
-                                color: Colors.blue,
-                                size: 40,
-                              ),
-                            ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
             ),
             // const Spacer(),
