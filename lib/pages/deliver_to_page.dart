@@ -2,20 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:food_delivery/components/location.dart';
-import 'package:food_delivery/components/my_button.dart';
-import 'package:food_delivery/components/total.dart';
-import 'package:food_delivery/models/cart_item.dart';
-import 'package:food_delivery/models/food.dart';
-import 'package:food_delivery/models/my_notification.dart';
-import 'package:food_delivery/models/notification_item.dart';
-import 'package:food_delivery/models/restaurant.dart';
-import 'package:food_delivery/services/location/location_service.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:food_delivery/models/location_model.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-import 'package:food_delivery/services/notifications/notif_service.dart';
-import 'package:food_delivery/pages/navigation/home_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DeliverToPage extends StatefulWidget {
@@ -29,19 +18,20 @@ class _DeliverToPageState extends State<DeliverToPage> {
   final SupabaseClient supabase = Supabase.instance.client;
   final MapController mapController = MapController();
   LatLng? _selectedLocation;
-  late LocationService locationService;
+  late LocationModel locationModel;
 
   @override
   void initState() {
     super.initState();
-    locationService = Provider.of<LocationService>(context, listen: false);
+    locationModel = Provider.of<LocationModel>(context, listen: false);
+    _initializeLocation();
   }
 
-  Future<void> _initializeMap() async {
-    final position = locationService.currentPosition;
-    if (position != null) {
+  Future<void> _initializeLocation() async {
+    await locationModel.initializeLocation();
+    if (locationModel.hasLocation) {
       setState(() {
-        _selectedLocation = LatLng(position.latitude, position.longitude);
+        _selectedLocation = LatLng(locationModel.latitude, locationModel.longitude);
       });
     }
   }
@@ -90,11 +80,9 @@ class _DeliverToPageState extends State<DeliverToPage> {
         child: Column(
           children: [
             Expanded(
-              child: Consumer<LocationService>(
-                builder: (context, locationService, child) {
-                  final position = locationService.currentPosition;
-
-                  if (position == null) {
+              child: Consumer<LocationModel>(
+                builder: (context, location, child) {
+                  if (!location.hasLocation) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
@@ -104,14 +92,17 @@ class _DeliverToPageState extends State<DeliverToPage> {
                       child: FlutterMap(
                         mapController: mapController,
                         options: MapOptions(
-                            initialCenter:
-                                LatLng(position.latitude, position.longitude),
-                            initialZoom: 15,
-                            onTap: (TapPosition tapPosition, LatLng point) {
-                              setState(() {
-                                _selectedLocation = point;
-                              });
-                            }),
+                          initialCenter: LatLng(
+                            location.latitude,
+                            location.longitude,
+                          ),
+                          initialZoom: 15,
+                          onTap: (TapPosition tapPosition, LatLng point) {
+                            setState(() {
+                              _selectedLocation = point;
+                            });
+                          },
+                        ),
                         children: [
                           TileLayer(
                             urlTemplate:
@@ -139,7 +130,9 @@ class _DeliverToPageState extends State<DeliverToPage> {
                                 ),
                               Marker(
                                 point: LatLng(
-                                    position.latitude, position.longitude),
+                                  location.latitude,
+                                  location.longitude,
+                                ),
                                 width: 80,
                                 height: 80,
                                 child: const Icon(
@@ -157,82 +150,6 @@ class _DeliverToPageState extends State<DeliverToPage> {
                 },
               ),
             ),
-            // const Spacer(),
-            // const Total(),
-            // const SizedBox(height: 8),
-            // MyButton(
-            //   onTap: () async {
-            //     final User? user = Supabase.instance.client.auth.currentUser;
-            //     final List<CartItem> cartItems =
-            //         Provider.of<Restaurant>(context, listen: false).cart;
-            //     final List<Map<String, Object>> itemsJson = cartItems
-            //         .map((CartItem item) => {
-            //               'food_name': item.name,
-            //               'food_price': item.price,
-            //               'food_quantity': item.quantity,
-            //               'selected_addons': item.selectedAddons
-            //                   .map((Addons addon) => {
-            //                         'name': addon.name,
-            //                         'price': addon.price,
-            //                       })
-            //                   .toList(),
-            //             })
-            //         .toList();
-
-            //     try {
-            //       await supabase.from('payments').insert({
-            //         'user_id': user!.id,
-            //         'created_at': DateTime.timestamp().toIso8601String(),
-            //         'total_amount':
-            //             Provider.of<Restaurant>(context, listen: false)
-            //                     .getTotalPrice() -
-            //                 ((Provider.of<Restaurant>(context, listen: false)
-            //                             .getTotalPrice() *
-            //                         3.75) /
-            //                     100),
-            //         'items': itemsJson,
-            //         'status': 'processed',
-            //         'delivery_address': 'Home',
-            //       });
-
-            //       //show notification
-            //       NotifService().showNotification(
-            //         title: 'Payment Processed',
-            //         body:
-            //             'Your Payment has been processed. Food awaiting delivery',
-            //       );
-
-            //       // Ajouter la notification
-            //       Provider.of<MyNotification>(context, listen: false)
-            //           .addNotification(
-            //         NotificationItem(
-            //           title: "Payment Processed",
-            //           description:
-            //               "Your Payment has been processed. Food awaiting delivery",
-            //           time: "${DateTime.now().hour}:${DateTime.now().minute}",
-            //         ),
-            //       );
-
-            //       // Effacer le panier
-            //       Provider.of<Restaurant>(context, listen: false).clearCart();
-
-            //       // Retourner à la HomePage
-            //       Navigator.pushAndRemoveUntil(
-            //         context,
-            //         MaterialPageRoute(builder: (context) => const HomePage()),
-            //         (route) => false,
-            //       );
-            //     } catch (e) {
-            //       ScaffoldMessenger.of(context).showSnackBar(
-            //         SnackBar(
-            //           content: Text('Payment failed: $e'),
-            //         ),
-            //       );
-            //       print('Payment failed: $e');
-            //     }
-            //   },
-            //   text: 'NEXT',
-            // ),
           ],
         ),
       ),
