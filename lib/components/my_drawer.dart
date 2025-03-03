@@ -50,20 +50,20 @@ class MyDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(25.0),
             child: Divider(
-              color: Theme.of(context).colorScheme.tertiary,
+              color: Theme.of(context).colorScheme.surface,
             ),
           ),
 
           // home list tile
           MyDrawerTile(
-            text: 'HOME',
+            text: 'H O M E',
             icon: Icons.home,
             onTap: () => Navigator.pop(context),
           ),
 
           // settings list tile
           MyDrawerTile(
-            text: 'SETTINGS',
+            text: 'S E T T I N G S',
             icon: Icons.settings,
             onTap: () {
               Navigator.pop(context);
@@ -80,7 +80,7 @@ class MyDrawer extends StatelessWidget {
 
           // logout list tile
           MyDrawerTile(
-            text: 'LOG OUT',
+            text: 'L O G O U T',
             icon: Icons.logout,
             onTap: () => signUserOut(context),
           ),

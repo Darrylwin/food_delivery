@@ -7,8 +7,9 @@ ThemeData darkMode = ThemeData(
   colorScheme: const ColorScheme.dark(
     primary: Colors.white,
     secondary: Color(0xFF0D5EF9), // Bouton bleu
-    tertiary:  Color.fromARGB(255, 215, 214, 214),
+    tertiary: Color.fromARGB(255, 215, 214, 214),
     surface: Color(0xFF2C3039), // Couleur des cartes
+    inversePrimary: Color(0xFF24292D),
   ),
   // cardTheme: const CardTheme(
   //   color: Color(0xFF2C3039),

@@ -15,16 +15,18 @@ class MyCartTile extends StatelessWidget {
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) => Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xff0d5ef9).withOpacity(0.3),
-              spreadRadius: .7,
-              blurRadius: 5,
-              offset:
-                  const Offset(2, 2), // changé pour ombre à droite et en bas
-            ),
-          ],
+          color: Theme.of(context).colorScheme.surface,
+          boxShadow: Theme.of(context).brightness == Brightness.light
+              ? [
+                  BoxShadow(
+                    color: const Color(0xff0d5ef9).withOpacity(0.3),
+                    spreadRadius: .7,
+                    blurRadius: 5,
+                    offset: const Offset(
+                        2, 2), // changé pour ombre à droite et en bas
+                  ),
+                ]
+              : null,
           borderRadius: BorderRadius.circular(20),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -75,8 +77,8 @@ class MyCartTile extends StatelessWidget {
                       //food price
                       Text(
                         "\$ ${cartItem.food.price}",
-                        style: const TextStyle(
-                          color: Color(0xff0d5ef9),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

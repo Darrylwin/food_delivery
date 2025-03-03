@@ -10,7 +10,7 @@ import 'package:food_delivery/pages/deliver_to_page.dart';
 import 'package:provider/provider.dart';
 
 class ChoosePayementMethodPage extends StatefulWidget {
-  ChoosePayementMethodPage({super.key});
+  const ChoosePayementMethodPage({super.key});
 
   @override
   State<ChoosePayementMethodPage> createState() =>
@@ -62,7 +62,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
         ];
 
         Function()? cashPayment() {
-          //TODO: implementer la logique de paiement par cash
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -72,7 +71,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
         }
 
         Function()? masterCardPayment() {
-          //TODO: implementer la logique de paiement par mastercard
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -146,7 +144,7 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
         return Scaffold(
           appBar: AppBar(
             // automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             title: const Text(
               'Payement method',
@@ -162,16 +160,18 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
               child: Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      spreadRadius: 1,
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
+                  boxShadow: Theme.of(context).brightness == Brightness.light
+                      ? [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ]
+                      : null,
                 ),
                 child: const Icon(
                   Icons.arrow_back_ios_new,
@@ -234,8 +234,10 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                     child: MyButton(
                       text: 'ADD CARD +',
                       onTap: () {},
-                      color: const Color.fromARGB(255, 201, 233, 255)
-                          .withOpacity(.8),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(.2),
                       textColor: const Color(0xff0d5ef9),
                     ),
                   ),
@@ -243,7 +245,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                   const Text(
                     'Other methods',
                     style: TextStyle(
-                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 13,
                     ),

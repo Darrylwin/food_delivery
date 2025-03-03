@@ -19,13 +19,13 @@ class MyDrawerTile extends StatelessWidget {
       child: ListTile(
         title: Text(
           text,
-          style: const TextStyle(
-            color: Colors.black,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
         leading: Icon(
           icon,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.primary,
         ),
         onTap: onTap,
       ),

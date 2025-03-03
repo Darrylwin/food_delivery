@@ -17,15 +17,17 @@ class SearchTextField extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: Theme.of(context).colorScheme.surface,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey
-                  .withOpacity(0.25), // Augmentation de l'opacité de 0.2 à 0.25
-              spreadRadius: 3, // Augmentation du spreadRadius de 2 à 3
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
-          ],
+          boxShadow: Theme.of(context).brightness == Brightness.light
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(
+                        0.25), // Augmentation de l'opacité de 0.2 à 0.25
+                    spreadRadius: 3, // Augmentation du spreadRadius de 2 à 3
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ]
+              : null,
         ),
         child: TextField(
           controller: controller,
