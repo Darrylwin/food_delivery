@@ -14,10 +14,6 @@ ThemeData darkMode = ThemeData(
   //   color: Color(0xFF2C3039),
   //   elevation: 4,
   // ),
-  appBarTheme: const AppBarTheme(
-    color: Color(0xFF181E22),
-    elevation: 0,
-  ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Color(0xFF181E22),
     selectedItemColor: Colors.white,
