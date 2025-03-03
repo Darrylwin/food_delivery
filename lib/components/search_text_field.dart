@@ -16,10 +16,11 @@ class SearchTextField extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: const Color(0xFFf9f9f9),
+          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.25), // Augmentation de l'opacité de 0.2 à 0.25
+              color: Colors.grey
+                  .withOpacity(0.25), // Augmentation de l'opacité de 0.2 à 0.25
               spreadRadius: 3, // Augmentation du spreadRadius de 2 à 3
               blurRadius: 10,
               offset: const Offset(0, 3),
@@ -46,8 +47,8 @@ class SearchTextField extends StatelessWidget {
             hintStyle: const TextStyle(
               color: Color(0xFFacaeb4),
             ),
-            fillColor: const Color(0xFFf9f9f9),
-            focusColor: const Color(0xFFf9f9f9),
+            fillColor: Theme.of(context).colorScheme.surface,
+            focusColor: Theme.of(context).colorScheme.surface,
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),
               borderRadius: BorderRadius.circular(30),
