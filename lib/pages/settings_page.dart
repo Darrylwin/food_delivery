@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/services/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -13,14 +16,14 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        backgroundColor: Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(23),
             ),
             margin: const EdgeInsets.only(left: 25, top: 10, right: 25),
@@ -33,18 +36,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   "  Dark Mode",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
 
-                // switch
-                // CupertinoSwitch(
-                //   value: Provider.of<ThemeProvider>(context, listen: false)
-                //       .isDarkMode,
-                //   onChanged: (value) =>
-                //       Provider.of<ThemeProvider>(context, listen: false)
-                //           .toggleTheme(),
-                // ),
+                CupertinoSwitch(
+                  value: !context.read<ThemeProvider>().isLightMode,
+                  onChanged: (value) =>
+                      context.read<ThemeProvider>().toggleTheme(),
+                ),
               ],
             ),
           ),
