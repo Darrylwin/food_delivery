@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Colors.grey[400],
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                   Text(
                     'Or continue with',
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Colors.grey[400],
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ],
               ),

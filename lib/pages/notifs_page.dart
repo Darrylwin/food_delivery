@@ -12,7 +12,6 @@ class NotifsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MyNotification>(
         builder: (context, MyNotification notification, child) {
-      final oneNotif = notification.notifications;
 
       return Scaffold(
         appBar: AppBar(

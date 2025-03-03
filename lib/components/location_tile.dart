@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Location extends StatelessWidget {
-  const Location({
+class LocationTile extends StatelessWidget {
+  const LocationTile({
     super.key,
     required this.place,
     required this.address,

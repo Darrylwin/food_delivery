@@ -24,7 +24,7 @@ class FoodPage extends StatefulWidget {
 
 class _FoodPageState extends State<FoodPage> {
   //method to add to card
-   void addToCart(Food food, Map<Addons, bool> selectedAddons) {
+  void addToCart(Food food, Map<Addons, bool> selectedAddons) {
     Navigator.pop(context);
 
     //format the selected addons
@@ -86,7 +86,7 @@ class _FoodPageState extends State<FoodPage> {
 
                       const SizedBox(height: 10),
 
-                      Divider(color: Theme.of(context).colorScheme.secondary),
+                      Divider(color: Theme.of(context).colorScheme.tertiary),
 
                       const SizedBox(height: 10),
 
@@ -142,7 +142,7 @@ class _FoodPageState extends State<FoodPage> {
                 //button to  add to cart
                 MyButton(
                   text: 'Add to cart',
-                  onTap: () =>  addToCart(
+                  onTap: () => addToCart(
                     widget.food,
                     widget.selectedAddons,
                   ),

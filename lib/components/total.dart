@@ -53,7 +53,9 @@ class Total extends StatelessWidget {
                   ),
                 ],
               ),
-              Divider(color: const Color(0xff8b8e90).withOpacity(.5)),
+              Divider(
+                color: Theme.of(context).colorScheme.tertiary.withOpacity(.5),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -74,7 +76,9 @@ class Total extends StatelessWidget {
                   ),
                 ],
               ),
-              Divider(color: const Color(0xff8b8e90).withOpacity(.5)),
+              Divider(
+                  color:
+                      Theme.of(context).colorScheme.tertiary.withOpacity(.5)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
