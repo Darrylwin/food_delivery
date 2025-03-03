@@ -104,7 +104,7 @@ class _FoodPageState extends State<FoodPage> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
