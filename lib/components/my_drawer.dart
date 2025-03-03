@@ -34,7 +34,7 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.7,
       elevation: 10,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         children: [
           // app logo
