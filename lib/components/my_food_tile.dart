@@ -25,15 +25,18 @@ class MyFoodTile extends StatelessWidget {
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                      color: Theme.of(context).colorScheme.surface,
+                      boxShadow:
+                          Theme.of(context).brightness == Brightness.light
+                              ? [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(13),
                         topRight: Radius.circular(13),
@@ -94,7 +97,7 @@ class MyFoodTile extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.shopping_bag_rounded,
-                          color: Colors.white, 
+                          color: Colors.white,
                           size: 15,
                         ),
                         Text(

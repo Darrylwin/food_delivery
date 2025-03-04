@@ -91,10 +91,9 @@ class _FoodPageState extends State<FoodPage> {
                       const SizedBox(height: 10),
 
                       //addons
-                      Text(
+                      const Text(
                         'Add-ons',
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inversePrimary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
@@ -105,7 +104,7 @@ class _FoodPageState extends State<FoodPage> {
                       Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -159,7 +158,7 @@ class _FoodPageState extends State<FoodPage> {
           child: Container(
             margin: const EdgeInsets.only(left: 25),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
               // borderRadius: BorderRadius.circular(8),
               shape: BoxShape.circle,
             ),

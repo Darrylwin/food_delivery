@@ -27,16 +27,18 @@ class MySliverAppBar extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(15),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 1,
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
+            boxShadow: Theme.of(context).brightness == Brightness.light
+                ? [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 1,
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : null,
           ),
           child: const Icon(
             Icons.menu_rounded,
@@ -58,27 +60,26 @@ class MySliverAppBar extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 1,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
+              boxShadow: Theme.of(context).brightness == Brightness.light
+                  ? [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 1,
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
             ),
-            // child: const Icon(
-            //   Icons.notifications_none_rounded,
-            //   size: 22.5,
-            // ),
             child: Consumer<MyNotification>(
               builder: (context, notificationProvider, child) => Badge(
                 isLabelVisible: notificationProvider.notifications.isNotEmpty,
                 label: Text('${notificationProvider.notifications.length}'),
                 backgroundColor: Colors.red,
-                child: const Icon(
+                child: Icon(
+                  color: Theme.of(context).colorScheme.primary,
                   Icons.notifications_none_rounded,
                   size: 22.5,
                 ),
@@ -88,8 +89,8 @@ class MySliverAppBar extends StatelessWidget {
         ),
         const SizedBox(width: 10),
       ],
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      foregroundColor: Theme.of(context).colorScheme.primary,
       title: const Text(
         "Popular menu",
         style: TextStyle(

@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -87,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                 "Sign in your account",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -138,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                   Text(
                     'Or continue with',
@@ -147,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                   Divider(
                     indent: 25,
                     endIndent: 25,
-                    color: Theme.of(context).colorScheme.tertiary,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ],
               ),
@@ -189,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       "Register Now",
                       style: TextStyle(
-                        color: Color(0xff0d5ef9),
+                        color: Color(0xFF0D5EF9),
                         fontWeight: FontWeight.w500,
                       ),
                     ),

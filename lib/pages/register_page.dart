@@ -104,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -128,7 +128,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 "Let's create an account for you",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
                   fontWeight: FontWeight.w500,
                 ),
               ),

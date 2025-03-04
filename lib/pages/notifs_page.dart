@@ -12,11 +12,11 @@ class NotifsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MyNotification>(
         builder: (context, MyNotification notification, child) {
-
       return Scaffold(
         appBar: AppBar(
           // automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          foregroundColor: Theme.of(context).colorScheme.primary,
           title: const Text(
             'Notifications',
             style: TextStyle(
@@ -31,16 +31,18 @@ class NotifsPage extends StatelessWidget {
             child: Container(
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                boxShadow: Theme.of(context).brightness == Brightness.light
+                    ? [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : null,
               ),
               child: const Icon(
                 Icons.arrow_back_ios_new,
@@ -58,8 +60,8 @@ class NotifsPage extends StatelessWidget {
               floating: false,
               pinned: true,
               shadowColor: Colors.white,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.white,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              foregroundColor: Theme.of(context).colorScheme.primary,
               title: SearchTextField(
                 controller: controller,
                 sort: false,
@@ -67,7 +69,7 @@ class NotifsPage extends StatelessWidget {
             ),
           ],
           body: Container(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: notification.notifications.isEmpty
                 ? const Center(child: Text('Aucune Notification'))
                 : ListView.builder(

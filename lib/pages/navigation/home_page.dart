@@ -57,22 +57,26 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       drawer: const MyDrawer(),
       body: _pages[_bottomNavBarIndex],
       bottomNavigationBar: CurvedNavigationBar(
+        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
         height: 60,
         key: _bottomNavigationKey,
-        buttonBackgroundColor: Theme.of(context).colorScheme.surface,
-        backgroundColor: Colors.transparent,
+        // buttonBackgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.backgroundColor!,
         index: _bottomNavBarIndex,
         items: List.generate(
           4,
           (index) => Image.asset(
             'assets/icons/${index == 0 ? 'home' : index == 1 ? 'order' : index == 2 ? 'profil' : 'message'}.png',
             color: _bottomNavBarIndex == index
-                ? const Color(0xff28303f)
-                : const Color(0xffb5b8bd),
+                ? Theme.of(context).bottomNavigationBarTheme.selectedItemColor!
+                : Theme.of(context)
+                    .bottomNavigationBarTheme
+                    .unselectedItemColor!,
             height: 25,
           ),
         ),

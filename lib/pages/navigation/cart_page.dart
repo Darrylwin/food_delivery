@@ -21,24 +21,26 @@ class CartPage extends StatelessWidget {
 
         return Scaffold(
           drawer: const MyDrawer(),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                color: Theme.of(context).scaffoldBackgroundColor,
+                boxShadow: Theme.of(context).brightness == Brightness.light
+                    ? [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 1,
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : null,
               ),
               child: AppBar(
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.white,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 title: const Text(
                   'Order details',
                   style: TextStyle(
@@ -53,16 +55,19 @@ class CartPage extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                      boxShadow:
+                          Theme.of(context).brightness == Brightness.light
+                              ? [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 1,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ]
+                              : null,
                     ),
                     child: const Icon(
                       Icons.menu_rounded,
@@ -74,7 +79,7 @@ class CartPage extends StatelessWidget {
             ),
           ),
           body: Container(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Column(
               children: [
                 Expanded(
@@ -111,14 +116,15 @@ class CartPage extends StatelessWidget {
                                               DismissDirection.endToStart,
                                           background: Container(
                                             margin: const EdgeInsets.symmetric(
-                                                horizontal: 5, vertical: 10),
+                                              horizontal: 5,
+                                              vertical: 10,
+                                            ),
                                             alignment: Alignment.centerRight,
                                             padding: const EdgeInsets.only(
                                                 right: 20),
                                             decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                      204, 153, 204, 255)
-                                                  .withOpacity(.38),
+                                              color: const Color(0xFF0D5EF9)
+                                                  .withOpacity(.2),
                                               borderRadius:
                                                   const BorderRadius.only(
                                                 topRight: Radius.circular(20),
@@ -128,7 +134,8 @@ class CartPage extends StatelessWidget {
                                             ),
                                             child: const Icon(
                                               Icons.delete_outlined,
-                                              color: Color(0xff0d5ef9),
+                                              size: 40,
+                                              color: Color(0xFF0D5EF9),
                                             ),
                                           ),
                                           onDismissed: (direction) {
@@ -147,7 +154,7 @@ class CartPage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ChoosePayementMethodPage(),
+                                                const ChoosePayementMethodPage(),
                                           ),
                                         );
                                       },

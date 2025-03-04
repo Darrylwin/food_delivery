@@ -19,10 +19,10 @@ class MyQuantitySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 247, 247, 247),
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(50),
       ),
-      padding:const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

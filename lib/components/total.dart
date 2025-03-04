@@ -15,22 +15,8 @@ class Total extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: const Color(0xfff3f4f4),
+            color: Theme.of(context).colorScheme.surface.withOpacity(.5),
             borderRadius: BorderRadius.circular(10),
-            border: Border(
-              top: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              left: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              right: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-              ),
-              bottom: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-              ),
-            ),
           ),
           child: Column(
             children: [
