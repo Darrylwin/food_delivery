@@ -28,7 +28,7 @@ class MyTextFiled extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(color: Colors.grey[300]!),
           ),
-          fillColor: Colors.grey[100],
+          fillColor: Theme.of(context).colorScheme.surface,
           filled: true,
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[500]),

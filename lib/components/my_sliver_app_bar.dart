@@ -90,7 +90,7 @@ class MySliverAppBar extends StatelessWidget {
         const SizedBox(width: 10),
       ],
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      foregroundColor: Theme.of(context).primaryColor,
+      foregroundColor: Theme.of(context).colorScheme.primary,
       title: const Text(
         "Popular menu",
         style: TextStyle(
