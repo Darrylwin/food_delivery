@@ -1,34 +1,16 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:food_delivery/models/location_model.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-class DeliverToPage extends StatefulWidget {
+import '../models/location_model.dart'; // Importez votre LocationModel
+
+class DeliverToPage extends StatelessWidget {
   const DeliverToPage({super.key});
-
-  @override
-  State<DeliverToPage> createState() => _DeliverToPageState();
-}
-
-class _DeliverToPageState extends State<DeliverToPage> {
-  final SupabaseClient supabase = Supabase.instance.client;
-  final MapController mapController = MapController();
-  LatLng? _selectedLocation;
-  late LocationModel locationModel;
-
-  @override
-  void initState() {
-    super.initState();
-    locationModel = Provider.of<LocationModel>(context, listen: false);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         // automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -67,69 +49,163 @@ class _DeliverToPageState extends State<DeliverToPage> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 6),
-        child: Column(
+      body: ChangeNotifierProvider(
+        create: (context) => LocationModel()..initializeLocation(context),
+        child: const LocationSelectionWidget(),
+      ),
+    );
+  }
+}
+
+class LocationSelectionWidget extends StatefulWidget {
+  const LocationSelectionWidget({super.key});
+
+  @override
+  _LocationSelectionWidgetState createState() =>
+      _LocationSelectionWidgetState();
+}
+
+class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
+  final MapController _mapController = MapController();
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeLocation();
+  }
+
+  Future<void> _initializeLocation() async {
+    final locationModel = Provider.of<LocationModel>(context, listen: false);
+
+    try {
+      await locationModel.initializeLocation(context);
+
+      // Une fois la localisation chargée, mettre à jour l'état
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+
+        // Centrer la carte sur la nouvelle localisation
+        if (locationModel.currentLocation != null) {
+          _mapController.move(locationModel.currentLocation!, 15.0);
+        }
+      }
+    } catch (e) {
+      // Gérer les erreurs potentielles
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Erreur de chargement de la localisation')));
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<LocationModel>(
+      builder: (context, locationModel, child) {
+        // Afficher un indicateur de chargement temporaire
+        if (_isLoading) {
+          return const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 16),
+                Text('Chargement de votre position...')
+              ],
+            ),
+          );
+        }
+
+        // Si aucune localisation n'est disponible après le chargement
+        if (locationModel.currentLocation == null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.location_off, size: 80, color: Colors.grey),
+                const Text('Impossible de récupérer votre position'),
+                ElevatedButton(
+                  onPressed: _initializeLocation,
+                  child: const Text('Réessayer'),
+                )
+              ],
+            ),
+          );
+        }
+
+        // Carte avec la localisation
+        return Column(
           children: [
             Expanded(
-              child: Consumer<LocationModel>(
-                builder: (context, location, child) {
-                  return Expanded(
-                    child: FlutterMap(
-                      options: MapOptions(
-                        initialCenter:
-                            locationModel.currentLocation ?? LatLng(0, 0),
-                        onTap: (tapPosition, point) {
-                          locationModel.selectLocationOnMap(point);
-                        },
-                      ),
-                      children: [
-                        // Configuration des tuiles de la carte
-                        TileLayer(
-                          urlTemplate:
-                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                          subdomains: ['a', 'b', 'c'],
+              child: FlutterMap(
+                mapController: _mapController,
+                options: MapOptions(
+                  initialCenter: locationModel.currentLocation!,
+                  initialZoom: 15.0,
+                  onTap: (tapPosition, point) {
+                    locationModel.selectLocationOnMap(point);
+                  },
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    subdomains: const ['a', 'b', 'c'],
+                  ),
+                  MarkerLayer(
+                    markers: [
+                      // Marqueur de position actuelle
+                      Marker(
+                        point: locationModel.currentLocation!,
+                        width: 80,
+                        height: 80,
+                        child: const Icon(
+                          Icons.my_location,
+                          color: Colors.blue,
+                          size: 40,
                         ),
-                        // Marqueurs pour la position actuelle et sélectionnée
-                        if (locationModel.currentLocation != null)
-                          MarkerLayer(
-                            markers: [
-                              Marker(
-                                point: locationModel.currentLocation!,
-                                width: 80,
-                                height: 80,
-                                child:
-                                    Icon(Icons.my_location, color: Colors.blue),
-                              ),
-                              if (locationModel.selectedLocation != null)
-                                Marker(
-                                  point: locationModel.selectedLocation!,
-                                  width: 80,
-                                  height: 80,
-                                  child: Icon(Icons.location_pin,
-                                      color: Colors.red),
-                                ),
-                            ],
+                      ),
+                      // Marqueur de localisation sélectionnée (si existante)
+                      if (locationModel.selectedLocation != null)
+                        Marker(
+                          point: locationModel.selectedLocation!,
+                          width: 80,
+                          height: 80,
+                          child: const Icon(
+                            Icons.location_pin,
+                            color: Colors.red,
+                            size: 40,
                           ),
-                      ],
-                    ),
-                  );
-                },
+                        ),
+                    ],
+                  ),
+                ],
               ),
-            ), // Bouton de confirmation
-            ElevatedButton(
-              onPressed: locationModel.isLocationReady
-                  ? () {
-                      // Utiliser la localisation sélectionnée ou par défaut
-                      final finalLocation = locationModel.getFinalLocation();
-                      // Faire quelque chose avec la localisation
-                    }
-                  : null,
-              child: Text('Confirmer la localisation'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: locationModel.isLocationReady
+                    ? () {
+                        final finalLocation = locationModel.getFinalLocation();
+                        Navigator.of(context).pop(finalLocation);
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                ),
+                child: const Text('Confirmer la localisation'),
+              ),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
