@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotifService().initNotifiaction();
   await SupabaseConfig.initialize();
-  await LocationModel().initializeLocation();
+  // await LocationModel().initializeLocation();
 
   runApp(
     MultiProvider(

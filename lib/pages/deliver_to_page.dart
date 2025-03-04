@@ -24,17 +24,6 @@ class _DeliverToPageState extends State<DeliverToPage> {
   void initState() {
     super.initState();
     locationModel = Provider.of<LocationModel>(context, listen: false);
-    _initializeLocation();
-  }
-
-  Future<void> _initializeLocation() async {
-    await locationModel.initializeLocation();
-    if (locationModel.hasLocation) {
-      setState(() {
-        _selectedLocation =
-            LatLng(locationModel.latitude, locationModel.longitude);
-      });
-    }
   }
 
   @override
@@ -85,73 +74,58 @@ class _DeliverToPageState extends State<DeliverToPage> {
             Expanded(
               child: Consumer<LocationModel>(
                 builder: (context, location, child) {
-                  if (!location.hasLocation) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
-                  return SizedBox(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: FlutterMap(
-                        mapController: mapController,
-                        options: MapOptions(
-                          initialCenter: LatLng(
-                            location.latitude,
-                            location.longitude,
-                          ),
-                          initialZoom: 15,
-                          onTap: (TapPosition tapPosition, LatLng point) {
-                            setState(() {
-                              _selectedLocation = point;
-                            });
-                          },
+                  return Expanded(
+                    child: FlutterMap(
+                      options: MapOptions(
+                        initialCenter:
+                            locationModel.currentLocation ?? LatLng(0, 0),
+                        onTap: (tapPosition, point) {
+                          locationModel.selectLocationOnMap(point);
+                        },
+                      ),
+                      children: [
+                        // Configuration des tuiles de la carte
+                        TileLayer(
+                          urlTemplate:
+                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          subdomains: ['a', 'b', 'c'],
                         ),
-                        children: [
-                          TileLayer(
-                            urlTemplate:
-                                'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                            userAgentPackageName: 'com.example.app',
-                            // tileBuilder: (context, child, tile) {
-                            //   return Opacity(
-                            //     opacity: 0.8,
-                            //     child: child,
-                            //   );
-                            // },
-                          ),
+                        // Marqueurs pour la position actuelle et sélectionnée
+                        if (locationModel.currentLocation != null)
                           MarkerLayer(
                             markers: [
-                              if (_selectedLocation != null)
-                                Marker(
-                                  point: _selectedLocation!,
-                                  width: 80,
-                                  height: 80,
-                                  child: const Icon(
-                                    Icons.location_pin,
-                                    color: Colors.red,
-                                    size: 45,
-                                  ),
-                                ),
                               Marker(
-                                point: LatLng(
-                                  location.latitude,
-                                  location.longitude,
-                                ),
+                                point: locationModel.currentLocation!,
                                 width: 80,
                                 height: 80,
-                                child: const Icon(
-                                  Icons.my_location,
-                                  color: Colors.blue,
-                                  size: 40,
-                                ),
+                                child:
+                                    Icon(Icons.my_location, color: Colors.blue),
                               ),
+                              if (locationModel.selectedLocation != null)
+                                Marker(
+                                  point: locationModel.selectedLocation!,
+                                  width: 80,
+                                  height: 80,
+                                  child: Icon(Icons.location_pin,
+                                      color: Colors.red),
+                                ),
                             ],
                           ),
-                        ],
-                      ),
+                      ],
                     ),
                   );
                 },
               ),
+            ), // Bouton de confirmation
+            ElevatedButton(
+              onPressed: locationModel.isLocationReady
+                  ? () {
+                      // Utiliser la localisation sélectionnée ou par défaut
+                      final finalLocation = locationModel.getFinalLocation();
+                      // Faire quelque chose avec la localisation
+                    }
+                  : null,
+              child: Text('Confirmer la localisation'),
             ),
           ],
         ),
