@@ -123,9 +123,7 @@ class CartPage extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 right: 20),
                                             decoration: BoxDecoration(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary
+                                              color: const Color(0xFF0D5EF9)
                                                   .withOpacity(.2),
                                               borderRadius:
                                                   const BorderRadius.only(
@@ -134,12 +132,10 @@ class CartPage extends StatelessWidget {
                                                     Radius.circular(20),
                                               ),
                                             ),
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.delete_outlined,
                                               size: 40,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
+                                              color: Color(0xFF0D5EF9),
                                             ),
                                           ),
                                           onDismissed: (direction) {

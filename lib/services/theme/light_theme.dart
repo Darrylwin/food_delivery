@@ -5,7 +5,6 @@ ThemeData lightMode = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   colorScheme: const ColorScheme.light(
     primary: Color(0xff181E22),
-    secondary: Color(0xFF0D5EF9), // Bouton bleu
     tertiary: Color.fromARGB(255, 52, 51, 51),
     surface: Color(0xFFF9F9F9), // Couleur des cartes
     inversePrimary: Color(0xFFF3F4F4),

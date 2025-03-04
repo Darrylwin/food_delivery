@@ -234,10 +234,7 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                     child: MyButton(
                       text: 'ADD CARD +',
                       onTap: () {},
-                      color: Theme.of(context)
-                          .colorScheme
-                          .secondary
-                          .withOpacity(.2),
+                      color: const Color(0xFF0D5EF9).withOpacity(.2),
                       textColor: const Color(0xff0d5ef9),
                     ),
                   ),

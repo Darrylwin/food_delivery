@@ -77,8 +77,8 @@ class MyCartTile extends StatelessWidget {
                       //food price
                       Text(
                         "\$ ${cartItem.food.price}",
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
+                        style: const TextStyle(
+                          color: Color(0xFF0D5EF9),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
