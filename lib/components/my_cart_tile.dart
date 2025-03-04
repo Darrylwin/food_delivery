@@ -125,10 +125,10 @@ class MyCartTile extends StatelessWidget {
                             ),
                           ),
                           onSelected: (value) {},
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
-                          labelStyle: TextStyle(
-                            color: Theme.of(context).colorScheme.inversePrimary,
+                          backgroundColor: Theme.of(context)
+                              .scaffoldBackgroundColor
+                              .withOpacity(.2),
+                          labelStyle: const TextStyle(
                             fontSize: 12,
                           ),
                         ),

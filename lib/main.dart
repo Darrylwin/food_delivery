@@ -36,17 +36,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   scaffoldBackgroundColor: const Color(0xFFF5F5F5),
-      //   canvasColor: const Color(0xFFF5F5F5),
-      //   colorScheme: ColorScheme.light(
-      //     surface: Colors.grey.shade300,
-      //     primary: Colors.grey.shade500,
-      //     secondary: Colors.grey.shade100,
-      //     tertiary: Colors.white,
-      //     inversePrimary: Colors.grey.shade700,
-      //   ),
-      // ),
       theme: context.watch<ThemeProvider>().currentTheme,
       home: const HomePage(),
     );

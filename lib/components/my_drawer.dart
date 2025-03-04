@@ -39,11 +39,11 @@ class MyDrawer extends StatelessWidget {
         children: [
           // app logo
           Padding(
-            padding: const EdgeInsets.only(top: 100.0),
+            padding: const EdgeInsets.only(top: 75.0),
             child: Image.asset(
               'assets/images/nom.png',
-              height: 80,
-              width: 80,
+              height: 105,
+              width: 105,
             ),
           ),
 

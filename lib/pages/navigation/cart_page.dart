@@ -21,7 +21,7 @@ class CartPage extends StatelessWidget {
 
         return Scaffold(
           drawer: const MyDrawer(),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight),
             child: Container(
@@ -136,7 +136,7 @@ class CartPage extends StatelessWidget {
                                             ),
                                             child: Icon(
                                               Icons.delete_outlined,
-                                              size:35,
+                                              size: 40,
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .secondary,
@@ -158,7 +158,7 @@ class CartPage extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ChoosePayementMethodPage(),
+                                                const ChoosePayementMethodPage(),
                                           ),
                                         );
                                       },

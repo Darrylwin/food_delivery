@@ -17,7 +17,7 @@ class LocationTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color:Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
