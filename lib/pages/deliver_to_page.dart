@@ -94,15 +94,20 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
       }
     } catch (e) {
       // Gérer les erreurs potentielles
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Erreur de chargement de la localisation')));
-      }
+
+      // if (mounted) {
+      //   setState(() {
+      //     _isLoading = false;
+      //   });
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('Erreur de chargement de la localisation'),
+      //     ),
+      //   );
+      // }
+
+      print("Erreur  de chargement de la localisation: $e");
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +121,7 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
               children: [
                 CircularProgressIndicator(),
                 SizedBox(height: 16),
-                Text('Chargement de votre position...')
+                Text('Loading...')
               ],
             ),
           );
@@ -129,10 +134,10 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.location_off, size: 80, color: Colors.grey),
-                const Text('Impossible de récupérer votre position'),
+                const Text('No way to get your position'),
                 ElevatedButton(
                   onPressed: _initializeLocation,
-                  child: const Text('Réessayer'),
+                  child: const Text('Try again'),
                 )
               ],
             ),
@@ -200,7 +205,7 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Confirmer la localisation'),
+                child: const Text('NEXT'),
               ),
             ),
           ],
