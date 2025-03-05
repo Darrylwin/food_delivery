@@ -54,8 +54,9 @@ class DeliverToPage extends StatelessWidget {
         child: const LocationSelectionWidget(),
       ),
     );
-  }
+    }
 }
+
 
 class LocationSelectionWidget extends StatefulWidget {
   const LocationSelectionWidget({super.key});
@@ -66,13 +67,16 @@ class LocationSelectionWidget extends StatefulWidget {
 }
 
 class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
-  final MapController _mapController = MapController();
+  late final MapController _mapController;
   bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _initializeLocation();
+    _mapController = MapController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeLocation();
+    });
   }
 
   Future<void> _initializeLocation() async {
@@ -89,25 +93,46 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
 
         // Centrer la carte sur la nouvelle localisation
         if (locationModel.currentLocation != null) {
+          // Attendre que la carte soit prête
+          await Future.delayed(const Duration(milliseconds: 300));
           _mapController.move(locationModel.currentLocation!, 15.0);
         }
       }
-    } catch (e) {
-      // Gérer les erreurs potentielles
+    } 
+    // catch (e) {
+    //   // Gérer les erreurs potentielles
 
-      // if (mounted) {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //       content: Text('Erreur de chargement de la localisation'),
-      //     ),
-      //   );
-      // }
+    //   // if (mounted) {
+    //   //   setState(() {
+    //   //     _isLoading = false;
+    //   //   });
+    //   //   ScaffoldMessenger.of(context).showSnackBar(
+    //   //     const SnackBar(
+    //   //       content: Text('Erreur de chargement de la localisation'),
+    //   //     ),
+    //   //   );
+    //   // }
 
-      print("Erreur  de chargement de la localisation: $e");
+    //   print("Erreur  de chargement de la localisation: $e");
+    // }
+    
+
+    catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+
+                ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Erreur de chargement de la localisation'),
+          ),
+        );
+
+      }
+      print("Erreur de chargement de la localisation: $e");
     }
+  }
 
   @override
   Widget build(BuildContext context) {
