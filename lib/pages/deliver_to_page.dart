@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 
-import '../models/location_model.dart'; // Importez votre LocationModel
+import '../models/location_model.dart';
 
 class DeliverToPage extends StatelessWidget {
   const DeliverToPage({super.key});
@@ -54,9 +54,8 @@ class DeliverToPage extends StatelessWidget {
         child: const LocationSelectionWidget(),
       ),
     );
-    }
+  }
 }
-
 
 class LocationSelectionWidget extends StatefulWidget {
   const LocationSelectionWidget({super.key});
@@ -98,37 +97,17 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
           _mapController.move(locationModel.currentLocation!, 15.0);
         }
       }
-    } 
-    // catch (e) {
-    //   // Gérer les erreurs potentielles
-
-    //   // if (mounted) {
-    //   //   setState(() {
-    //   //     _isLoading = false;
-    //   //   });
-    //   //   ScaffoldMessenger.of(context).showSnackBar(
-    //   //     const SnackBar(
-    //   //       content: Text('Erreur de chargement de la localisation'),
-    //   //     ),
-    //   //   );
-    //   // }
-
-    //   print("Erreur  de chargement de la localisation: $e");
-    // }
-    
-
-    catch (e) {
+    } catch (e) {
       if (mounted) {
         setState(() {
           _isLoading = false;
         });
 
-                ScaffoldMessenger.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Erreur de chargement de la localisation'),
           ),
         );
-
       }
       print("Erreur de chargement de la localisation: $e");
     }
@@ -185,8 +164,7 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                 children: [
                   TileLayer(
                     urlTemplate:
-                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    subdomains: const ['a', 'b', 'c'],
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   ),
                   MarkerLayer(
                     markers: [
@@ -219,18 +197,32 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: locationModel.isLocationReady
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: GestureDetector(
+                onTap: locationModel.isLocationReady
                     ? () {
                         final finalLocation = locationModel.getFinalLocation();
                         Navigator.of(context).pop(finalLocation);
                       }
                     : null,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                  margin: const EdgeInsets.symmetric(horizontal: 93),
+                  decoration: BoxDecoration(
+                    color: const Color(0xff0d5ef9),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'NEXT',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
                 ),
-                child: const Text('NEXT'),
               ),
             ),
           ],

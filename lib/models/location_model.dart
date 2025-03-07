@@ -47,14 +47,29 @@ class LocationModel extends ChangeNotifier {
 
   Future<void> _fetchCurrentLocation() async {
     try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
+      Position? position;
 
-      _currentLocation = LatLng(position.latitude, position.longitude);
-      notifyListeners();
+      try {
+        // Essayer d'abord d'obtenir la position actuelle
+        position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high,
+            timeLimit: const Duration(seconds: 15));
+      } catch (error) {
+        // En cas d'erreur, log et essayer d'obtenir la dernière position connue
+        print('Erreur détaillée de localisation : $error');
+        position = await Geolocator.getLastKnownPosition();
+      }
+
+      // Vérifier si une position a été obtenue
+      if (position != null) {
+        _currentLocation = LatLng(position.latitude, position.longitude);
+        notifyListeners();
+      } else {
+        print('Aucune localisation trouvée');
+        // Gérer le cas où aucune localisation n'est disponible
+      }
     } catch (e) {
-      // Gérer les erreurs de récupération de localisation
-      print('Erreur de récupération de la localisation : $e');
+      print('Échec complet de récupération de la localisation : $e');
     }
   }
 

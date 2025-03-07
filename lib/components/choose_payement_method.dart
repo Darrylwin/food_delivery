@@ -22,7 +22,7 @@ class ChoosePayementMethod extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
-          boxShadow: [
+          boxShadow: Theme.of(context).brightness == Brightness.light ?[
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: .7,
@@ -30,7 +30,7 @@ class ChoosePayementMethod extends StatelessWidget {
               offset:
                   const Offset(2, 2), // changé pour ombre à droite et en bas
             ),
-          ],
+          ] : null,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Row(

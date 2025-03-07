@@ -194,7 +194,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                       });
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -215,7 +214,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                       });
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -254,7 +252,6 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                       });
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
                         border: Border.all(
