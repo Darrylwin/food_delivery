@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:food_delivery/models/my_notification.dart';
 import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/services/generation/gemini_service.dart';
 import 'package:food_delivery/services/notifications/notif_service.dart';
 import 'package:provider/provider.dart';
 
@@ -174,7 +175,8 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                     markers: [
                       // Un seul marqueur qui montre soit la position sélectionnée, soit la position actuelle
                       Marker(
-                        point: locationModel.selectedLocation ?? locationModel.currentLocation!,
+                        point: locationModel.selectedLocation ??
+                            locationModel.currentLocation!,
                         width: 80,
                         height: 80,
                         child: const Icon(
