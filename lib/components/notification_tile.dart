@@ -43,14 +43,16 @@ class NotificationTile extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.light
                     ? const Color.fromARGB(255, 149, 212, 251).withOpacity(.3)
-                    : const Color.fromARGB(255, 0, 55, 255).withOpacity(0.075),
+                    : const Color(
+                        0xFF2E353D), // Couleur plus profonde et élégante pour le dark mode
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 Icons.check,
                 color: Theme.of(context).brightness == Brightness.light
                     ? const Color.fromARGB(255, 0, 55, 255).withOpacity(.5)
-                    : const Color.fromARGB(255, 0, 55, 255),
+                    : const Color(
+                        0xFF64FFDA), // Couleur turquoise claire pour un bon contraste
                 size: 22,
               ),
             ),
