@@ -145,6 +145,7 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
           appBar: AppBar(
             // automaticallyImplyLeading: false,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
             elevation: 0,
             title: const Text(
               'Payement method',
@@ -266,12 +267,14 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
                     ),
                   ),
                   const Total(),
+                  const SizedBox(height: 8),
                   MyButton(
                     onTap: selectedPaymentMethod,
                     text: 'ORDER NOW',
                     color: const Color(0xff0d5ef9),
                     textColor: Colors.white,
                   ),
+                  const SizedBox(height: 13),
                 ],
               ),
             ),
