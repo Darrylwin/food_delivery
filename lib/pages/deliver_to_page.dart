@@ -172,29 +172,17 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                   ),
                   MarkerLayer(
                     markers: [
-                      // Marqueur de position actuelle
+                      // Un seul marqueur qui montre soit la position sélectionnée, soit la position actuelle
                       Marker(
-                        point: locationModel.currentLocation!,
+                        point: locationModel.selectedLocation ?? locationModel.currentLocation!,
                         width: 80,
                         height: 80,
                         child: const Icon(
-                          Icons.my_location,
-                          color: Colors.blue,
+                          Icons.location_pin,
+                          color: Colors.red,
                           size: 40,
                         ),
                       ),
-                      // Marqueur de localisation sélectionnée (si existante)
-                      if (locationModel.selectedLocation != null)
-                        Marker(
-                          point: locationModel.selectedLocation!,
-                          width: 80,
-                          height: 80,
-                          child: const Icon(
-                            Icons.location_pin,
-                            color: Colors.red,
-                            size: 40,
-                          ),
-                        ),
                     ],
                   ),
                 ],

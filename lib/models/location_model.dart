@@ -63,6 +63,8 @@ class LocationModel extends ChangeNotifier {
       // Vérifier si une position a été obtenue
       if (position != null) {
         _currentLocation = LatLng(position.latitude, position.longitude);
+        // Initialiser selectedLocation avec la position actuelle
+        _selectedLocation = _currentLocation;
         notifyListeners();
       } else {
         print('Aucune localisation trouvée');
