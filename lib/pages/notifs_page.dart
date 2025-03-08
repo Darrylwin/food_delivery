@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../components/search_text_field.dart';
 
 class NotifsPage extends StatefulWidget {
-  NotifsPage({super.key});
+  const NotifsPage({super.key});
 
   @override
   State<NotifsPage> createState() => _NotifsPageState();
