@@ -73,10 +73,15 @@ class MySliverAppBar extends StatelessWidget {
                     ]
                   : null,
             ),
-            child: Consumer<MyNotification>(
+            child: Consumer<NotificationProvider>(
               builder: (context, notificationProvider, child) => Badge(
                 isLabelVisible: notificationProvider.notifications.isNotEmpty,
-                label: Text('${notificationProvider.notifications.length}'),
+                label: Text(
+                  '${notificationProvider.notifications.length}',
+                  style:const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
                 backgroundColor: Colors.red,
                 child: Icon(
                   color: Theme.of(context).colorScheme.primary,

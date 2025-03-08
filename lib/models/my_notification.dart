@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
-import 'notification_item.dart';
 
-class MyNotification extends ChangeNotifier {
+class NotificationItem {
+  final String title;
+  final String description;
+  final String time;
+
+  NotificationItem({
+    required this.title,
+    required this.description,
+    required this.time,
+  });
+}
+
+class NotificationProvider extends ChangeNotifier {
   List<NotificationItem> _notifications = [];
 
   List<NotificationItem> get notifications => _notifications;

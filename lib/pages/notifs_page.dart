@@ -10,8 +10,8 @@ class NotifsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MyNotification>(
-        builder: (context, MyNotification notification, child) {
+    return Consumer<NotificationProvider>(
+        builder: (context, NotificationProvider notification, child) {
       return Scaffold(
         appBar: AppBar(
           // automaticallyImplyLeading: false,
@@ -69,6 +69,7 @@ class NotifsPage extends StatelessWidget {
             ),
           ],
           body: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
             color: Theme.of(context).scaffoldBackgroundColor,
             child: notification.notifications.isEmpty
                 ? const Center(child: Text('Aucune Notification'))

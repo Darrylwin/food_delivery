@@ -19,7 +19,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Restaurant()),
-        ChangeNotifierProvider(create: (context) => MyNotification()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (context) => LocationModel()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],

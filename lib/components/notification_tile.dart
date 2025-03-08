@@ -17,16 +17,20 @@ class NotificationTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: Theme.of(context).brightness == Brightness.light
+            ? [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, 2),
+                ),
+              ]
+            : null,
       ),
       child: Padding(
         padding: const EdgeInsets.all(15),
@@ -36,12 +40,14 @@ class NotificationTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 230, 239, 254),
+                color: Theme.of(context).brightness == Brightness.light
+                    ? const Color.fromARGB(255, 230, 239, 254)
+                    : Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.check,
-                color: Color.fromARGB(255, 0, 55, 255),
+                color: const Color.fromARGB(255, 0, 55, 255).withOpacity(.5),
                 size: 22,
               ),
             ),
@@ -52,10 +58,12 @@ class NotificationTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xFF2C3A4B),
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? const Color(0xFF2C3A4B)
+                          : const Color.fromARGB(255, 151, 196, 248),
                     ),
                   ),
                   const SizedBox(height: 4),

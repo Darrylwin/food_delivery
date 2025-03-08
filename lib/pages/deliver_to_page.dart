@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:food_delivery/models/my_notification.dart';
+import 'package:food_delivery/models/restaurant.dart';
+import 'package:food_delivery/services/notifications/notif_service.dart';
 import 'package:provider/provider.dart';
 
 import '../models/location_model.dart';
+import 'navigation/home_page.dart';
 
 class DeliverToPage extends StatelessWidget {
   const DeliverToPage({super.key});
@@ -200,9 +204,33 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: GestureDetector(
                 onTap: locationModel.isLocationReady
-                    ? () {
+                    ? () async {
                         final finalLocation = locationModel.getFinalLocation();
-                        Navigator.of(context).pop(finalLocation);
+                        final NotifService notifService = NotifService();
+                        await notifService.showNotification(
+                          title: "Your food is in delivery",
+                          body:
+                              "Your delivery location has been successfully set! Driver is on way",
+                        );
+
+                        final NotificationItem notification = NotificationItem(
+                          title: "Food in delivery",
+                          description:
+                              "please wait untile the driver bring your food",
+                          time: DateTime.now().toString(),
+                        );
+                        context
+                            .read<NotificationProvider>()
+                            .addNotification(notification);
+
+                        if (context.mounted) {
+                          context.read<Restaurant>().clearCart();
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                              (Route<dynamic> route) => false);
+                        }
                       }
                     : null,
                 child: Container(
