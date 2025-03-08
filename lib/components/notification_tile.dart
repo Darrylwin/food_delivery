@@ -24,10 +24,11 @@ class NotificationTile extends StatelessWidget {
         boxShadow: Theme.of(context).brightness == Brightness.light
             ? [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 10,
-                  offset: const Offset(0, 2),
+                  color: Colors.grey
+                      .withOpacity(0.2), // Increased opacity from 0.1 to 0.2
+                  spreadRadius: 2, // Increased from 1 to 2
+                  blurRadius: 8, // Decreased from 10 to 8
+                  offset: const Offset(0, 3), // Increased y-offset from 2 to 3
                 ),
               ]
             : null,
@@ -41,13 +42,15 @@ class NotificationTile extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Theme.of(context).brightness == Brightness.light
-                    ? const Color.fromARGB(255, 230, 239, 254)
-                    : Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+                    ? const Color.fromARGB(255, 149, 212, 251).withOpacity(.3)
+                    : const Color.fromARGB(255, 0, 55, 255).withOpacity(0.075),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 Icons.check,
-                color: const Color.fromARGB(255, 0, 55, 255).withOpacity(.5),
+                color: Theme.of(context).brightness == Brightness.light
+                    ? const Color.fromARGB(255, 0, 55, 255).withOpacity(.5)
+                    : const Color.fromARGB(255, 0, 55, 255),
                 size: 22,
               ),
             ),
@@ -63,7 +66,7 @@ class NotificationTile extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).brightness == Brightness.light
                           ? const Color(0xFF2C3A4B)
-                          : const Color.fromARGB(255, 151, 196, 248),
+                          : const Color.fromARGB(255, 195, 195, 195),
                     ),
                   ),
                   const SizedBox(height: 4),
