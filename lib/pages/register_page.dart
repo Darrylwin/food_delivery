@@ -32,10 +32,6 @@ class _RegisterPageState extends State<RegisterPage> {
     String confirmPassword = confirmPasswordController.text;
 
     if (password == confirmPassword) {
-      // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
-      print('Email: $email');
-      print('Password: $password');
-
       try {
         final response = await Supabase.instance.client.auth.signUp(
           email: email, // email de l'utilisateur
@@ -44,35 +40,47 @@ class _RegisterPageState extends State<RegisterPage> {
 
         if (response.error == null) {
           // Utilisateur créé avec succès, informer l'utilisateur de vérifier son email
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-                content: Text(
-                    'Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.')),
+          showDialog(
+            context: context,
+            builder: (context) => Dialog(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+              child: const Padding(
+                padding: EdgeInsets.all(12),
+                child: Text(
+                  'Utilisateur créé avec succès. Veuillez vérifier votre email pour confirmer votre compte.',
+                ),
+              ),
+            ),
           );
 
           // Attendre la confirmation de l'email
           await waitForEmailConfirmation(email, password);
-        } else {
-          // Afficher l'erreur si la création de l'utilisateur échoue
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Erreur : ${response.error!.message}')),
-          );
         }
       } catch (e) {
-        print('Erreur lors de la création de l\'utilisateur : $e');
+        showDialog(
+          context: context,
+          builder: (context) => Dialog(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text('Erreur : $e'),
+            ),
+          ),
+        );
       }
     } else {
-      print('Email: $email');
-      print('Password: $password');
-      print('confirmPassword: $confirmPassword');
-      print('Passwords don\'t match');
-
-      // Afficher un message d'erreur si les mots de passe ne correspondent pas
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Passwords don\'t match'),
-        ),
-      );
+      showDialog(
+          context: context,
+          builder: (context) => Dialog(
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Text('Passwords don\'t match'),
+                ),
+              ));
     }
   }
 

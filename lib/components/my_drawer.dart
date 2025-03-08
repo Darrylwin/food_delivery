@@ -20,10 +20,10 @@ class MyDrawer extends StatelessWidget {
         (route) => false,
       );
     } catch (e) {
-      print('Error signing out: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Error signing out'),
+        SnackBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          content: const Text('Error signing out'),
         ),
       );
     }

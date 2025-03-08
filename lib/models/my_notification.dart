@@ -13,6 +13,7 @@ class NotificationItem {
 }
 
 class NotificationProvider extends ChangeNotifier {
+  // ignore: prefer_final_fields
   List<NotificationItem> _notifications = [];
   int _unreadCount = 0;
 

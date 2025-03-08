@@ -30,33 +30,33 @@ class _LoginPageState extends State<LoginPage> {
     String email = emailController.text;
     String password = passwordController.text;
 
-    // Affichez les valeurs pour vérification (vous pouvez les envoyer à un serveur ici)
-    print('Email: $email');
-    print('Password: $password');
 
     try {
-      final response = await Supabase.instance.client.auth.signInWithPassword(
+      await Supabase.instance.client.auth.signInWithPassword(
         email: email,
         password: password,
       );
 
-      if (response.error == null) {
-        // Connexion réussie
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Connexion réussie')),
-        );
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
-      } else {
-        // Affichage d'une erreur si la connexion échoue
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Erreur : ${response.error!.message}'),
-        ));
-      }
+      // Connexion réussie
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
     } catch (e) {
-      print('Erreur lors de la connexion : $e');
+      // Connexion échouée
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(
+              'Error when logging: $e',
+            ),
+          ),
+        ),
+      );
     }
   }
 
@@ -206,5 +206,6 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 extension on AuthResponse {
+  // ignore: unused_element
   get error => null;
 }
