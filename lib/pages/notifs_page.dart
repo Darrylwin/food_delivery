@@ -16,7 +16,7 @@ class NotifsPage extends StatelessWidget {
         appBar: AppBar(
           // automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          surfaceTintColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
           title: const Text(
             'Notifications',
             style: TextStyle(
@@ -55,13 +55,14 @@ class NotifsPage extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              expandedHeight: 50,
-              collapsedHeight: 57,
+              expandedHeight: 64,
+              collapsedHeight: 65,
               floating: false,
               pinned: true,
-              shadowColor: Colors.white,
+              shadowColor: Theme.of(context).scaffoldBackgroundColor,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              foregroundColor: Theme.of(context).colorScheme.primary,
+              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+              forceMaterialTransparency: true,
               title: SearchTextField(
                 controller: controller,
                 sort: false,
