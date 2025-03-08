@@ -41,6 +41,7 @@ class CartPage extends StatelessWidget {
               child: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
                 title: const Text(
                   'Order details',
                   style: TextStyle(

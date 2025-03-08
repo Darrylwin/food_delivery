@@ -13,13 +13,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotifService().initNotifiaction();
   await SupabaseConfig.initialize();
-  await LocationModel().initializeLocation();
+  // await LocationModel().initializeLocation();
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Restaurant()),
-        ChangeNotifierProvider(create: (context) => MyNotification()),
+        ChangeNotifierProvider(create: (context) => NotificationProvider()),
         ChangeNotifierProvider(create: (context) => LocationModel()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],

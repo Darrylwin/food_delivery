@@ -4,19 +4,38 @@ import 'package:food_delivery/models/my_notification.dart';
 import 'package:provider/provider.dart';
 import '../components/search_text_field.dart';
 
-class NotifsPage extends StatelessWidget {
+class NotifsPage extends StatefulWidget {
   NotifsPage({super.key});
+
+  @override
+  State<NotifsPage> createState() => _NotifsPageState();
+}
+
+class _NotifsPageState extends State<NotifsPage> with RouteAware {
   TextEditingController controller = TextEditingController();
 
   @override
+  void didPop() {
+    context.read<NotificationProvider>().markAllAsRead();
+    super.didPop();
+  }
+
+  @override
+  void dispose() {
+    context.read<NotificationProvider>().markAllAsRead();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Consumer<MyNotification>(
-        builder: (context, MyNotification notification, child) {
+    return Consumer<NotificationProvider>(
+        builder: (context, NotificationProvider notification, child) {
       return Scaffold(
         appBar: AppBar(
           // automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          foregroundColor: Theme.of(context).colorScheme.primary,
+          surfaceTintColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
           title: const Text(
             'Notifications',
             style: TextStyle(
@@ -26,6 +45,7 @@ class NotifsPage extends StatelessWidget {
           ),
           leading: GestureDetector(
             onTap: () {
+              context.read<NotificationProvider>().markAllAsRead();
               Navigator.pop(context);
             },
             child: Container(
@@ -55,13 +75,14 @@ class NotifsPage extends StatelessWidget {
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              expandedHeight: 50,
-              collapsedHeight: 57,
+              expandedHeight: 64,
+              collapsedHeight: 65,
               floating: false,
               pinned: true,
-              shadowColor: Colors.white,
+              shadowColor: Theme.of(context).scaffoldBackgroundColor,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              foregroundColor: Theme.of(context).colorScheme.primary,
+              surfaceTintColor:
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
               title: SearchTextField(
                 controller: controller,
                 sort: false,
@@ -69,6 +90,7 @@ class NotifsPage extends StatelessWidget {
             ),
           ],
           body: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
             color: Theme.of(context).scaffoldBackgroundColor,
             child: notification.notifications.isEmpty
                 ? const Center(child: Text('Aucune Notification'))

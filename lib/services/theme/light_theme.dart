@@ -6,8 +6,7 @@ ThemeData lightMode = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: Color(0xff181E22),
     tertiary: Color.fromARGB(255, 52, 51, 51),
-    surface: Color(0xFFF9F9F9), // Couleur des cartes
-    inversePrimary: Color(0xFFF3F4F4),
+    surface: Color(0xFFF5F5F5),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.white,
