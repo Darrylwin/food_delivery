@@ -14,11 +14,20 @@ class NotificationItem {
 
 class NotificationProvider extends ChangeNotifier {
   List<NotificationItem> _notifications = [];
+  int _unreadCount = 0;
 
   List<NotificationItem> get notifications => _notifications;
+  int get unreadCount => _unreadCount;
 
   void addNotification(NotificationItem notification) {
-    _notifications.insert(0, notification);
+    _notifications.add(notification);
+    _unreadCount++;
+    notifyListeners();
+  }
+
+
+  void markAllAsRead(){
+    _unreadCount = 0;
     notifyListeners();
   }
 }

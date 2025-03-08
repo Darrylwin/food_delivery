@@ -4,9 +4,27 @@ import 'package:food_delivery/models/my_notification.dart';
 import 'package:provider/provider.dart';
 import '../components/search_text_field.dart';
 
-class NotifsPage extends StatelessWidget {
+class NotifsPage extends StatefulWidget {
   NotifsPage({super.key});
+
+  @override
+  State<NotifsPage> createState() => _NotifsPageState();
+}
+
+class _NotifsPageState extends State<NotifsPage> with RouteAware {
   TextEditingController controller = TextEditingController();
+
+  @override
+  void didPop() {
+    context.read<NotificationProvider>().markAllAsRead();
+    super.didPop();
+  }
+
+  @override
+  void dispose() {
+    context.read<NotificationProvider>().markAllAsRead();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +34,8 @@ class NotifsPage extends StatelessWidget {
         appBar: AppBar(
           // automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          surfaceTintColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+          surfaceTintColor:
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
           title: const Text(
             'Notifications',
             style: TextStyle(
@@ -26,6 +45,7 @@ class NotifsPage extends StatelessWidget {
           ),
           leading: GestureDetector(
             onTap: () {
+              context.read<NotificationProvider>().markAllAsRead();
               Navigator.pop(context);
             },
             child: Container(
@@ -61,7 +81,8 @@ class NotifsPage extends StatelessWidget {
               pinned: true,
               shadowColor: Theme.of(context).scaffoldBackgroundColor,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              surfaceTintColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
+              surfaceTintColor:
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
               title: SearchTextField(
                 controller: controller,
                 sort: false,
