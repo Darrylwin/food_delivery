@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/backend/supabase_config.dart';
 import 'package:food_delivery/models/my_notification.dart';
-import 'package:food_delivery/pages/navigation/home_page.dart';
 import 'package:food_delivery/services/auth/login_or_register.dart';
 import 'package:provider/provider.dart';
 import 'models/location_model.dart';
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: context.watch<ThemeProvider>().currentTheme,
-      home: const HomePage(),
+      home: const LoginOrRegister(),
     );
   }
 }
