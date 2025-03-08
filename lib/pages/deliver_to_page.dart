@@ -217,7 +217,7 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                           title: "Food in delivery",
                           description:
                               "please wait untile the driver bring your food",
-                          time: DateTime.now().toString(),
+                          time: DateTime.now().toString().substring(0, 16),
                         );
                         context
                             .read<NotificationProvider>()
