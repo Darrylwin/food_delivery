@@ -62,7 +62,6 @@ class NotifsPage extends StatelessWidget {
               shadowColor: Theme.of(context).scaffoldBackgroundColor,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               surfaceTintColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(.5),
-              forceMaterialTransparency: true,
               title: SearchTextField(
                 controller: controller,
                 sort: false,
