@@ -60,9 +60,9 @@ class NotifService {
         importance: Importance.max,
         priority: Priority.high,
         icon: '@mipmap/launcher_icon',
-        largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'), // Icône large
+        // largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'),
       ),
-      iOS:DarwinNotificationDetails(
+      iOS: DarwinNotificationDetails(
         presentAlert: true,
         presentBadge: true,
         presentSound: true,
