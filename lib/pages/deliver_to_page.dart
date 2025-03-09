@@ -197,12 +197,12 @@ class _LocationSelectionWidgetState extends State<LocationSelectionWidget> {
                         final finalLocation = locationModel.getFinalLocation();
                         final NotifService notifService = NotifService();
                         await notifService.showNotification(
-                          title: "Order Confirmed! 🎉",
+                          title: "Order Confirmed! 🍽🍕",
                           body: "Your delicious meal is on its way to you",
                         );
 
                         final NotificationItem notification = NotificationItem(
-                          title: "Order Confirmed! 🎉",
+                          title: "Order Confirmed! 🍽🍕",
                           description:
                               "Your delicious meal is on its way to you",
                           time: DateTime.now().toString().substring(0, 16),
