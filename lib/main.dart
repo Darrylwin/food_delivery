@@ -7,12 +7,16 @@ import 'models/location_model.dart';
 import 'models/restaurant.dart';
 import 'services/notifications/notif_service.dart';
 import 'services/theme/theme_provider.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
   await NotifService().initNotifiaction();
   await SupabaseConfig.initialize();
   // await LocationModel().initializeLocation();
+
+  FlutterNativeSplash.remove();
 
   runApp(
     MultiProvider(

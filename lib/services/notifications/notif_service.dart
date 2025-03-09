@@ -13,7 +13,7 @@ class NotifService {
 
     //prepare android innit settings
     const initSettingAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/launcher_icon');
 
     //prepare ios init settings
     const initSettingsIOS = DarwinInitializationSettings(
@@ -59,8 +59,14 @@ class NotifService {
         channelDescription: 'Daily Notification Channel',
         importance: Importance.max,
         priority: Priority.high,
+        icon: '@mipmap/launcher_icon',
+        largeIcon: DrawableResourceAndroidBitmap('@mipmap/launcher_icon'), // Icône large
       ),
-      iOS: DarwinNotificationDetails(),
+      iOS:DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
     );
   }
 

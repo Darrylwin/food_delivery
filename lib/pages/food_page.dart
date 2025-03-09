@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/components/my_button.dart';
 import 'package:food_delivery/models/food.dart';
@@ -45,118 +46,136 @@ class _FoodPageState extends State<FoodPage> {
       children: [
         // page ui
         Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                //food image
-                Image.network(
-                  widget.food.imagePath,
-                  height: 300,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.cover,
-                ),
+          body: ListView(
+            children: [
+              Column(
+                children: [
+                  //food image
+                  Image.network(
+                    widget.food.imagePath,
+                    height: MediaQuery.of(context).size.height / 2,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
 
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //food name
-                      Text(
-                        widget.food.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                  CachedNetworkImage(
+                    imageUrl: widget.food.imagePath,
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.height / 2,
+                    width: MediaQuery.of(context).size.width,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) => const Center(
+                      child: Icon(
+                        Icons.error,
+                        color: Colors.red,
                       ),
+                    ),
+                  ),
 
-                      //food price
-                      Text(
-                        '\$${widget.food.price}',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 16,
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      //food description
-                      Text(widget.food.description),
-
-                      const SizedBox(height: 10),
-
-                      Divider(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.grey[200]!
-                            : Theme.of(context).colorScheme.surface,
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      //addons
-                      const Text(
-                        'Add-ons',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color:
-                                Theme.of(context).brightness == Brightness.light
-                                    ? Colors.grey[200]!
-                                    : Theme.of(context).colorScheme.surface,
+                  Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //food name
+                        Text(
+                          widget.food.name,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                          borderRadius: BorderRadius.circular(8),
                         ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: EdgeInsets.zero,
-                          itemBuilder: (context, index) {
-                            //get individual Addon
-                            Addons addon = widget.food.availableAddons[index];
-                            return CheckboxListTile(
-                              title: Text(addon.name),
-                              subtitle: Text(
-                                '\$${addon.price}',
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.primary,
+
+                        //food price
+                        Text(
+                          '\$${widget.food.price}',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 16,
+                          ),
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        //food description
+                        Text(widget.food.description),
+
+                        const SizedBox(height: 10),
+
+                        Divider(
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.grey[200]!
+                                  : Theme.of(context).colorScheme.surface,
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        //addons
+                        const Text(
+                          'Add-ons',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        const SizedBox(height: 10),
+
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.grey[200]!
+                                  : Theme.of(context).colorScheme.surface,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              //get individual Addon
+                              Addons addon = widget.food.availableAddons[index];
+                              return CheckboxListTile(
+                                title: Text(addon.name),
+                                subtitle: Text(
+                                  '\$${addon.price}',
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                                 ),
-                              ),
-                              value: widget.selectedAddons[addon],
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  widget.selectedAddons[addon] = value!;
-                                });
-                              },
-                            );
-                          },
-                          itemCount: widget.food.availableAddons.length,
+                                value: widget.selectedAddons[addon],
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    widget.selectedAddons[addon] = value!;
+                                  });
+                                },
+                              );
+                            },
+                            itemCount: widget.food.availableAddons.length,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(height: 25),
+                ],
+              ),
+              //button to  add to cart
+              MyButton(
+                text: 'Add to cart',
+                onTap: () => addToCart(
+                  widget.food,
+                  widget.selectedAddons,
                 ),
-
-                //button to  add to cart
-                MyButton(
-                  text: 'Add to cart',
-                  onTap: () => addToCart(
-                    widget.food,
-                    widget.selectedAddons,
-                  ),
-                ),
-
-                const SizedBox(height: 25),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
 
