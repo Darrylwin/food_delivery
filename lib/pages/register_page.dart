@@ -115,111 +115,113 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 13),
-              //logo
-
-              Center(
-                child: Image.asset(
-                  'assets/images/nom.png',
-                  height: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // app welcome message
-              const Text(
-                "Let's create an account for you",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-
-              const SizedBox(height: 25),
-
-              // email textfield
-              MyTextFiled(
-                controller: emailController,
-                hintText: "Email",
-                obscureText: false,
-              ),
-
-              const SizedBox(height: 33),
-
-              //password textfield
-              MyTextFiled(
-                controller: passwordController,
-                hintText: "Password",
-                obscureText: true,
-              ),
-
-              const SizedBox(height: 33),
-
-              // confirm password textfield
-              MyTextFiled(
-                controller: confirmPasswordController,
-                hintText: "Confirm Password",
-                obscureText: true,
-              ),
-
-              const SizedBox(height: 33),
-
-              // sign up button
-              MyButton(
-                onTap: signUp,
-                text: "SIGN UP",
-              ),
-
-              const SizedBox(height: 19),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RegistrationButton(
-                    image: 'assets/icons/facebook.png',
-                    onTap: () {},
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 13),
+                //logo
+            
+                Center(
+                  child: Image.asset(
+                    'assets/images/nom.png',
+                    height: 120,
+                    fit: BoxFit.cover,
                   ),
-                  RegistrationButton(
-                    image: 'assets/icons/google.png',
-                    onTap: () {},
+                ),
+            
+                const SizedBox(height: 25),
+            
+                // app welcome message
+                const Text(
+                  "Let's create an account for you",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
                   ),
-                ],
-              ),
-
-              const SizedBox(height: 10),
-
-              // already havea an account ?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account? ?",
-                    style: TextStyle(
-                      color: Colors.grey[700],
+                ),
+            
+                const SizedBox(height: 25),
+            
+                // email textfield
+                MyTextFiled(
+                  controller: emailController,
+                  hintText: "Email",
+                  obscureText: false,
+                ),
+            
+                const SizedBox(height: 33),
+            
+                //password textfield
+                MyTextFiled(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true,
+                ),
+            
+                const SizedBox(height: 33),
+            
+                // confirm password textfield
+                MyTextFiled(
+                  controller: confirmPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),
+            
+                const SizedBox(height: 33),
+            
+                // sign up button
+                MyButton(
+                  onTap: signUp,
+                  text: "SIGN UP",
+                ),
+            
+                const SizedBox(height: 19),
+            
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RegistrationButton(
+                      image: 'assets/icons/facebook.png',
+                      onTap: () {},
                     ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: const Text(
-                      "Login Now",
+                    RegistrationButton(
+                      image: 'assets/icons/google.png',
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+            
+                const SizedBox(height: 10),
+            
+                // already havea an account ?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account? ?",
                       style: TextStyle(
-                        color: Color(0xff0d5ef9),
-                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[700],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-            ],
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        "Login Now",
+                        style: TextStyle(
+                          color: Color(0xff0d5ef9),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
