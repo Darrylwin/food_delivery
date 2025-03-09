@@ -181,102 +181,109 @@ class _ChoosePayementMethodPageState extends State<ChoosePayementMethodPage> {
               ),
             ),
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 0;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: selectedIndex == 0
-                              ? const Color(0xff0d5ef9)
-                              : Colors.grey.withOpacity(0.3),
-                          width: 2,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = 0;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 8),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: selectedIndex == 0
+                                    ? const Color(0xff0d5ef9)
+                                    : Colors.grey.withOpacity(0.3),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: paiementMethods[0],
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: paiementMethods[0],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 1;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: selectedIndex == 1
-                              ? const Color(0xff0d5ef9)
-                              : Colors.grey.withOpacity(0.3),
-                          width: 2,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = 1;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 9),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: selectedIndex == 1
+                                    ? const Color(0xff0d5ef9)
+                                    : Colors.grey.withOpacity(0.3),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: paiementMethods[1],
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: paiementMethods[1],
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: MyButton(
-                      text: 'ADD CARD +',
-                      onTap: () {},
-                      color: const Color(0xFF0D5EF9).withOpacity(.2),
-                      textColor: const Color(0xff0d5ef9),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  const Text(
-                    'Other methods',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 13,
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = 2;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: selectedIndex == 2
-                              ? const Color(0xff0d5ef9)
-                              : Colors.grey.withOpacity(0.3),
-                          width: 2,
+                        Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: MyButton(
+                            text: 'ADD CARD +',
+                            onTap: () {},
+                            color: const Color(0xFF0D5EF9).withOpacity(.2),
+                            textColor: const Color(0xff0d5ef9),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: paiementMethods[2],
+                        // const SizedBox(height: 15),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 11.5),
+                          child: Text(
+                            'Other methods',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        // const SizedBox(height: 15),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedIndex = 2;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 8, top: 15),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: selectedIndex == 2
+                                    ? const Color(0xff0d5ef9)
+                                    : Colors.grey.withOpacity(0.3),
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: paiementMethods[2],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Total(),
-                  const SizedBox(height: 8),
-                  MyButton(
-                    onTap: selectedPaymentMethod,
-                    text: 'ORDER NOW',
-                    color: const Color(0xff0d5ef9),
-                    textColor: Colors.white,
-                  ),
-                  const SizedBox(height: 13),
-                ],
-              ),
+                ),
+                const Total(),
+                const SizedBox(height: 8),
+                MyButton(
+                  onTap: selectedPaymentMethod,
+                  text: 'ORDER NOW',
+                  color: const Color(0xff0d5ef9),
+                  textColor: Colors.white,
+                ),
+              ],
             ),
           ),
         );
