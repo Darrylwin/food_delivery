@@ -79,97 +79,92 @@ class CartPage extends StatelessWidget {
               ),
             ),
           ),
-          body: Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SearchTextField(
-                          controller: controller,
-                          sort: false,
-                        ),
-                        //list of cart
-
-                        userCart.isEmpty
-                            ? const Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 11.5, vertical: 10),
-                                child: Center(
-                                  child: Text("Cart is empty"),
-                                ),
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 11.5,
-                                  vertical: 10,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Column(
-                                      children: userCart.map((cartItem) {
-                                        return Dismissible(
-                                          key:
-                                              Key(cartItem.hashCode.toString()),
-                                          direction:
-                                              DismissDirection.endToStart,
-                                          background: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 5,
-                                              vertical: 10,
-                                            ),
-                                            alignment: Alignment.centerRight,
-                                            padding: const EdgeInsets.only(
-                                                right: 20),
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF0D5EF9)
-                                                  .withOpacity(.2),
-                                              borderRadius:
-                                                  const BorderRadius.only(
-                                                topRight: Radius.circular(20),
-                                                bottomRight:
-                                                    Radius.circular(20),
-                                              ),
-                                            ),
-                                            child: const Icon(
-                                              Icons.delete_outlined,
-                                              size: 40,
-                                              color: Color(0xFF0D5EF9),
-                                            ),
-                                          ),
-                                          onDismissed: (direction) {
-                                            //delete item from cart
-                                            restaurant.deleteFromCart(cartItem);
-                                          },
-                                          child: MyCartTile(cartItem: cartItem),
-                                        );
-                                      }).toList(),
-                                    ),
-                                    const Total(),
-                                    MyButton(
-                                      text: 'PLACE MY ORDER',
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ChoosePayementMethodPage(),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                      ],
-                    ),
+          body: userCart.isEmpty
+              ? const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 11.5, vertical: 10),
+                  child: Center(
+                    child: Text("Cart is empty"),
                   ),
+                )
+              : Column(
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          //list of cart
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 11.5,
+                              vertical: 10,
+                            ),
+                            child: Column(
+                              children: [
+                                SearchTextField(
+                                  controller: controller,
+                                  sort: false,
+                                ),
+                                Column(
+                                  children: userCart.map(
+                                    (cartItem) {
+                                      return Dismissible(
+                                        key: Key(cartItem.hashCode.toString()),
+                                        direction: DismissDirection.endToStart,
+                                        background: Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 5,
+                                            vertical: 10,
+                                          ),
+                                          alignment: Alignment.centerRight,
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF0D5EF9)
+                                                .withOpacity(.2),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              bottomRight: Radius.circular(20),
+                                            ),
+                                          ),
+                                          child: const Icon(
+                                            Icons.delete_outlined,
+                                            size: 40,
+                                            color: Color(0xFF0D5EF9),
+                                          ),
+                                        ),
+                                        onDismissed: (direction) {
+                                          //delete item from cart
+                                          restaurant.deleteFromCart(cartItem);
+                                        },
+                                        child: MyCartTile(cartItem: cartItem),
+                                      );
+                                    },
+                                  ).toList(),
+                                ),
+                                const Total(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: MyButton(
+                        text: 'PLACE MY ORDER',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ChoosePayementMethodPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
         );
       },
     );
