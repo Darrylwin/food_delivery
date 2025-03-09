@@ -1,20 +1,25 @@
 # Food Delivery App
 
-A Flutter project for a food delivery application.
+A modern Flutter-based food delivery application with real-time order tracking and Supabase backend integration.
+
+## Project Status
+
+🚧 **Currently in Development** 🚧
+
+Current Version: 0.1.0
 
 ## Features
 
 - Browse a variety of food items categorized by type (Burgers, Pizza, Pasta, Salads, Desserts, Drinks)
 - Add food items to the cart with optional add-ons
 - View cart summary and total price
-- Generate a receipt for the cart items
-- Backend powered by Supabase for real-time data synchronization and user authentication
-- Real-time notifications system
-- Multiple delivery addresses management
-- Modern and responsive UI
-- User authentication with Supabase
-- Search functionality
-- Order tracking
+- Backend powered by Supabase for real-time data synchronization
+- Real-time order tracking with live map integration
+- Multiple payment methods (Credit Card, PayPal, Apple Pay, Google Pay)
+- Dark/Light theme support
+- Offline mode capability
+- Order scheduling for future delivery
+- Group ordering feature
 
 ## Getting Started
 
@@ -64,15 +69,23 @@ lib/
 └── main.dart         # Application entry point
 ```
 
+## Technical Details
+
 ### State Management
 - Provider pattern for state management
 - Multiple providers:
   - Restaurant: Cart and orders management
   - MyNotification: Notifications handling
+  - UserPreferences: App settings and user preferences
+  - OrderTracking: Real-time order location updates
+  - PaymentProvider: Payment processing management
 
 ### Services
 - NotifService: Push notification management
 - SupabaseConfig: Backend services and authentication
+- LocationService: Real-time GPS tracking
+- PaymentService: Payment gateway integration
+- CacheService: Offline data management
 
 ## Technical Stack
 
@@ -91,8 +104,16 @@ Contributions are welcome! Please fork the repository and create a pull request 
 
 - [MrJojono](https://github.com/MrJojono)
 
+### Contact
+
+Project Maintainer: [Darrylwin](https://github.com/Darrylwin)
+
 ## Acknowledgements
 
 - [Flutter](https://flutter.dev/)
 - [Dart](https://dart.dev/)
 - [Supabase](https://supabase.com/)
+- [Provider](https://pub.dev/packages/provider) - State Management
+- [Flutter Local Notifications](https://pub.dev/packages/flutter_local_notifications)
+- [Material Design Icons](https://material.io/icons/)
+- All the contributors who help improve this project
